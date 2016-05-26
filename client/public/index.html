@@ -1,10 +1,88 @@
 <!DOCTYPE html>
 <html>
 <head>
+<<<<<<< cc5b063e5c8b3f4b9a51141da542774e4ca66692
   <title></title>
 </head>
 <body>
   <div id="app"></div>
   <script src="webpack.min.js"></script>
+=======
+  <style>
+    #map {
+      width: 1000px;
+      height: 800px;
+      background-color: #CCC;
+    }
+  </style>
+	<title></title>
+</head>
+<body>
+Hello world!
+<a href="/auth/facebook">Login With Facebook</a>
+
+<h3>Check out below for the maps API</h3>
+<div id="map"></div>
+<div id="startLat"></div>
+<div id="startLon"></div>
+AIzaSyAEl_IX49-luTebXzOy6JWGEgHQABaPpg0
+<script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
+
+<script>
+
+function initMap() {
+  var myLatLng = {lat: 37.783603, lng: -122.408956};
+  var mapDiv = document.getElementById('map');
+  var mapOptions = {
+    center: myLatLng,
+    zoom: 15
+  };
+  var map = new google.maps.Map(mapDiv, mapOptions);
+
+  var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map,
+    title: 'Hello World!'
+  })
+
+  if (navigator.geolocation) {
+    console.log('supported');
+  } else {
+    console.log('Not supported');
+  }
+
+
+  var infoWindow = new google.maps.InfoWindow({map: map});
+
+  // Try HTML5 geolocation.
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+
+      infoWindow.setPosition(pos);
+      infoWindow.setContent('Location found. You are at ====>' + JSON.stringify(pos));
+      map.setCenter(pos);
+    }, function() {
+      handleLocationError(true, infoWindow, map.getCenter());
+    });
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, infoWindow, map.getCenter());
+  }
+}
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(browserHasGeolocation ?
+                        'Error: The Geolocation service failed.' :
+                        'Error: Your browser doesn\'t support geolocation.');
+}
+
+
+</script>
+>>>>>>> Load google maps api and test geolocation functionality to index html file
 </body>
 </html>
