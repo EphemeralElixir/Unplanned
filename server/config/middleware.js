@@ -1,9 +1,8 @@
-var bodyParser = require('body-parser');
-
+//Middleware module to be abstracted later.
 
 
 module.exports = function (app, express) {
-  app.use(bodyParser.urlencoded({extended: true}));
-  app.use(bodyParser.json());
-  app.use(express.static(__dirname + '/../../client/public'));
+
+
+
 };
