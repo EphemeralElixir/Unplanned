@@ -1,0 +1,26 @@
+{
+  "name": "elixir",
+  "version": "1.0.0",
+  "description": "Never Eat Alone App",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EphemeralElixir/EphemeralElixir.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EphemeralElixir/EphemeralElixir/issues"
+  },
+  "homepage": "https://github.com/EphemeralElixir/EphemeralElixir#readme",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.19",
+    "nodemon": "^1.9.2"
+  }
+}
