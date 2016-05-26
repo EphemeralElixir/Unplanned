@@ -28,6 +28,8 @@
     "nodemon": "^1.9.2",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
-    "webpack": "^1.13.1"
+    "webpack": "^1.13.1",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1"
   }
 }
