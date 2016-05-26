@@ -13,7 +13,6 @@ mongoose.connect('mongodb://localhost/elixir');
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 // configure our server with all the middleware and routing
 require('./config/middleware.js')(app, express);
 require('./config/routes.js')(app, passport, express);

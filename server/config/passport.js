@@ -60,6 +60,7 @@ module.exports = function(passport) {
             // throw err;
           }
           console.log('Saving user to database... =>', newUser);
+
           return done(null, newUser);
         });
       }
