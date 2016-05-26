@@ -32,6 +32,7 @@ module.exports = function(passport) {
     console.log('Here is the fresh profile --->', JSON.stringify(profile));
 
     process.nextTick(function(){
+
     //Lookup user in database based on facebook id
     User.findOne({'facebook.id': profile.id}, function(err, user) {
 
@@ -47,6 +48,7 @@ module.exports = function(passport) {
       } else {
 
         //Create a new user if not found
+
         var newUser = new User();
 
         newUser.facebook.id = profile.id;
@@ -61,13 +63,13 @@ module.exports = function(passport) {
             // throw err;
           }
           console.log('Saving user to database... =>', newUser);
+
           return done(null, newUser);
         });
       }
     })
     })
   }));
-
 };
 
 
