@@ -29,10 +29,6 @@ module.exports = function(passport) {
   //Callback function -- facebook sending back token and profile info
   function(token, refreshToken, profile, done) {
 
-    console.log('Here is the fresh profile --->', JSON.stringify(profile));
-
-    process.nextTick(function(){
-
     //Lookup user in database based on facebook id
     User.findOne({'facebook.id': profile.id}, function(err, user) {
 
@@ -48,7 +44,6 @@ module.exports = function(passport) {
       } else {
 
         //Create a new user if not found
-
         var newUser = new User();
 
         newUser.facebook.id = profile.id;
@@ -67,7 +62,6 @@ module.exports = function(passport) {
           return done(null, newUser);
         });
       }
-    })
     })
   }));
 };

@@ -13,6 +13,7 @@ module.exports = function (app, passport, express) {
       failureRediect: '/login'
     }));
 
+  //Test routes to confirm success or failure
   app.get('/success', function(req, res) {
     res.send('Successfully logged in.');
   });
