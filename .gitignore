@@ -1,4 +1,5 @@
 node_modules
 .DS_Store
 server/config/env/auth.js
-webpack.min.js
+client/public/webpack.min.js
+client/public/webpack.min.js.map
