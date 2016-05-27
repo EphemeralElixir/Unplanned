@@ -5,6 +5,7 @@ var io = require('socket.io')(server);
 
 var mongoose = require('mongoose');
 var passport = require('passport');
+var config = require('./config/env/auth')
 
 // connect to mongo database named "elixir"
 mongoose.connect('mongodb://localhost/elixir');

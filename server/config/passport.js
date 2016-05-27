@@ -1,6 +1,6 @@
 var FacebookStrategy = require('passport-facebook').Strategy;
 var User = require('../users');
-var configAuth = require('./auth');
+var config = require('./env/auth');
 
 module.exports = function(passport) {
 
@@ -19,10 +19,10 @@ module.exports = function(passport) {
 
   passport.use(new FacebookStrategy({
 
-    clientID: configAuth.facebookAuth.clientID,
-    clientSecret: configAuth.facebookAuth.clientSecret,
-    callbackURL: configAuth.facebookAuth.callbackURL,
-    enableProof: configAuth.facebookAuth.enableProof
+    clientID: config.facebookAuth.clientID,
+    clientSecret: config.facebookAuth.clientSecret,
+    callbackURL: config.facebookAuth.callbackURL,
+    enableProof: config.facebookAuth.enableProof
 
   },
 
