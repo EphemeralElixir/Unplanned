@@ -31,7 +31,7 @@ module.exports = function(passport) {
 
     console.log('Here is the fresh profile --->', JSON.stringify(profile));
 
-    process.nextTick(function(){
+    process.nextTick(function() {
     //Lookup user in database based on facebook id
     User.findOne({'facebook.id': profile.id}, function(err, user) {
 

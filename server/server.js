@@ -1,5 +1,8 @@
 var express = require('express');
 var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
 var mongoose = require('mongoose');
 var passport = require('passport');
 
@@ -15,6 +18,14 @@ require('./config/middleware.js')(app, express);
 require('./config/routes.js')(app, passport, express);
 require('./config/passport.js')(passport);
 
-app.listen(8000);
-console.log('listening on 8000')
+
+io.on('connection', function(socket) {
+
+  socket.on('sample event listener', function() {}); //sample, etc...
+
+});
+
+server.listen(8000);
+console.log('listening on 8000');
+
 module.exports = app;
