@@ -49,10 +49,9 @@ module.exports = function(passport) {
         //Create a new user if not found
         var newUser = new User();
 
-        newUser.facebook.id = profile.id;
-        newUser.facebook.token = token;
-        newUser.facebook.name = profile.displayName;
-        newUser.facebook.email = profile.email;
+        newUser.name = profile.displayName;
+        newUser.token = token;
+        newUser.facebookId = profile.id;
 
         console.log('Here is the new facebook user stored in Mongo ======>', JSON.stringify(newUser));
         newUser.save(function(err) {
