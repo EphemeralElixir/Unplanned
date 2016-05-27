@@ -1,12 +1,16 @@
-
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React, { Component } from 'react'
+import AddUser from './AddUser.jsx';
+import UserList from './UserList.jsx';
 
 class App extends React.Component {
   render() {
-    return <div>Hello World</div>;
+    return (<div>
+    	<p>Hello World</p>
+      <AddUser/>
+      <UserList/>
+    </div>);
   }
 }
 
 
-window.App = App;
+export default App;
