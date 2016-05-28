@@ -8,6 +8,7 @@ var UserSchema = mongoose.Schema({
   phoneNumber: String,
   token: String,
   facebookId: String
+
 });
 
 module.exports = mongoose.model('User', UserSchema);
