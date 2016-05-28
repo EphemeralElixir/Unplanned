@@ -16,7 +16,6 @@ module.exports = function(passport) {
     });
   });
 
-
   passport.use(new FacebookStrategy({
 
     clientID: config.facebookAuth.clientID,
@@ -29,11 +28,9 @@ module.exports = function(passport) {
   //Callback function -- facebook sending back token and profile info
   function(token, refreshToken, profile, done) {
 
-    console.log('Here is the fresh profile --->', JSON.stringify(profile));
-
     process.nextTick(function() {
     //Lookup user in database based on facebook id
-    User.findOne({'facebook.id': profile.id}, function(err, user) {
+    User.findOne({'facebookId': profile.id}, function(err, user) {
 
       if (err) {
         return done(err);
@@ -41,8 +38,6 @@ module.exports = function(passport) {
 
       //Log in user if found
       if (user) {
-      console.log('Here is the existing ==>', user);
-
         return done(null, user);
       } else {
 
@@ -52,20 +47,15 @@ module.exports = function(passport) {
         newUser.name = profile.displayName;
         newUser.token = token;
         newUser.facebookId = profile.id;
-
-        console.log('Here is the new facebook user stored in Mongo ======>', JSON.stringify(newUser));
         newUser.save(function(err) {
           if (err) {
             console.log("error ====>", err);
             // throw err;
           }
-          console.log('Saving user to database... =>', newUser);
-
           return done(null, newUser);
         });
       }
     })
     })
   }));
-
 };
