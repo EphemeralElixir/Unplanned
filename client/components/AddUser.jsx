@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import actions from '../redux/actions.js'
 
 class AddUser extends Component {
 
@@ -15,6 +16,12 @@ class AddUser extends Component {
 		});
 	}
 
+	handleSubmit(event) {
+		event.preventDefault();
+		console.log('submit button clicked');
+		this.props.dispatch(actions.addUser(66, this.state.inputName));
+	}
+
 	render() {
 		return (<div>
 		  <input
@@ -23,7 +30,7 @@ class AddUser extends Component {
 				  value={this.state.inputName}
 				  onChange={this.handleChange.bind(this)}
 				/>
-			<button> Submit </button>
+			<button onClick={this.handleSubmit.bind(this)}> Submit </button>
 
 		</div>);
 	}
