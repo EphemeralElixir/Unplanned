@@ -2,33 +2,18 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var User = require('../users');
 var config = require('./env/auth');
 
-module.exports = function(passport) {
+var client = {
+  clientID: config.facebookAuth.clientID,
+  clientSecret: config.facebookAuth.clientSecret,
+  callbackURL: config.facebookAuth.callbackURL,
+  enableProof: config.facebookAuth.enableProof
+};
 
-  //Serialize the user for the session
-  passport.serializeUser(function(user, done) {
-    done(null, user.id);
-  });
+//Callback handler for Facebook Strategy
+var loginOrCreate = function(token, refreshToken, profile, done) {
 
-  //Deserialize the user
-  passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
-      done(err, user);
-    });
-  });
+  process.nextTick(function() {
 
-  passport.use(new FacebookStrategy({
-
-    clientID: config.facebookAuth.clientID,
-    clientSecret: config.facebookAuth.clientSecret,
-    callbackURL: config.facebookAuth.callbackURL,
-    enableProof: config.facebookAuth.enableProof
-
-  },
-
-  //Callback function -- facebook sending back token and profile info
-  function(token, refreshToken, profile, done) {
-
-    process.nextTick(function() {
     //Lookup user in database based on facebook id
     User.findOne({'facebookId': profile.id}, function(err, user) {
 
@@ -47,15 +32,34 @@ module.exports = function(passport) {
         newUser.name = profile.displayName;
         newUser.token = token;
         newUser.facebookId = profile.id;
+
         newUser.save(function(err) {
           if (err) {
-            console.log("error ====>", err);
-            // throw err;
+            throw err;
           }
+
           return done(null, newUser);
         });
       }
-    })
-    })
-  }));
+    });
+  });
+}
+
+module.exports = function(passport) {
+
+  //Serialize the user for the session
+  passport.serializeUser(function(user, done) {
+    done(null, user.id);
+  });
+
+  //Deserialize the user
+  passport.deserializeUser(function(id, done) {
+    User.findById(id, function(err, user) {
+      done(err, user);
+    });
+  });
+
+  passport.use(new FacebookStrategy(client, loginOrCreate));
 };
+
+
