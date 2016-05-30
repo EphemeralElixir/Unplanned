@@ -1,6 +1,6 @@
 # Project Name: Elixir (lunchNow)
 
-> Uber for tinder. 
+> Meet people in your area in the moment.
 
 ## Team
 
@@ -37,6 +37,7 @@ From within the root directory:
 
 ```sh
 npm install
+mongod
 webpack
 nodemon server/server.js
 
