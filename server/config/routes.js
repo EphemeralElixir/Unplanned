@@ -1,11 +1,12 @@
 var handle = require('./request-handlers');
 
 module.exports = function (app, passport, express) {
-  var newUser = null;
 
-  app.get('/login', handle.redirectToFbOath);
+  app.get('/', handle.initializeMain);
 
-  app.get('/auth/facebook/callback', handle.fbCallbackOath);
+  app.get('/login', handle.redirectToFbOAuth);
+
+  app.get('/auth/facebook/callback', handle.fbCallbackOAuth);
 
   app.get('/success', handle.sendUserDataToClient);
 

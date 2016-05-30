@@ -1,12 +1,11 @@
 var passport = require('passport');
 var websocket = require('./websocket');
 
-var redirectToFbOath = function(req, res, next) {
-  console.log('Calling this function redirect');
+var redirectToFbOAuth = function(req, res, next) {
   passport.authenticate('facebook', {scope: 'email'})(req, res, next);
 };
 
-var fbCallbackOath = function(req, res, next) {
+var fbCallbackOAuth = function(req, res, next) {
   passport.authenticate('facebook', function(err, user, info) {
     if (err) {
       return next(err);
@@ -19,17 +18,22 @@ var fbCallbackOath = function(req, res, next) {
   })(req, res, next);
 };
 
-var sendUserDataToClient = function(req, res) {
+var sendUserDataToClient = function(req, res, next) {
   res.send(websocket.activeUsers);
 };
 
-var sendLoginError = function (req, res) {
+var sendLoginError = function (req, res, next) {
   res.send('Login to facebook failed, please try again');
-}
+};
+
+var initializeMain = function(req, res, next) {
+  res.render('/index.html');
+};
 
 module.exports = {
-  fbCallbackOath: fbCallbackOath,
-  redirectToFbOath: redirectToFbOath,
+  fbCallbackOAuth: fbCallbackOAuth,
+  redirectToFbOAuth: redirectToFbOAuth,
   sendLoginError: sendLoginError,
-  sendUserDataToClient: sendUserDataToClient
+  sendUserDataToClient: sendUserDataToClient,
+  initializeMain: initializeMain
 };
