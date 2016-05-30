@@ -1,5 +1,5 @@
-export default actions = {
-	addUser(id, name) {
+let actions = {
+	addUser: function(id, name) {
 		return {
 			type: 'ADD_USER',
 			id: id,
@@ -7,3 +7,5 @@ export default actions = {
 		}
 	}
 }
+
+export default actions;

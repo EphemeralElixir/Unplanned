@@ -8,8 +8,12 @@ import './components/Gmap.jsx';
 
 let initialState = {
 	users: {
-		id: 55,
-		name: 'leo'
+		55: {
+			name: 'leo'
+		},
+		37: {
+			name: 'james'
+		}
 	}
 };
 
