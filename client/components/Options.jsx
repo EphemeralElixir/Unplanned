@@ -19,9 +19,15 @@ class Options extends Component {
   render() {
     return (<div>
       <button> Available </button>
-      <button> Beer </button>
-      <button> Coffee </button>
-      <button> Dinner </button>
+      <button value='beer' onChange={this.handleChange.bind(this)}>
+        Beer 
+      </button>
+      <button value='coffee' onChange={this.handleChange.bind(this)}>
+        Coffee 
+      </button>
+      <button value='dinner' onChange={this.handleChange.bind(this)}>
+        Dinner 
+      </button>
     </div>);
   }
 }
