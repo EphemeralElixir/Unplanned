@@ -17,7 +17,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require('./config/middleware.js')(app, express);
-require('./config/routes.js')(app, express);
+require('./config/routes.js')(app, passport, express);
 require('./config/passport.js')(passport);
 
 server.listen(8000, function(err) {

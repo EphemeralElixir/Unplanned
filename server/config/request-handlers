@@ -1,8 +1,9 @@
 var passport = require('passport');
 var websocket = require('./websocket');
 
-var redirectToFbOath = function() {
-  passport.authenticate('facebook', {scope: 'email'})
+var redirectToFbOath = function(req, res, next) {
+  console.log('Calling this function redirect');
+  passport.authenticate('facebook', {scope: 'email'})(req, res, next);
 };
 
 var fbCallbackOath = function(req, res, next) {
@@ -19,7 +20,7 @@ var fbCallbackOath = function(req, res, next) {
 };
 
 var sendUserDataToClient = function(req, res) {
-  res.send(newUser);
+  res.send(websocket.activeUsers);
 };
 
 var sendLoginError = function (req, res) {
