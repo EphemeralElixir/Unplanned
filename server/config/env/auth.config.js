@@ -5,5 +5,6 @@ module.exports = {
     enableProof: true,
     clientID: 'InsertClientID',
     clientSecret: 'InsertClientSecret'
-  }
+  },
+  'dbUri': 'InsertDatabaseUri'
 };

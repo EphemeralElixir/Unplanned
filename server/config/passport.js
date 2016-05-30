@@ -29,33 +29,34 @@ module.exports = function(passport) {
   function(token, refreshToken, profile, done) {
 
     process.nextTick(function() {
-    //Lookup user in database based on facebook id
-    User.findOne({'facebookId': profile.id}, function(err, user) {
 
-      if (err) {
-        return done(err);
-      }
+      //Lookup user in database based on facebook id
+      User.findOne({'facebookId': profile.id}, function(err, user) {
 
-      //Log in user if found
-      if (user) {
-        return done(null, user);
-      } else {
+        if (err) {
+          return done(err);
+        }
 
-        //Create a new user if not found
-        var newUser = new User();
+        //Log in user if found
+        if (user) {
+          return done(null, user);
+        } else {
 
-        newUser.name = profile.displayName;
-        newUser.token = token;
-        newUser.facebookId = profile.id;
-        newUser.save(function(err) {
-          if (err) {
-            console.log("error ====>", err);
-            // throw err;
-          }
-          return done(null, newUser);
-        });
-      }
-    })
-    })
+          //Create a new user if not found
+          var newUser = new User();
+
+          newUser.name = profile.displayName;
+          newUser.token = token;
+          newUser.facebookId = profile.id;
+          newUser.save(function(err) {
+            if (err) {
+              console.log("error ====>", err);
+              // throw err;
+            }
+            return done(null, newUser);
+          });
+        }
+      });
+    });
   }));
 };
