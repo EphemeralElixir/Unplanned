@@ -14,23 +14,43 @@ class Gmap extends Component {
 
     }
   }
-  
-  // componentDidMount() {
-  //   this.setState({
-  //     center: {
-  //       user.lat,
-  //       user.lng
-  //     }
-  //   })
-  // }
+  componentDidMount() {
+  // if current user exists on global e.g. user is logged in
+    if ( user ) {
+      // set the maps center to their lat lng
+      this.setState({
+        center: {
+          user.lat,
+          user.lng
+        }
+      })
+    }
+  }
 
   componentWillReceiveProps() {
     console.log('received new props!');
 
   }
+  // this will close all other infoWindows except the user clicked on
+  closeOtherInfoWindows(socketIdToKeepOpen) {
+    // iterate all the users markers
+    {Object.keys(this.props.users).map((socketId, index) => {
+      let marker = this.props.users[socketId];
+      // if userIdToKeepOpen is not current marker
+      if ( marker.showInfo && socketId !== socketIdToKeepOpen ) {
+        // close the marker window 
+        console.log('closing window for: ', socketId);
+        this.handleMarkerClose(marker);
+      }
+      
+    }); //end the map over users object
+
+    }
+  }
 
   //Toggle to 'true' to show InfoWindow and re-renders component
   handleMarkerClick(marker) {
+    this.closeOtherInfoWindows(marker.socketId);
     marker.showInfo = true;
     this.setState(this.state);
   }
@@ -93,15 +113,15 @@ class Gmap extends Component {
             overviewMapControl={false}
             ref='map'>
 
-            {Object.keys(this.props.users).map((key, index) => 
+            {Object.keys(this.props.users).map((socketId, index) => 
               {
-                const marker = this.props.users[key];
+                const marker = this.props.users[socketId];
                 // used to reference the marker to for positioning the infowindow
-                const ref = `marker_${key}`;
+                const ref = `marker_${socketId}`;
                 return (
                   // use the Marker component to render user as a marker on map
                   <Marker
-                    key={key}
+                    key={socketId}
                     ref={ref}
                     position={{lat: marker.lat, lng: marker.lng}}
                     onClick={this.handleMarkerClick.bind(this, marker)} >
