@@ -8,12 +8,18 @@ import './components/Gmap.jsx';
 
 let initialState = {
 	users: {
-		55: {
-			name: 'leo'
-		},
-		37: {
-			name: 'james'
-		}
+		1234: {
+	    name: 'Sepehr',
+	    bio: 'This is Sepehr',
+	    lat: 37.782917,
+	    lng: -122.406350
+    },
+    4523: {
+      name: 'Leo',
+      bio: 'This is Leo',
+      lat: 37.784617,
+      lng: -122.416645
+    }
 	}
 };
 
