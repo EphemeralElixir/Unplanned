@@ -5,6 +5,12 @@ let actions = {
 			id: id,
 			name: name
 		}
+	},
+	updateUserList: function(newUserList) {
+		return {
+			type: 'UPDATE_USERLIST',
+			newUserList: newUserList
+		}
 	}
 }
 
