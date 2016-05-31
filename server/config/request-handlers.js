@@ -8,8 +8,7 @@ var redirectToFbOAuth = function(req, res, next) {
 var fbCallbackOAuth = function(req, res, next) {
   passport.authenticate('facebook', function(err, user, info) {
     if (err) {
-      return next(err);
-    }
+      return next(err);    }
 
     //Store current user to send back individual data
     websocket.user.current = user;
