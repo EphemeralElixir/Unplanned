@@ -5,15 +5,31 @@ var user = {};
 var io = function(io) {
 
   io.on('connection', function(socket) {
-    var socketId;
+    var socketId = null;
+    var receiverId = null;
 
-    /****** Socket-Server Event Handlers *******/
+    /********** Socket-Server Controllers **********/
+
     var updateAllUsers = function() {
       io.emit('update all users', activeUsers);
     };
 
-    var sendNewUserData = function() {
-      socket.emit('save new user', user.current);
+
+    /******** Socket-Server Event Handlers *********/
+
+    var sendRejection = function(senderId) {
+      socket.to(senderId).emit('user said no', socketId);
+      receiverId = null;
+    };
+
+    var sendConfirmation = function(senderId) {
+      socket.to(senderId).emit('user said yes', socketId);
+      receiverId = null;
+    };
+
+    var outboundRequestHandler = function(senderId, receiveId) {
+      receiverId = receiveId;
+      socket.to(receiverId).emit('lets meet', senderId);
     };
 
     var refreshAllUserData = function(userData, id) {
@@ -27,18 +43,20 @@ var io = function(io) {
       updateAllUsers();
     };
 
-    var outboundRequestHandler = function(userId) {
-      socket.to(userId).emit('lets meet', socketId);
+    var sendNewUserData = function() {
+      socket.emit('save new user', user.current);
     };
 
 
-    /****** Socket-Server Event Listeners ******/
+    /******** Socket-Server Event Listeners ********/
 
     socket.on('new user connection', sendNewUserData);
     socket.on('update new user coords', refreshAllUserData);
     socket.on('disconnect', refreshAfterDisconnect);
 
     socket.on('request meeting', outboundRequestHandler);
+    socket.on('no thanks', sendRejection);
+    socket.on('lets do it', sendConfirmation);
 
 
   });
