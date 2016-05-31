@@ -1,36 +1,3 @@
-// render the google map DONE
-  // given an array of users lats/longs
-
-var users = {
-  1234: {
-    name: 'Sepehr',
-    bio: 'This is Sepehr',
-    lat: 37.2,
-    lng: -122.1
-  },
-  4523: {
-    name: 'Leo',
-    bio: 'This is Leo',
-    lat: 37.5,
-    lng: -122.5
-  }
-
-}
-
-  // display on the map each user at some lat and long position, also need to have their user id
-
-// when click on user render a request meetup view passing the user id into that view
-  // populate that view with the user info
-
-
-// pull data from jsonServer onto the map
-// display the data on the map based on the location lat and long
-
-
-// would info window have to be part of the google maps component
-  // or will a separate view open up?
-  // how would we get it to open up a separate component view?
-
 import { default as React, Component } from "react";
 import { GoogleMapLoader, GoogleMap, InfoWindow, Marker } from "react-google-maps";
 
@@ -42,22 +9,14 @@ class Gmap extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // specify the center of the map
       center: {
-        lat: 37.774929,
-        lng: -122.419416
+        lat: 37.784817,
+        lng: -122.406358
       },
       
-      //array of objects of markers
-      markers: [
-        {
-          position: new google.maps.LatLng(37, -122),
-          showInfo: false
-        },
-        {
-          position: new google.maps.LatLng(37.5, -122.5),
-          showInfo: false  
-        }
-      ]
+      usersObj: this.props.users
+
     }
   }
   
@@ -73,77 +32,83 @@ class Gmap extends Component {
   }
   
   renderInfoWindow(ref, marker) {
-    
     return (
-      
+
       //You can nest components inside of InfoWindow!
       <InfoWindow 
         key={`${ref}_info_window`}
         onCloseclick={this.handleMarkerClose.bind(this, marker)} >
-        
-        {ref === 'marker_1' ? 
-        
-        <div>Marker 1</div>  
-        :
-        <div>Marker 2</div>
+
+        {
+        <div>
+          <div>{marker.name}</div>
+          <div><button>Meet!</button></div>
+        </div>
         }
-      
+
       </InfoWindow>
       
     );
-    
+
   }
 
   render() {
 
     return (
-      
+
       <GoogleMapLoader
         containerElement={
           <div
             {...this.props}
             style={{
-              height: '300px',
-              width: '300px'
+              margin: 'auto',
+              height: '500px',
+              width: '500px'
             }} >
           </div>
         }
         googleMapElement={
           <GoogleMap 
+            // google map options:
             center={this.state.center}
-            defaultZoom={4}
+            // higher zoom level will reduce the area covered
+            // lower zoom level will cover a greater area
+            defaultZoom={14}
+            // set google map controls:
+            zoomControl={false}
+            panControl={false}
+            mapTypeControl={false}
+            scaleControl={false}
+            streetViewControl={false}
+            rotateControl={false}
+            overviewMapControl={false}
             ref='map'>
-            
-            {this.state.markers.map((marker, index) => 
-              
+
+            {Object.keys(this.state.usersObj).map((key, index) => 
               {
-              
-              const ref = `marker_${index}`;
-              
-              return ( <Marker 
-                key={index}
-                ref={ref}
-                position={marker.position}
-                onClick={this.handleMarkerClick.bind(this, marker)} >
-                
-                {/* 
-                  Show info window only if the 'showInfo' key of the marker is true. 
-                  That is, when the Marker pin has been clicked and 'handleMarkerClick' has been
-                  Successfully fired.
-                */}
-                {marker.showInfo ? this.renderInfoWindow(ref, marker) : null}
-                
-              </Marker>
-              );
-                
-              }) 
-            } 
-          
+                const marker = this.state.usersObj[key];
+                // used to reference the marker to for positioning the infowindow
+                const ref = `marker_${key}`;
+                return (
+                  // use the Marker component to render user as a marker on map
+                  <Marker
+                    key={key}
+                    ref={ref}
+                    position={{lat: marker.lat, lng: marker.lng}}
+                    onClick={this.handleMarkerClick.bind(this, marker)} >
+
+                    {marker.showInfo ? this.renderInfoWindow(ref, marker) : null}
+                  </Marker>
+                  );
+
+              }) // end map paren over userObj here
+            }
+
           </GoogleMap>
         }
-      
+
       /> //end of GoogleMapLoader
-        
+
     );
 
   }
