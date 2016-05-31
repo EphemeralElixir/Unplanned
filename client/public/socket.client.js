@@ -2,24 +2,45 @@ var socket = io.connect('http://localhost:8000');
 var activeUsers = {};
 var user = null;
 
+
 /****** Socket-Client Event Handlers *******/
 
-var refreshAllData = function() {
-  socket.emit('refresh on new user', socket.id);
-};
-
-var initializeData = function(data) {
-  //Set user only if it hasn't been set to avoid overwriting to other users id when they connect
-  if (!user) {
-    user = data.newUser;
+var updateUserLocation = function(user) {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      user.lat = position.coords.latitude;
+      user.lng = position.coords.longitude;
+      socket.emit('update new user coords', user, socket.id);
+    });
   }
-  activeUsers = data.allUsers;
 };
 
+var notifyNewUserConnection = function() {
+  console.log('Connected!');
+  socket.emit('new user connection');
+};
+
+var saveNewUser = function(data) {
+  if (!user) {
+    user = data;
+    updateUserLocation(user);
+  }
+};
+
+var updateAllUserData = function(data) {
+  activeUsers = data;
+};
+
+var inboundRequestHandler = function(userId) {
+
+};
 
 /****** Socket-Client Event Listeners ******/
 
-socket.on('connect', refreshAllData);
-socket.on('update all users', initializeData);
+socket.on('connect', notifyNewUserConnection);
+socket.on('save new user', saveNewUser);
+socket.on('update all users', updateAllUserData);
+
+socket.on('lets meet', inboundRequestHandler);
 
 
