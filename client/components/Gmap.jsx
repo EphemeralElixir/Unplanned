@@ -15,20 +15,7 @@ class Gmap extends Component {
         lng: -122.406358
       },
       
-      usersObj: {
-        1234: {
-          name: 'Sepehr',
-          bio: 'This is Sepehr',
-          lat: 37.782917,
-          lng: -122.406350
-        },
-        4523: {
-          name: 'Leo',
-          bio: 'This is Leo',
-          lat: 37.784617,
-          lng: -122.416645
-        }
-      }
+      usersObj: this.props.users
 
     }
   }
