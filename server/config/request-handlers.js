@@ -1,5 +1,5 @@
 var passport = require('passport');
-var websocket = require('./websocket');
+var websocket = require('./socket.server');
 
 var redirectToFbOAuth = function(req, res, next) {
   passport.authenticate('facebook', {scope: 'email'})(req, res, next);
@@ -11,15 +11,17 @@ var fbCallbackOAuth = function(req, res, next) {
       return next(err);
     }
 
-    //Store new user using their unique fbId on login success.
-    websocket.activeUsers.facebookId = user;
+    //Store current user to send back individual data
+    websocket.user.current = user;
 
-    res.redirect('/success');
+    res.redirect('/');
   })(req, res, next);
 };
 
 var sendUserDataToClient = function(req, res, next) {
-  res.send(websocket.activeUsers);
+  //Sends own users data along with all connected users
+
+  res.send('<h1>Good job it works</h1>');
 };
 
 var sendLoginError = function (req, res, next) {
