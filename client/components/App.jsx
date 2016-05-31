@@ -4,6 +4,8 @@ import UserList from './UserList.jsx';
 import Options from './Options.jsx';
 import { default as Gmap } from './Gmap.jsx';
 import { connect } from 'react-redux';
+import SocketSend from './SocketSend.jsx';
+import SocketReceive from './SocketReceive.jsx';
 
 class App extends React.Component {
   render() {
@@ -13,6 +15,9 @@ class App extends React.Component {
       <UserList userList={this.props.users}/>
       <Gmap users={this.props.users}/>
       <Options/>
+      <SocketReceive dispatch={this.props.dispatch}/>
+      <SocketSend />
+
     </div>);
   }
 }

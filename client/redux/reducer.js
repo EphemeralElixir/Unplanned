@@ -15,6 +15,10 @@ export default function reducer(state, action) {
 			return Object.assign({}, {users: newUsers});
 		}
 
+		case 'UPDATE_USERLIST': {
+			return Object.assign({}, {users: action.newUserList});
+		}
+
 		default:
 		  return state;
 	}
