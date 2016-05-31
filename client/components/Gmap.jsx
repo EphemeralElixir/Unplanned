@@ -1,9 +1,6 @@
 import { default as React, Component } from "react";
 import { GoogleMapLoader, GoogleMap, InfoWindow, Marker } from "react-google-maps";
 
-// var React = require('react');
-// import { GoogleMapLoader, GoogleMap, InfoWindow, Marker } from 'react-google-maps';
-
 class Gmap extends Component {
 
   constructor(props) {
@@ -13,13 +10,25 @@ class Gmap extends Component {
       center: {
         lat: 37.784817,
         lng: -122.406358
-      },
-      
-      usersObj: this.props.users
+      }
 
     }
   }
   
+  // componentDidMount() {
+  //   this.setState({
+  //     center: {
+  //       user.lat,
+  //       user.lng
+  //     }
+  //   })
+  // }
+
+  componentWillReceiveProps() {
+    console.log('received new props!');
+
+  }
+
   //Toggle to 'true' to show InfoWindow and re-renders component
   handleMarkerClick(marker) {
     marker.showInfo = true;
@@ -84,9 +93,9 @@ class Gmap extends Component {
             overviewMapControl={false}
             ref='map'>
 
-            {Object.keys(this.state.usersObj).map((key, index) => 
+            {Object.keys(this.props.users).map((key, index) => 
               {
-                const marker = this.state.usersObj[key];
+                const marker = this.props.users[key];
                 // used to reference the marker to for positioning the infowindow
                 const ref = `marker_${key}`;
                 return (
