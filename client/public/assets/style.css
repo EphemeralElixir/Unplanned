@@ -1,0 +1,34 @@
+/*These styles are used for the InfoWindow (rendered on clicking a marker)*/
+.markerInfoWindow {
+  margin: auto;
+}
+
+.markerName {
+  font-weight: 500;
+  font-size: 1.2em;
+}
+
+.markerProfile {
+
+}
+
+.markerProfilePic {
+
+}
+
+.markerBio {
+
+}
+
+.buttonSendMeetReq {
+  width: 100%;
+  margin-top: 5px;
+  background-color: #008CBA; /* Blue */
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+}
