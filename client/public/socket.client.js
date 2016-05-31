@@ -8,21 +8,20 @@ var senderSocketId;
 
 /********** Socket-Client Controllers **********/
 
-var renderTimer = function (id) {
-  console.log('Wow you are popular, people want to hang out');
+// var renderTimer = function (id) {
+//   console.log('Wow you are popular, people want to hang out');
 
-  //Render timer component on acceptance
-  //var profile = activeUsers[id];
-};
+//   //Render timer component on acceptance
+//   //var profile = activeUsers[id];
+// };
 
-var renderRejection = function (id) {
-  //Render rejection component
-  //var profile = activeUsers[id];
-};
+// var renderRejection = function (id) {
+//   //Render rejection component
+//   //var profile = activeUsers[id];
+// };
 
 var acceptMeeting = function() {
   socket.emit('lets do it', senderSocketId);
-  renderTimerComponent(senderSocketId);
 };
 
 var rejectMeeting = function() {
@@ -31,6 +30,7 @@ var rejectMeeting = function() {
 
 var sendMeeting = function(receiverId) {
   socket.emit('send meeting', userSocketId, receiverId);
+  // renderTimer(receiverId);
 };
 
 var updateLocation = function(userProfile) {
@@ -50,6 +50,7 @@ var handleMeetingRequest = function(id) {
   console.log('Look! Inbound request is here');
   senderProfile = activeUsers[id];
   senderSocketId = id;
+  // renderTimer(senderSocketId);
 };
 
 var notifyNewUserConnection = function() {
@@ -77,5 +78,5 @@ socket.on('get coordinates', updateAndSave);
 socket.on('update all users', updateAllUserData);
 socket.on('lets meet', handleMeetingRequest);
 
-socket.on('user said no', renderRejection);
-socket.on('user said yes', renderTimer);
+// socket.on('user said no', renderRejection);
+// socket.on('user said yes', renderTimer);

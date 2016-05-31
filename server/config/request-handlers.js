@@ -2,7 +2,7 @@ var passport = require('passport');
 var websocket = require('./socket.server');
 
 var redirectToFbOAuth = function(req, res, next) {
-  passport.authenticate('facebook', {scope: 'email'})(req, res, next);
+  passport.authenticate('facebook', {scope: ['email', 'public_profile'], info_fields: ['email', 'name']})(req, res, next);
 };
 
 var fbCallbackOAuth = function(req, res, next) {
