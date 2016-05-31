@@ -11,6 +11,8 @@ class App extends React.Component {
     	<p>Hello World</p>
       <AddUser dispatch={this.props.dispatch}/>
       <UserList userList={this.props.users}/>
+      <Gmap/>
+      <Options/>
     </div>);
   }
 }
