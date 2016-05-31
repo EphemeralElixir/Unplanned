@@ -4,8 +4,8 @@ var path = require('path');
 
 module.exports = {
   context: path.join(__dirname, ""),
-  devtool: debug ? "inline-source-map" : null,
-  entry: "./client/webpackEntry.js",
+  devtool: debug ? "inline-sourcemap" : null,
+  entry: ['webpack-hot-middleware/client', './client/webpackEntry.js'],
   module: {
     loaders: [
       {
@@ -22,7 +22,11 @@ module.exports = {
     path: __dirname + "/client/public",
     filename: "webpack.min.js"
   },
-  plugins: debug ? [] : [
+  plugins: debug ? [
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+    ] : [
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
