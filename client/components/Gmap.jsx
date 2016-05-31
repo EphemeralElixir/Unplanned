@@ -14,23 +14,11 @@ class Gmap extends Component {
 
     }
   }
-  componentDidMount() {
-  // if current user exists on global e.g. user is logged in
-    if ( user ) {
-      // set the maps center to their lat lng
-      this.setState({
-        center: {
-          user.lat,
-          user.lng
-        }
-      })
-    }
-  }
 
   componentWillReceiveProps() {
-    console.log('received new props!');
-
+    console.log('Received new props!');
   }
+
   // this will close all other infoWindows except the user clicked on
   closeOtherInfoWindows(socketIdToKeepOpen) {
     // iterate all the users markers
@@ -39,7 +27,7 @@ class Gmap extends Component {
       // if userIdToKeepOpen is not current marker
       if ( marker.showInfo && socketId !== socketIdToKeepOpen ) {
         // close the marker window 
-        console.log('closing window for: ', socketId);
+        console.log('Closing info window of:', socketId);
         this.handleMarkerClose(marker);
       }
       
@@ -48,8 +36,14 @@ class Gmap extends Component {
     }
   }
 
+  handleMeetRequest(receiverId) {
+    console.log('Sending meeting request from user.');
+    // change state here for request sent 
+  }
+
   //Toggle to 'true' to show InfoWindow and re-renders component
   handleMarkerClick(marker) {
+    console.log('Inside handleMarkerClick');
     this.closeOtherInfoWindows(marker.socketId);
     marker.showInfo = true;
     this.setState(this.state);
@@ -69,9 +63,13 @@ class Gmap extends Component {
         onCloseclick={this.handleMarkerClose.bind(this, marker)} >
 
         {
-        <div>
-          <div>{marker.name}</div>
-          <div><button>Meet!</button></div>
+        <div className="markerInfoWindow">
+          <div className="markerProfilePic">
+            <img src={marker.image} />
+          </div>
+          <div className="markerName">{marker.name}</div>
+          <div className="markerBio">{marker.bio}</div>
+          <button className="buttonSendMeetReq" onClick={this.handleMeetRequest.bind(this, marker)}>Let's Meet</button>
         </div>
         }
 
@@ -91,8 +89,8 @@ class Gmap extends Component {
             {...this.props}
             style={{
               margin: 'auto',
-              height: '500px',
-              width: '500px'
+              width: '600px',
+              height: '600px'
             }} >
           </div>
         }
@@ -101,16 +99,7 @@ class Gmap extends Component {
             // google map options:
             center={this.state.center}
             // higher zoom level will reduce the area covered
-            // lower zoom level will cover a greater area
             defaultZoom={14}
-            // set google map controls:
-            zoomControl={false}
-            panControl={false}
-            mapTypeControl={false}
-            scaleControl={false}
-            streetViewControl={false}
-            rotateControl={false}
-            overviewMapControl={false}
             ref='map'>
 
             {Object.keys(this.props.users).map((socketId, index) => 
@@ -130,7 +119,7 @@ class Gmap extends Component {
                   </Marker>
                   );
 
-              }) // end map paren over userObj here
+              }) // end map over users here
             }
 
           </GoogleMap>
