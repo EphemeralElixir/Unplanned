@@ -1,43 +1,44 @@
 var socket = io.connect('http://localhost:8000');
 var activeUsers = {};
 var userProfile = null;
+var userSocketId;
 //Sender profile will be set only if the user receives a meeting request
 var senderProfile = null;
-var senderId = null;
+var senderSocketId;
 
 /********** Socket-Client Controllers **********/
 
-var renderTimerComponent = function (userId) {
-  console.log('Wow you are popular, people want to hang out');
+// var renderTimer = function (id) {
+//   console.log('Wow you are popular, people want to hang out');
 
-  //Render timer component on acceptance
-  //var profile = activeUsers[userId];
+//   //Render timer component on acceptance
+//   //var profile = activeUsers[id];
+// };
+
+// var renderRejection = function (id) {
+//   //Render rejection component
+//   //var profile = activeUsers[id];
+// };
+
+var acceptMeeting = function() {
+  socket.emit('lets do it', senderSocketId);
 };
 
-var renderRejectionComponent = function (userId) {
-  //Render rejection component
-  //var profile = activeUsers[userId];
+var rejectMeeting = function() {
+  socket.emit('no thanks', senderSocketId);
 };
 
-var acceptMeetingRequest = function() {
-  socket.emit('lets do it', senderId);
-  renderTimerComponent(senderId);
+var sendMeeting = function(receiverId) {
+  socket.emit('send meeting', userSocketId, receiverId);
+  // renderTimer(receiverId);
 };
 
-var rejectMeetingRequest = function() {
-  socket.emit('no thanks', senderId);
-};
-
-var sendMeetingRequest = function(receiverId) {
-  socket.emit('request meeting', socket.id, receiverId);
-};
-
-var updateUserLocation = function(userProfile) {
+var updateLocation = function(userProfile) {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       userProfile.lat = position.coords.latitude;
       userProfile.lng = position.coords.longitude;
-      socket.emit('update new user coords', userProfile, socket.id);
+      socket.emit('update user coords', userProfile, userSocketId);
     });
   }
 };
@@ -45,21 +46,23 @@ var updateUserLocation = function(userProfile) {
 
 /******** Socket-Client Event Handlers *********/
 
-var inboundRequestHandler = function(userId) {
+var handleMeetingRequest = function(id) {
   console.log('Look! Inbound request is here');
-  senderProfile = activeUsers[userId];
-  senderId = userId;
+  senderProfile = activeUsers[id];
+  senderSocketId = id;
+  // renderTimer(senderSocketId);
 };
 
 var notifyNewUserConnection = function() {
   console.log('Connected!');
+  userSocketId = socket.id;
   socket.emit('new user connection');
 };
 
-var saveNewUser = function(data) {
+var updateAndSave = function(data) {
   if (!userProfile) {
     userProfile = data;
-    updateUserLocation(userProfile);
+    updateLocation(userProfile);
   }
 };
 
@@ -71,9 +74,9 @@ var updateAllUserData = function(data) {
 /******** Socket-Client Event Listeners ********/
 
 socket.on('connect', notifyNewUserConnection);
-socket.on('save new user', saveNewUser);
+socket.on('get coordinates', updateAndSave);
 socket.on('update all users', updateAllUserData);
-socket.on('lets meet', inboundRequestHandler);
+socket.on('lets meet', handleMeetingRequest);
 
-socket.on('user said no', renderRejectionComponent);
-socket.on('user said yes', renderTimerComponent);
+// socket.on('user said no', renderRejection);
+// socket.on('user said yes', renderTimer);

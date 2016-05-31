@@ -27,34 +27,34 @@ var io = function(io) {
       receiverId = null;
     };
 
-    var outboundRequestHandler = function(senderId, receiveId) {
+    var deliverMeetingRequest = function(senderId, receiveId) {
       receiverId = receiveId;
       socket.broadcast.to('/#' + receiverId).emit('lets meet', senderId);
     };
 
-    var refreshAllUserData = function(userData, id) {
+    var refreshOnConnect = function(userData, id) {
       socketId = id;
       activeUsers[socketId] = userData;
       updateAllUsers();
     };
 
-    var refreshAfterDisconnect = function() {
+    var refreshOnDisconnect = function() {
       delete activeUsers[socketId];
       updateAllUsers();
     };
 
-    var sendNewUserData = function() {
-      socket.emit('save new user', user.current);
+    var sendToGetCoords = function() {
+      socket.emit('get coordinates', user.current);
     };
 
 
     /******** Socket-Server Event Listeners ********/
 
-    socket.on('new user connection', sendNewUserData);
-    socket.on('update new user coords', refreshAllUserData);
-    socket.on('disconnect', refreshAfterDisconnect);
+    socket.on('new user connection', sendToGetCoords);
+    socket.on('update user coords', refreshOnConnect);
+    socket.on('disconnect', refreshOnDisconnect);
 
-    socket.on('request meeting', outboundRequestHandler);
+    socket.on('send meeting', deliverMeetingRequest);
     socket.on('no thanks', sendRejection);
     socket.on('lets do it', sendConfirmation);
 
