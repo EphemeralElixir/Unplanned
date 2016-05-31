@@ -18,18 +18,18 @@ var io = function(io) {
     /******** Socket-Server Event Handlers *********/
 
     var sendRejection = function(senderId) {
-      socket.to(senderId).emit('user said no', socketId);
+      socket.broadcast.to('/#' + senderId).emit('user said no', socketId);
       receiverId = null;
     };
 
     var sendConfirmation = function(senderId) {
-      socket.to(senderId).emit('user said yes', socketId);
+      socket.broadcast.to('/#' + senderId).emit('user said yes', socketId);
       receiverId = null;
     };
 
     var outboundRequestHandler = function(senderId, receiveId) {
       receiverId = receiveId;
-      socket.to(receiverId).emit('lets meet', senderId);
+      socket.broadcast.to('/#' + receiverId).emit('lets meet', senderId);
     };
 
     var refreshAllUserData = function(userData, id) {

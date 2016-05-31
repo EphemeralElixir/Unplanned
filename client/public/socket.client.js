@@ -1,6 +1,5 @@
 var socket = io.connect('http://localhost:8000');
 var activeUsers = {};
-var userId = socket.id;
 var userProfile = null;
 //Sender profile will be set only if the user receives a meeting request
 var senderProfile = null;
@@ -9,6 +8,8 @@ var senderId = null;
 /********** Socket-Client Controllers **********/
 
 var renderTimerComponent = function (userId) {
+  console.log('Wow you are popular, people want to hang out');
+
   //Render timer component on acceptance
   //var profile = activeUsers[userId];
 };
@@ -28,7 +29,7 @@ var rejectMeetingRequest = function() {
 };
 
 var sendMeetingRequest = function(receiverId) {
-  socket.emit('request meeting', userId, receiverId);
+  socket.emit('request meeting', socket.id, receiverId);
 };
 
 var updateUserLocation = function(userProfile) {
@@ -45,6 +46,7 @@ var updateUserLocation = function(userProfile) {
 /******** Socket-Client Event Handlers *********/
 
 var inboundRequestHandler = function(userId) {
+  console.log('Look! Inbound request is here');
   senderProfile = activeUsers[userId];
   senderId = userId;
 };
