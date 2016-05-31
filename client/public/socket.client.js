@@ -10,7 +10,7 @@ var updateUserLocation = function(user) {
     navigator.geolocation.getCurrentPosition(function(position) {
       user.lat = position.coords.latitude;
       user.lng = position.coords.longitude;
-      socket.emit('update new user coords', user);
+      socket.emit('update new user coords', user, socket.id);
     });
   }
 };
@@ -30,8 +30,6 @@ var saveNewUser = function(data) {
 var updateAllUserData = function(data) {
   activeUsers = data;
 };
-
-
 
 var inboundRequestHandler = function(userId) {
 

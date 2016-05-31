@@ -5,32 +5,30 @@ var user = {};
 var io = function(io) {
 
   io.on('connection', function(socket) {
+    var socketId;
 
     /****** Socket-Server Event Handlers *******/
     var updateAllUsers = function() {
+      io.emit('update all users', activeUsers);
     };
 
     var sendNewUserData = function() {
       socket.emit('save new user', user.current);
     };
 
-    var refreshAllUserData = function(userData, socketId) {
+    var refreshAllUserData = function(userData, id) {
+      socketId = id;
       activeUsers[socketId] = userData;
-      io.emit('update all users', activeUsers);
-
       updateAllUsers();
     };
 
     var refreshAfterDisconnect = function() {
-      console.log('User socket id ====>', socket.id);
-      console.log('User active user by id ===>', activeUsers[socket.id]);
-      delete activeUsers[socket.id];
-      io.emit('update all users', activeUsers);
-
+      delete activeUsers[socketId];
+      updateAllUsers();
     };
 
     var outboundRequestHandler = function(userId) {
-      socket.to(userId).emit('lets meet', socket.id);
+      socket.to(userId).emit('lets meet', socketId);
     };
 
 
@@ -39,7 +37,6 @@ var io = function(io) {
     socket.on('new user connection', sendNewUserData);
     socket.on('update new user coords', refreshAllUserData);
     socket.on('disconnect', refreshAfterDisconnect);
-
 
     socket.on('request meeting', outboundRequestHandler);
 
