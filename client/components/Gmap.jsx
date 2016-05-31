@@ -1,9 +1,6 @@
 import { default as React, Component } from "react";
 import { GoogleMapLoader, GoogleMap, InfoWindow, Marker } from "react-google-maps";
 
-// var React = require('react');
-// import { GoogleMapLoader, GoogleMap, InfoWindow, Marker } from 'react-google-maps';
-
 class Gmap extends Component {
 
   constructor(props) {
@@ -13,15 +10,41 @@ class Gmap extends Component {
       center: {
         lat: 37.784817,
         lng: -122.406358
-      },
-      
-      usersObj: this.props.users
+      }
 
     }
   }
-  
+
+  componentWillReceiveProps() {
+    console.log('Received new props!');
+  }
+
+  // this will close all other infoWindows except the user clicked on
+  closeOtherInfoWindows(socketIdToKeepOpen) {
+    // iterate all the users markers
+    {Object.keys(this.props.users).map((socketId, index) => {
+      let marker = this.props.users[socketId];
+      // if userIdToKeepOpen is not current marker
+      if ( marker.showInfo && socketId !== socketIdToKeepOpen ) {
+        // close the marker window 
+        console.log('Closing info window of:', socketId);
+        this.handleMarkerClose(marker);
+      }
+      
+    }); //end the map over users object
+
+    }
+  }
+
+  handleMeetRequest(receiverId) {
+    console.log('Sending meeting request from user.');
+    // change state here for request sent 
+  }
+
   //Toggle to 'true' to show InfoWindow and re-renders component
   handleMarkerClick(marker) {
+    console.log('Inside handleMarkerClick');
+    this.closeOtherInfoWindows(marker.socketId);
     marker.showInfo = true;
     this.setState(this.state);
   }
@@ -40,9 +63,13 @@ class Gmap extends Component {
         onCloseclick={this.handleMarkerClose.bind(this, marker)} >
 
         {
-        <div>
-          <div>{marker.name}</div>
-          <div><button>Meet!</button></div>
+        <div className="markerInfoWindow">
+          <div className="markerProfilePic">
+            <img src={marker.image} />
+          </div>
+          <div className="markerName">{marker.name}</div>
+          <div className="markerBio">{marker.bio}</div>
+          <button className="buttonSendMeetReq" onClick={this.handleMeetRequest.bind(this, marker)}>Let's Meet</button>
         </div>
         }
 
@@ -62,8 +89,8 @@ class Gmap extends Component {
             {...this.props}
             style={{
               margin: 'auto',
-              height: '500px',
-              width: '500px'
+              width: '600px',
+              height: '600px'
             }} >
           </div>
         }
@@ -72,27 +99,18 @@ class Gmap extends Component {
             // google map options:
             center={this.state.center}
             // higher zoom level will reduce the area covered
-            // lower zoom level will cover a greater area
             defaultZoom={14}
-            // set google map controls:
-            zoomControl={false}
-            panControl={false}
-            mapTypeControl={false}
-            scaleControl={false}
-            streetViewControl={false}
-            rotateControl={false}
-            overviewMapControl={false}
             ref='map'>
 
-            {Object.keys(this.state.usersObj).map((key, index) => 
+            {Object.keys(this.props.users).map((socketId, index) => 
               {
-                const marker = this.state.usersObj[key];
+                const marker = this.props.users[socketId];
                 // used to reference the marker to for positioning the infowindow
-                const ref = `marker_${key}`;
+                const ref = `marker_${socketId}`;
                 return (
                   // use the Marker component to render user as a marker on map
                   <Marker
-                    key={key}
+                    key={socketId}
                     ref={ref}
                     position={{lat: marker.lat, lng: marker.lng}}
                     onClick={this.handleMarkerClick.bind(this, marker)} >
@@ -101,7 +119,7 @@ class Gmap extends Component {
                   </Marker>
                   );
 
-              }) // end map paren over userObj here
+              }) // end map over users here
             }
 
           </GoogleMap>
