@@ -7,7 +7,6 @@ import { default as Gmap } from './Gmap.jsx';
 import { connect } from 'react-redux';
 import SocketSend from './SocketSend.jsx';
 import SocketReceive from './SocketReceive.jsx';
-import MeetingRequest from './MeetingRequest.jsx';
 
 class App extends React.Component {
   render() {
@@ -19,7 +18,7 @@ class App extends React.Component {
       <Options/>
       <MeetingRequest/>
       <SocketReceive dispatch={this.props.dispatch}/>
-      <SocketSend />
+      <SocketSend/>
 
     </div>);
   }
