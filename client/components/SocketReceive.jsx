@@ -6,7 +6,7 @@ class SocketReceive extends React.Component {
   constructor(props) {
     super(props);
     this.updateUserList.bind(this)();
-    setInterval(this.updateUserList.bind(this), 5000);
+    setInterval(this.updateUserList.bind(this), 500);
   }
   
   updateUserList() {
