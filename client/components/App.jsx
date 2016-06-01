@@ -12,14 +12,17 @@ const App = (props) => (
     <p>Hello World</p>
     <AddUser dispatch={props.dispatch} />
     <UserList userList={props.users} />
-    <Gmap users={props.users} />
+    <Gmap
+      users={props.users} dispatch={props.dispatch}
+      gmap={props.gmap}
+    />
     <Options />
     <MeetingRequest />
     <Socket dispatch={props.dispatch} />
   </div>
 );
 
-// only reaturn the part of the state/store that the component needs
+// only return the part of the state/store that the component needs
 function mapStateToProps(state) {
   return state;
 }
@@ -27,6 +30,8 @@ function mapStateToProps(state) {
 App.propTypes = {
   dispatch: React.PropTypes.func,
   users: React.PropTypes.object,
+  meet: React.PropTypes.object,
+  gmap: React.PropTypes.object,
 };
 
 export default connect(mapStateToProps)(App);
