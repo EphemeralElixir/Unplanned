@@ -18,10 +18,11 @@ class Gmap extends Component {
     console.log('Received new props!');
   }
 
-  handleMeetRequest() {
+  handleMeetRequest(socketId) {
     console.log('Sending meeting request from user.');
-    // send dispatch to update user1s recipientID
-    // emit socket to update user2s requestorID
+    // send dispatch to update user1s recipientId
+    this.props.dispatch(actions.setRecipient(socketId));
+    // emit socket to update user2s requestorId
   }
 
   // Toggle to 'true' to show InfoWindow and re-renders component
@@ -34,7 +35,7 @@ class Gmap extends Component {
     this.props.dispatch(actions.updateOpenedUserId(undefined));
   }
 
-  renderInfoWindow(marker) {
+  renderInfoWindow(marker, socketId) {
     return (
       <InfoWindow
         key={`${marker.userID}_info_window`}
@@ -47,7 +48,10 @@ class Gmap extends Component {
           </div>
           <div className="markerName">{marker.name}</div>
           <div className="markerBio">{marker.bio}</div>
-          <button className="buttonSendMeetReq" onClick={this.handleMeetRequest.bind(this, marker)}>
+          <button
+            className="buttonSendMeetReq"
+            onClick={this.handleMeetRequest.bind(this, socketId)}
+          >
             Let's Meet
           </button>
         </div>
@@ -82,18 +86,15 @@ class Gmap extends Component {
           {Object.keys(this.props.users).map((socketId) => {
             const marker = this.props.users[socketId];
             const openedUserId = this.props.gmap.openedUserId;
-            // ref is used to reference the marker for positioning the infoWindow
-            // const ref = `marker_${socketId}`;
             return (
               // use the Marker component to render user as a marker on map
               <Marker
-                key={socketId}
-                // ref={ref}
+                key={`marker_${socketId}`}
                 position={{ lat: marker.lat, lng: marker.lng }}
                 onClick={this.handleMarkerClick.bind(this, marker, socketId)}
               >
                 {/* render infoWindow only if marker has been clicked */}
-                {socketId === openedUserId ? this.renderInfoWindow(marker) : null}
+                {socketId === openedUserId ? this.renderInfoWindow(marker, socketId) : null}
               </Marker>
             );
           }) // end map over users here
