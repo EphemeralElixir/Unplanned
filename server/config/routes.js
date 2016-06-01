@@ -1,15 +1,11 @@
-var handle = require('./request-handlers');
+var handler = require('./request-handlers');
 
 module.exports = function (app, passport, express) {
 
-  app.get('/', handle.initializeMain);
+  app.get('/', handler.initializeMain);
 
-  app.get('/login', handle.redirectToFbOAuth);
+  app.get('/success', handler.sendUserDataToClient);
 
-  app.get('/auth/facebook/callback', handle.fbCallbackOAuth);
-
-  app.get('/success', handle.sendUserDataToClient);
-
-  app.get('/failure', handle.sendLoginError);
+  app.get('/failure', handler.sendLoginError);
 
 };

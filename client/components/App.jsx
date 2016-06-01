@@ -16,7 +16,7 @@ class App extends React.Component {
       <Gmap users={this.props.users}/>
       <Options/>
       <MeetingRequest/>
-      
+
       <Socket dispatch={this.props.dispatch}/>
     </div>);
   }
