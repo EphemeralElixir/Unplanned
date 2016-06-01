@@ -1,86 +1,56 @@
-var User = require('../users/userModel');
-var userHandlers = require('../users/userController');
+const User = require('../users/userModel');
+const userHandlers = require('../users/userController');
 
-var activeUsers = {};
+const socketIO = require('socket.io');
 
-var io = function(io) {
+const activeUsers = {};
 
-  io.on('connection', function(socket) {
-    // var socketId = null;
-    // var receiverId = null;
 
-    /********** Socket-Server Controllers **********/
+const makeSocketServer = function socketServer(http) {
+  const io = socketIO(http);
 
-    var updateAllUsers = function() {
+  io.on('connection', (socket) => {
+    const updateAllUsers = function updateAllUsers() {
       io.emit('update all users', activeUsers);
     };
 
-    var updateActiveUsers = function (socketUser, socketID) {
+    const updateActiveUsers = function updateActiveUsers(socketUser, socketID) {
       activeUsers[socketID] = socketUser;
     };
 
-    setInterval(updateAllUsers, 3000);
+    setInterval(updateAllUsers, 5000);
 
-    var disconnect = function() {
-      console.log(socket.id);
+    const disconnect = function disconnect() {
       delete activeUsers[socket.id.slice(2)];
       updateAllUsers();
-    }
-    /******** Socket-Server Event Handlers *********/
-
-    var saveUserToDb = function(userObj) {
-      userHandlers.loginOrCreate(User, userObj);
-      console.log(userObj);
     };
-    // var sendRejection = function(senderId) {
-    //   socket.broadcast.to('/#' + senderId).emit('user said no', socketId);
-    //   receiverId = null;
-    // };
 
-    // var sendConfirmation = function(senderId) {
-    //   socket.broadcast.to('/#' + senderId).emit('user said yes', socketId);
-    //   receiverId = null;
-    // };
-
-    // var deliverMeetingRequest = function(senderId, receiveId) {
-    //   receiverId = receiveId;
-    //   socket.broadcast.to('/#' + receiverId).emit('lets meet', senderId);
-    // };
-
-    // var refreshOnConnect = function(userData, id) {
-    //   socketId = id;
-    //   activeUsers[socketId] = userData;
-    //   updateAllUsers();
-    // };
-
-    // var refreshOnDisconnect = function() {
-    //   delete activeUsers[socketId];
-    //   updateAllUsers();
-    // };
-
-    // var sendToGetCoords = function() {
-    //   socket.emit('get coordinates', user.current);
-    // };
-
-
-    /******** Socket-Server Event Listeners ********/
+    const saveUserToDb = function saveUserToDb(userObj) {
+      userHandlers.loginOrCreate(User, userObj);
+    };
 
     socket.on('update one socket user', updateActiveUsers);
     socket.on('save user to db', saveUserToDb);
     socket.on('disconnect', disconnect);
 
-    // socket.on('new user connection', sendToGetCoords);
-    // socket.on('update user coords', refreshOnConnect);
+    const sendMeetingRequest = function sendMeetingRequest(senderID, receiverID) {
+      socket.broadcast.to(`/#${receiverID}`).emit('receive meeting request', senderID);
+    };
 
-    // socket.on('send meeting', deliverMeetingRequest);
-    // socket.on('no thanks', sendRejection);
-    // socket.on('lets do it', sendConfirmation);
+    const confirmMeetingRequest = function confirmMeetingRequest(senderID, receiverID) {
+      socket.broadcast.to(`/#${receiverID}`).emit('confirm meeting request', senderID);
+    };
 
+    const rejectMeetingRequest = function rejectMeetingRequest(senderID, receiverID) {
+      socket.broadcast.to(`/#${receiverID}`).emit('reject meeting request', senderID);
+    };
 
+    socket.on('send meeting request', sendMeetingRequest);
+    socket.on('confirm meeting request', confirmMeetingRequest);
+    socket.on('reject meeting request', rejectMeetingRequest);
   });
 };
 
 module.exports = {
-  activeUsers : activeUsers,
-  io: io
+  makeSocketServer,
 };
