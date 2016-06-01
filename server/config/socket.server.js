@@ -17,6 +17,11 @@ var io = function(io) {
 
     var updateActiveUsers = function (socketUser, socketID) {
       activeUsers[socketID] = socketUser;
+
+      updateAllUsers();
+
+      //For test purposes only
+      socket.emit('update success', activeUsers);
     };
 
     setInterval(updateAllUsers, 3000);
@@ -67,6 +72,7 @@ var io = function(io) {
 
     socket.on('update one socket user', updateActiveUsers);
     socket.on('save user to db', saveUserToDb);
+    socket.on('refresh users', updateAllUsers);
     socket.on('disconnect', disconnect);
 
     // socket.on('new user connection', sendToGetCoords);
