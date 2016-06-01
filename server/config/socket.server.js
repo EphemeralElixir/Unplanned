@@ -14,8 +14,8 @@ const makeSocketServer = function socketServer(http) {
       io.emit('update all users', activeUsers);
     };
 
-    const updateActiveUsers = function updateActiveUsers(socketUser, socketID) {
-      activeUsers[socketID] = socketUser;
+    const updateActiveUsers = function updateActiveUsers(socketUser, senderId) {
+      activeUsers[senderId] = socketUser;
     };
 
     setInterval(updateAllUsers, 5000);
@@ -33,16 +33,16 @@ const makeSocketServer = function socketServer(http) {
     socket.on('save user to db', saveUserToDb);
     socket.on('disconnect', disconnect);
 
-    const sendMeetingRequest = function sendMeetingRequest(senderID, receiverID) {
-      socket.broadcast.to(`/#${receiverID}`).emit('receive meeting request', senderID);
+    const sendMeetingRequest = function sendMeetingRequest(senderId, receiverId) {
+      socket.broadcast.to(`/#${receiverId}`).emit('receive meeting request', senderId);
     };
 
-    const confirmMeetingRequest = function confirmMeetingRequest(senderID, receiverID) {
-      socket.broadcast.to(`/#${receiverID}`).emit('confirm meeting request', senderID);
+    const confirmMeetingRequest = function confirmMeetingRequest(senderId, receiverId) {
+      socket.broadcast.to(`/#${receiverId}`).emit('confirm meeting request', senderId);
     };
 
-    const rejectMeetingRequest = function rejectMeetingRequest(senderID, receiverID) {
-      socket.broadcast.to(`/#${receiverID}`).emit('reject meeting request', senderID);
+    const rejectMeetingRequest = function rejectMeetingRequest(senderId, receiverId) {
+      socket.broadcast.to(`/#${receiverId}`).emit('reject meeting request', senderId);
     };
 
     socket.on('send meeting request', sendMeetingRequest);
