@@ -2,12 +2,24 @@ export default function reducer(state, action) {
   switch (action.type) {
 
     case 'UPDATE_USERLIST': {
-      return Object.assign({}, { users: action.newUserList,
+      return Object.assign({}, {
+        users: action.newUserList,
         meet: {
-          recipientID: state.meet.recipientID, requestorID: state.meet.requestorID,
-          acceptedID: state.meet.requestorID,
+          recipientId: state.meet.recipientID,
+          requestorId: state.meet.requestorID,
+          acceptedId: state.meet.requestorID,
         },
-        map: { openedUser: state.map.openedUser },
+        gmap: { openedUserId: state.gmap.openedUserId },
+      });
+    }
+
+    case 'UPDATE_OPENED_USER': {
+      return Object.assign({}, {
+        users: state.users,
+        meet: state.meet,
+        gmap: {
+          openedUserId: action.socketId,
+        },
       });
     }
 
