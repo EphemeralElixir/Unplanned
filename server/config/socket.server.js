@@ -43,8 +43,8 @@ var io = function(io) {
       updateAllUsers();
     };
 
-    var sendToGetCoords = function() {
-      socket.emit('get coordinates', user.current);
+    var sendToGetCoords = function(facebookId) {
+      socket.emit('get coordinates', user[facebookId]);
     };
 
 
