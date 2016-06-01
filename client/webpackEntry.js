@@ -9,9 +9,9 @@ import './components/Gmap.jsx';
 const initialState = {
   users: {},
   meet: {
-    recipientID: undefined,
-    requestorID: undefined,
-    acceptedID: undefined,
+    recipientId: undefined,
+    requesterId: undefined,
+    acceptedId: undefined,
   },
   gmap: {
     openedUserId: undefined,
