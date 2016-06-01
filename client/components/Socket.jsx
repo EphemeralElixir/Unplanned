@@ -5,8 +5,9 @@ class Socket extends React.Component {
 
   constructor(props) {
     super(props);
-    this.socket = window.io.connect('http://localhost:8000');
-    this.socketUser = {
+    window.socket = window.io.connect('http://localhost:8000');
+
+    window.socketUser = {
       userID: '',
       image: '',
       name: '',
@@ -15,8 +16,9 @@ class Socket extends React.Component {
       lng: '',
     };
 
-    this.isLoggedIn = false;
+    window.isLoggedIn = false;
 
+    // populate socketUser
     window.fbAsyncInit = () => {
       window.FB.init({
         appId: '577393235773311',
@@ -28,39 +30,64 @@ class Socket extends React.Component {
         if (response.status === undefined) {
           // do nothing
         } else {
-          this.socketUser.userID = response.authResponse.userID;
-          window.FB.api(`/${this.socketUser.userID}`, (userIdResponse) => {
-            this.socketUser.name = userIdResponse.name;
-            window.FB.api(`/${this.socketUser.userID}/picture?type=large`, (imageResponse) => {
-              this.socketUser.image = imageResponse.data.url;
-              this.isLoggedIn = true;
-              this.socket.emit('save user to db', this.socketUser);
+          window.socketUser.userID = response.authResponse.userID;
+          window.FB.api(`/${window.socketUser.userID}`, (userIdResponse) => {
+            window.socketUser.name = userIdResponse.name;
+            window.FB.api(`/${window.socketUser.userID}/picture?type=large`, (imageResponse) => {
+              window.socketUser.image = imageResponse.data.url;
+              window.isLoggedIn = true;
+              window.socket.emit('save user to db', window.socketUser);
             });
           });
         }
       });
     };
+
+    // api's
+    window.socket.api = {};
+
+    window.socket.api.sendToServer = function sendToServer() {
+      if (window.socket.connected && window.isLoggedIn) {
+        window.socket.emit('update one socket user', window.socketUser, window.socket.id);
+      }
+    };
+
+    window.socket.api.updateLocation = function updateLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          window.socketUser.lat = position.coords.latitude;
+          window.socketUser.lng = position.coords.longitude;
+        });
+      }
+    };
+
+    window.socket.api.sendMeetingRequest = function sendMeetingRequest(receiverId) {
+      if (window.socket.connected && window.isLoggedIn) {
+        window.socket.emit('send meeting request', window.socket.id, receiverId);
+      }
+    };
+
+    window.socket.api.confirmMeetingRequest = function confirmMeetingRequest(receiverId) {
+      if (window.socket.connected && window.isLoggedIn) {
+        window.socket.emit('confirm meeting request', window.socket.id, receiverId);
+      }
+    };
+
+    window.socket.api.rejectMeetingRequest = function rejectMeetingRequest(receiverId) {
+      if (window.socket.connected && window.isLoggedIn) {
+        window.socket.emit('reject meeting request', window.socket.id, receiverId);
+      }
+    };
   }
 
   componentDidMount() {
-    setInterval(this.sendToServer.bind(this), 3000);
-    setInterval(this.updateLocation.bind(this), 10000);
-    this.socket.on('update all users', this.updateUserList.bind(this));
-  }
+    setInterval(window.socket.api.sendToServer, 5000);
+    setInterval(window.socket.api.updateLocation, 5000);
 
-  sendToServer() {
-    if (this.socket.connected && this.isLoggedIn) {
-      this.socket.emit('update one socket user', this.socketUser, this.socket.id);
-    }
-  }
-
-  updateLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.socketUser.lat = position.coords.latitude;
-        this.socketUser.lng = position.coords.longitude;
-      });
-    }
+    window.socket.on('update all users', this.updateUserList.bind(this));
+    // window.socket.on('receive meeting request', this.setRecipientID.bind(this));
+    // window.socket.on('confirm meeting request', this.setRequestorID.bind(this));
+    // window.socket.on('reject meeting request', this.setAcceptedID.bind(this));
   }
 
   updateUserList(activeUsers) {
