@@ -85,9 +85,6 @@ class Socket extends React.Component {
     setInterval(window.socket.api.updateLocation, 5000);
 
     window.socket.on('update all users', this.updateUserList.bind(this));
-    // window.socket.on('receive meeting request', this.setRecipientID.bind(this));
-    // window.socket.on('confirm meeting request', this.setRequestorID.bind(this));
-    // window.socket.on('reject meeting request', this.setAcceptedID.bind(this));
   }
 
   updateUserList(activeUsers) {
