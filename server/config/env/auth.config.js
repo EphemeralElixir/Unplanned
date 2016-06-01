@@ -1,11 +1,12 @@
-//Fill in and change name to Auth.js in production
+// Fill in and change name to Auth.js in production
 module.exports = {
-  'facebookAuth': {
+  facebookAuth: {
     callbackURL: 'InsertCallbackURL',
     enableProof: true,
     clientID: 'InsertClientID',
     clientSecret: 'InsertClientSecret',
-    profileFields: ['emails', 'first_name', 'last_name', 'picture', 'gender','name', 'displayName', 'photos']
+    profileFields: ['emails', 'first_name', 'last_name',
+    'picture', 'gender', 'name', 'displayName', 'photos'],
   },
-  'dbUri': 'InsertDatabaseUri'
+  dbUri: 'InsertDatabaseUri',
 };
