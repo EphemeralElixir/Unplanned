@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import AddUser from './AddUser.jsx';
 import UserList from './UserList.jsx';
 import Options from './Options.jsx';
+import MeetingRequest from './MeetingRequest.jsx';
 import { default as Gmap } from './Gmap.jsx';
 import { connect } from 'react-redux';
 import SocketSend from './SocketSend.jsx';
@@ -15,8 +16,9 @@ class App extends React.Component {
       <UserList userList={this.props.users}/>
       <Gmap users={this.props.users}/>
       <Options/>
+      <MeetingRequest/>
       <SocketReceive dispatch={this.props.dispatch}/>
-      <SocketSend />
+      <SocketSend/>
 
     </div>);
   }
