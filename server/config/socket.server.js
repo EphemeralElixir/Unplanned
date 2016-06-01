@@ -1,4 +1,6 @@
-//Master list of users to store all users that are currently 'available' to hang out
+var User = require('../users/userModel');
+var userHandlers = require('../users/userController');
+
 var activeUsers = {};
 
 var io = function(io) {
@@ -20,11 +22,16 @@ var io = function(io) {
     setInterval(updateAllUsers, 3000);
 
     var disconnect = function() {
+      console.log(socket.id);
       delete activeUsers[socket.id.slice(2)];
       updateAllUsers();
     }
     /******** Socket-Server Event Handlers *********/
 
+    var saveUserToDb = function(userObj) {
+      userHandlers.loginOrCreate(User, userObj);
+      console.log(userObj);
+    };
     // var sendRejection = function(senderId) {
     //   socket.broadcast.to('/#' + senderId).emit('user said no', socketId);
     //   receiverId = null;
@@ -59,6 +66,7 @@ var io = function(io) {
     /******** Socket-Server Event Listeners ********/
 
     socket.on('update one socket user', updateActiveUsers);
+    socket.on('save user to db', saveUserToDb);
     socket.on('disconnect', disconnect);
 
     // socket.on('new user connection', sendToGetCoords);

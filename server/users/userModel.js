@@ -2,11 +2,16 @@ var mongoose = require('mongoose');
 
 var UserSchema = mongoose.Schema({
   name: String,
-  pic: String,
-  reportedCount: Number,
+  image: String,
   phoneNumber: String,
   token: String,
-  facebookId: String
+  userID: {
+    type: String,
+    unique: true
+  },
+  bio: String
 });
 
 module.exports = mongoose.model('User', UserSchema);
+
+

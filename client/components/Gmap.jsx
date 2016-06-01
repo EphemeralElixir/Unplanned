@@ -26,11 +26,11 @@ class Gmap extends Component {
       let marker = this.props.users[socketId];
       // if userIdToKeepOpen is not current marker
       if ( marker.showInfo && socketId !== socketIdToKeepOpen ) {
-        // close the marker window 
+        // close the marker window
         console.log('Closing info window of:', socketId);
         this.handleMarkerClose(marker);
       }
-      
+
     }); //end the map over users object
 
     }
@@ -38,7 +38,7 @@ class Gmap extends Component {
 
   handleMeetRequest(receiverId) {
     console.log('Sending meeting request from user.');
-    // change state here for request sent 
+    // change state here for request sent
   }
 
   //Toggle to 'true' to show InfoWindow and re-renders component
@@ -48,17 +48,17 @@ class Gmap extends Component {
     marker.showInfo = true;
     this.setState(this.state);
   }
-  
+
   handleMarkerClose(marker) {
     marker.showInfo = false;
     this.setState(this.state);
   }
-  
+
   renderInfoWindow(ref, marker) {
     return (
 
       //You can nest components inside of InfoWindow!
-      <InfoWindow 
+      <InfoWindow
         key={`${ref}_info_window`}
         onCloseclick={this.handleMarkerClose.bind(this, marker)} >
 
@@ -74,7 +74,7 @@ class Gmap extends Component {
         }
 
       </InfoWindow>
-      
+
     );
 
   }
@@ -95,14 +95,14 @@ class Gmap extends Component {
           </div>
         }
         googleMapElement={
-          <GoogleMap 
+          <GoogleMap
             // google map options:
             center={this.state.center}
             // higher zoom level will reduce the area covered
             defaultZoom={14}
             ref='map'>
 
-            {Object.keys(this.props.users).map((socketId, index) => 
+            {Object.keys(this.props.users).map((socketId, index) =>
               {
                 const marker = this.props.users[socketId];
                 // used to reference the marker to for positioning the infowindow
