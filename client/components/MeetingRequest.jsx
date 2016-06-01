@@ -11,16 +11,21 @@ class MeetingRequest extends React.Component {
     }
   }
 
+  //Render will show popover ONLY if meetingRequested is true
   render () {
-    return (
-      <div>
-      <img src='http://zblogged.com/wp-content/uploads/2015/11/17.jpg' />
-      <div>JOHN APPLESEED</div>  
-      <CountdownTimer />  
-      <img src='./lib/accept.png' onPress={() => this.setState({accepted: true})} /> 
-      <img src='./lib/reject.png' onPress={() => this.setState({accepted: false})} />
-      </div>
-    )
+    if (this.props.meetingRequested) {
+      return (
+        <div id='meeting-request'>
+          <img src={this.props.userList[key].pic}/>
+          <div>{this.props.userList[key].pic}</div>  
+          <CountdownTimer />  
+          <img src='./lib/accept.png' onPress={() => this.setState({accepted: true})} /> 
+          <img src='./lib/reject.png' onPress={() => this.setState({accepted: false})} />
+        </div>
+      )
+    } else {
+      return null
+    }
   }
 }
 

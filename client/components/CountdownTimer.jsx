@@ -11,7 +11,6 @@ class CountdownTimer extends React.Component {
   tick () {
     if (this.state.secondsRemaining <= 1) {
       clearInterval(this.interval);
-      
     }
     return this.setState({secondsRemaining: this.state.secondsRemaining - 1});
   }

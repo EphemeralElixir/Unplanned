@@ -3,6 +3,7 @@ import AddUser from './AddUser.jsx';
 import UserList from './UserList.jsx';
 import Options from './Options.jsx';
 import MeetingRequest from './MeetingRequest.jsx';
+import InsertBio from './InsertBio.jsx';
 import { default as Gmap } from './Gmap.jsx';
 import { connect } from 'react-redux';
 import Socket from './Socket.jsx'
@@ -16,8 +17,10 @@ class App extends React.Component {
       <Gmap users={this.props.users}/>
       <Options/>
       <MeetingRequest/>
-      
       <Socket dispatch={this.props.dispatch}/>
+      <InsertBio/>
+      <SocketReceive dispatch={this.props.dispatch}/>
+      <SocketSend/>
     </div>);
   }
 }
@@ -28,3 +31,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(App);
+

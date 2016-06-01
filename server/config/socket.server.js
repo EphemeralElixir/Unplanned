@@ -55,6 +55,10 @@ var io = function(io) {
     //   socket.emit('get coordinates', user.current);
     // };
 
+    var addBio = function (id, bio) {
+      activeUsers[id].bio = bio;
+      //save bio to the database
+    };
 
     /******** Socket-Server Event Listeners ********/
 
@@ -63,10 +67,15 @@ var io = function(io) {
 
     // socket.on('new user connection', sendToGetCoords);
     // socket.on('update user coords', refreshOnConnect);
-
     // socket.on('send meeting', deliverMeetingRequest);
     // socket.on('no thanks', sendRejection);
     // socket.on('lets do it', sendConfirmation);
+
+
+    socket.on('send meeting', deliverMeetingRequest);
+    socket.on('no thanks', sendRejection);
+    socket.on('lets do it', sendConfirmation);
+    socket.on('addBio', addBio);
 
 
   });
