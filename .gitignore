@@ -1,7 +1,6 @@
 node_modules
 .DS_Store
 server/config/env/auth.js
-server/config/env/auth.config.js
 
 # Ignore bundled webpack modules #
 client/public/webpack.min.js
