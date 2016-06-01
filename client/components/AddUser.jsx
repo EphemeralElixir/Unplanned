@@ -18,7 +18,6 @@ class AddUser extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log('submit button clicked');
     this.props.dispatch(actions.addUser(66, this.state.inputName));
   }
 

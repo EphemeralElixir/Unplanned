@@ -12,6 +12,12 @@ const actions = {
       newUserList,
     };
   },
+  updateOpenedUserId(socketId) {
+    return {
+      type: 'UPDATE_OPENED_USER',
+      socketId,
+    };
+  },
 };
 
 export default actions;

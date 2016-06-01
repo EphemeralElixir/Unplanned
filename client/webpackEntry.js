@@ -13,8 +13,8 @@ const initialState = {
     requestorID: undefined,
     acceptedID: undefined,
   },
-  map: {
-    openedUser: undefined,
+  gmap: {
+    openedUserId: undefined,
   },
 };
 
