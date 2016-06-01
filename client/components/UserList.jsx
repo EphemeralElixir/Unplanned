@@ -1,17 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class UserList extends Component {
+const UserList = (props) => (
+  <div>
+    <ul>
+      {Object.keys(props.userList).map((key) => (
+        <li key={key}>{props.userList[key].name}</li>
+        )
+      )}
+    </ul>
+  </div>
+);
 
-	render() {
-		return (<div>
-			<ul>
-			  {Object.keys(this.props.userList).map((key) => {
-			  	return <li key={key}>{this.props.userList[key].name}</li>;
-			  }
-			  )}
-			</ul>
-		</div>);
-	}
-}
+UserList.propTypes = {
+  userList: React.PropTypes.object,
+};
 
 export default UserList;

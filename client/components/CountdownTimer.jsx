@@ -2,31 +2,30 @@ import React from 'react';
 
 class CountdownTimer extends React.Component {
   constructor(props) {
-      super(props);
-      this.state = {
-          secondsRemaining: 0
-      };
+    super(props);
+    this.state = {
+      secondsRemaining: 0,
+    };
   }
 
-  tick () {
-    if (this.state.secondsRemaining <= 1) {
-      clearInterval(this.interval);
-
-    }
-    return this.setState({secondsRemaining: this.state.secondsRemaining - 1});
-  }
-
-  componentDidMount () {
-    this.setState({secondsRemaining: 30});
+  componentDidMount() {
+    // this.setState({ secondsRemaining: 30 });
     this.interval = setInterval(this.tick.bind(this), 1000);
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     clearInterval(this.interval);
   }
 
-  render () {
-    return (<div>Seconds Remaining: {this.state.secondsRemaining}</div>)
+  tick() {
+    if (this.state.secondsRemaining <= 1) {
+      clearInterval(this.interval);
+    }
+    return this.setState({ secondsRemaining: this.state.secondsRemaining - 1 });
+  }
+
+  render() {
+    return (<div>Seconds Remaining: {this.state.secondsRemaining}</div>);
   }
 }
 
