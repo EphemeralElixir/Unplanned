@@ -7,8 +7,6 @@ class Socket extends React.Component {
 		super(props);
 		this.socket = io.connect('http://localhost:8000');
 
-		this.socketUsers = {};
-
 		this.socketUser = {
 			userID: '',
 			picture: '',
@@ -17,6 +15,8 @@ class Socket extends React.Component {
 			lat: '',
 			lng: ''
 		};
+
+		this.isLoggedIn = false;
   
 
 		window.FB.login(function(response) {
@@ -24,13 +24,12 @@ class Socket extends React.Component {
 			if (response.status === undefined) {
 
 			} else {
-				console.log('settin it');
 				that.socketUser.userID = response.authResponse.userID;
 				window.FB.api('/' + that.socketUser.userID, function(response) {
 					that.socketUser.name = response.name;
 					FB.api('/' + that.socketUser.userID + '/picture?type=large', function(response) {
 						that.socketUser.picture = response.data.url;
-						console.log('final!!!!!!!!!', that.socketUser);
+						that.isLoggedIn = true;
 					});
 				});
 			}
@@ -44,8 +43,7 @@ class Socket extends React.Component {
 	}
 
 	sendToServer() {
-		console.log('callingn send to server');
-		if (this.socket.connected) {
+		if (this.socket.connected && this.isLoggedIn) {
 			this.socket.emit('update one socket user', this.socketUser, this.socket.id);
 		}
 	}
@@ -54,7 +52,6 @@ class Socket extends React.Component {
 		var that = this;
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(function(position) {
-				console.log('%%%%%%%%%%%%%%%%%%%', that.socketUser)
 				that.socketUser.lat = position.coords.latitude;
 				that.socketUser.lng = position.coords.longitude;
 			});
@@ -62,12 +59,8 @@ class Socket extends React.Component {
 	};
 
 	updateUserList(activeUsers) {
-		console.log('all users from socket server', activeUsers);
 		this.props.dispatch(actions.updateUserList(activeUsers));
 	}
-
-
-
 
 	render() {
 		return (<div>

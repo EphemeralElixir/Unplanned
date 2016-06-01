@@ -20,9 +20,7 @@ var io = function(io) {
     setInterval(updateAllUsers, 3000);
 
     var disconnect = function() {
-      console.log('delete socketid', socket.id);
       delete activeUsers[socket.id.slice(2)];
-      console.log('deleted!', activeUsers);
       updateAllUsers();
     }
     /******** Socket-Server Event Handlers *********/
