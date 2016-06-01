@@ -1,7 +1,10 @@
 var socket = io.connect('http://localhost:8000');
 var activeUsers = {};
+
+var facebookId;
 var userProfile = null;
 var userSocketId;
+
 //Sender profile will be set only if the user receives a meeting request
 var senderProfile = null;
 var senderSocketId;
@@ -56,13 +59,25 @@ var handleMeetingRequest = function(id) {
 var notifyNewUserConnection = function() {
   console.log('Connected!');
   userSocketId = socket.id;
-  socket.emit('new user connection');
+
+  //Give facebook sdk some time to load before emit
+  setTimeout(function(){
+    facebookId = FB.getUserID();
+    socket.emit('new user connection', facebookId);
+
+  }, 3000);
 };
 
 var updateAndSave = function(data) {
+
   if (!userProfile) {
     userProfile = data;
-    updateLocation(userProfile);
+
+    FB.api('/' + userProfile.facebookId + '/picture?width=9999',
+      function(res) {
+        userProfile.image = res.data.url;
+        updateLocation(userProfile);
+      });
   }
 };
 

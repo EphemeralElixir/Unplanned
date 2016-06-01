@@ -12,9 +12,9 @@ var client = {
 
 //Callback handler for Facebook Strategy
 var loginOrCreate = function(req, token, refreshToken, profile, done) {
-  console.log('Profile ==>', profile);
-  console.log('Token ==>', token);
-  console.log('Refresh Token ==>', refreshToken);
+  // console.log('Profile ==>', profile);
+  // console.log('Token ==>', token);
+  // console.log('Refresh Token ==>', refreshToken);
   process.nextTick(function() {
 
     //Lookup user in database based on facebook id
