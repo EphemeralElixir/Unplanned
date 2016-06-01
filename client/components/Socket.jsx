@@ -17,24 +17,34 @@ class Socket extends React.Component {
 		};
 
 		this.isLoggedIn = false;
+		var that = this;
 
-		window.FB.login(function(response) {
-			var that = this;
-			if (response.status === undefined) {
+		window.fbAsyncInit = function() {
+		  FB.init({
+		    appId      : '577393235773311',
+		    xfbml      : true,
+		    version    : 'v2.6'
+		  });
 
-			} else {
-				that.socketUser.userID = response.authResponse.userID;
-				window.FB.api('/' + that.socketUser.userID, function(response) {
-					that.socketUser.name = response.name;
-					FB.api('/' + that.socketUser.userID + '/picture?type=large', function(response) {
-						that.socketUser.image = response.data.url;
-						that.isLoggedIn = true;
-						that.socket.emit('save user to db', that.socketUser);
+			window.FB.login(function(response) {
 
+				if (response.status === undefined) {
+
+				} else {
+					that.socketUser.userID = response.authResponse.userID;
+					window.FB.api('/' + that.socketUser.userID, function(response) {
+						that.socketUser.name = response.name;
+						FB.api('/' + that.socketUser.userID + '/picture?type=large', function(response) {
+							that.socketUser.image = response.data.url;
+							that.isLoggedIn = true;
+							that.socket.emit('save user to db', that.socketUser);
+						});
 					});
-				});
-			}
-		}.bind(this));
+				}
+			}.bind(that));
+
+		};
+
 	}
 
 	componentDidMount() {
