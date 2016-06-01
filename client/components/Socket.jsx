@@ -6,7 +6,6 @@ class Socket extends React.Component {
   constructor(props) {
     super(props);
     this.socket = window.io.connect('http://localhost:8000');
-    window.alert(this.socket.id);
     this.socketUser = {
       userID: '',
       image: '',
