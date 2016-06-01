@@ -7,6 +7,13 @@ module.exports = {
   devtool: debug ? "inline-sourcemap" : null,
   entry: ['webpack-hot-middleware/client', './client/webpackEntry.js'],
   module: {
+    preLoaders: [
+      {
+        test: /\.jsx?$/, 
+        loader: 'eslint',
+        exclude: /(node_modules|bower_components)/
+      }
+    ],
     loaders: [
       {
         test: /\.jsx?$/,
@@ -21,6 +28,10 @@ module.exports = {
   output: {
     path: __dirname + "/client/public",
     filename: "webpack.min.js"
+  },
+  eslint: {
+    failOnWarning: false,
+    failOnError: true
   },
   plugins: debug ? [
     new webpack.optimize.OccurrenceOrderPlugin(),
