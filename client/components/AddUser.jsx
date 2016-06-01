@@ -8,10 +8,6 @@ class AddUser extends Component {
     this.state = {
       inputName: '',
     };
-    // use the following binding pattern per airbnb style guide:
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-bind.md
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
@@ -35,7 +31,7 @@ class AddUser extends Component {
           value={this.state.inputName}
           onChange={this.handleChange}
         />
-        <button onClick={this.handleSubmit}> Submit </button>
+        <button onClick={this.handleSubmit.bind(this)}> Submit </button>
       </div>
     );
   }

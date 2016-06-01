@@ -7,13 +7,13 @@ module.exports = {
   devtool: debug ? 'inline-sourcemap' : null,
   entry: ['webpack-hot-middleware/client', './client/webpackEntry.js'],
   module: {
-    preLoaders: [
-      {
-        test: /\.jsx?$/,
-        loader: 'eslint',
-        exclude: /(node_modules|bower_components)/,
-      },
-    ],
+    // preLoaders: [
+    //   {
+    //     test: /\.jsx?$/,
+    //     loader: 'eslint',
+    //     exclude: /(node_modules|bower_components)/,
+    //   },
+    // ],
     loaders: [
       {
         test: /\.jsx?$/,
