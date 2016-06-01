@@ -1,5 +1,6 @@
-import { default as React, Component } from 'react';
+import React, { Component } from 'react';
 import { GoogleMapLoader, GoogleMap, InfoWindow, Marker } from 'react-google-maps';
+import actions from '../redux/actions.js';
 
 class Gmap extends Component {
 
@@ -17,42 +18,27 @@ class Gmap extends Component {
     console.log('Received new props!');
   }
 
-  // Close all other infoWindows except the user clicked on
-  closeOtherInfoWindows(socketIdToKeepOpen) {
-    Object.keys(this.props.users).forEach((socketId) => {
-      const marker = this.props.users[socketId];
-      if (marker.showInfo && socketId !== socketIdToKeepOpen) {
-        console.log('Closing info window of:', socketId);
-        this.handleMarkerClose(marker);
-      }
-    });
-  }
-
   handleMeetRequest() {
     console.log('Sending meeting request from user.');
-    // change state here for request sent
+    // send dispatch to update user1s recipientID
+    // emit socket to update user2s requestorID
   }
 
   // Toggle to 'true' to show InfoWindow and re-renders component
-  handleMarkerClick(marker) {
-    console.log('Inside handleMarkerClick');
-    this.closeOtherInfoWindows(marker.socketId);
-    const user = marker;
-    user.showInfo = true;
-    this.setState(this.state);
+  handleMarkerClick(marker, socketId) {
+    // send dispatch to set map: openUserUserId to socketId
+    this.props.dispatch(actions.updateOpenedUserId(socketId));
   }
 
-  handleMarkerClose(marker) {
-    const user = marker;
-    user.showInfo = false;
-    this.setState(this.state);
+  handleMarkerClose() {
+    this.props.dispatch(actions.updateOpenedUserId(undefined));
   }
 
-  renderInfoWindow(ref, marker) {
+  renderInfoWindow(marker) {
     return (
       <InfoWindow
-        key={`${ref}_info_window`}
-        onCloseclick={this.handleMarkerClose.bind(this, marker)}
+        key={`${marker.userID}_info_window`}
+        onCloseclick={this.handleMarkerClose.bind(this)}
       >
 
         {<div className="markerInfoWindow">
@@ -73,7 +59,6 @@ class Gmap extends Component {
 
   render() {
     return (
-
       <GoogleMapLoader
         containerElement={
           <div
@@ -89,32 +74,32 @@ class Gmap extends Component {
         googleMapElement={
           <GoogleMap
             // google map options:
-            center={this.state.center}
+            defaultCenter={this.state.center}
             defaultZoom={14}
             ref="map"
           >
 
           {Object.keys(this.props.users).map((socketId) => {
             const marker = this.props.users[socketId];
-            // used to reference the marker for positioning the infowindow
-            const ref = `marker_${socketId}`;
+            const openedUserId = this.props.gmap.openedUserId;
+            // ref is used to reference the marker for positioning the infoWindow
+            // const ref = `marker_${socketId}`;
             return (
               // use the Marker component to render user as a marker on map
               <Marker
                 key={socketId}
-                ref={ref}
+                // ref={ref}
                 position={{ lat: marker.lat, lng: marker.lng }}
-                onClick={this.handleMarkerClick.bind(this, marker)}
+                onClick={this.handleMarkerClick.bind(this, marker, socketId)}
               >
-                {marker.showInfo ? this.renderInfoWindow(ref, marker) : null}
+                {/* render infoWindow only if marker has been clicked */}
+                {socketId === openedUserId ? this.renderInfoWindow(marker) : null}
               </Marker>
-              );
+            );
           }) // end map over users here
           }
-
           </GoogleMap>
         }
-
       /> // end of GoogleMapLoader
     );
   }
@@ -122,6 +107,8 @@ class Gmap extends Component {
 
 Gmap.propTypes = {
   users: React.PropTypes.object,
+  dispatch: React.PropTypes.func,
+  gmap: React.PropTypes.object,
 };
 
 export default Gmap;
