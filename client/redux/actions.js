@@ -1,17 +1,17 @@
-let actions = {
-	addUser: function(id, name) {
-		return {
-			type: 'ADD_USER',
-			id: id,
-			name: name
-		}
-	},
-	updateUserList: function(newUserList) {
-		return {
-			type: 'UPDATE_USERLIST',
-			newUserList: newUserList
-		}
-	}
-}
+const actions = {
+  addUser(id, name) {
+    return {
+      type: 'ADD_USER',
+      id,
+      name,
+    };
+  },
+  updateUserList(newUserList) {
+    return {
+      type: 'UPDATE_USERLIST',
+      newUserList,
+    };
+  },
+};
 
 export default actions;

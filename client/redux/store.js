@@ -3,10 +3,10 @@ import reducer from './reducer';
 import logger from 'redux-logger';
 // add middleware
 
-let finalCreateStore = compose(
+const finalCreateStore = compose(
 	applyMiddleware(logger())
-)(createStore)
+)(createStore);
 
-export default function configureStore(initalState = {users: {}}) {
-	return finalCreateStore(reducer, initalState);
+export default function configureStore(initalState = { users: {} }) {
+  return finalCreateStore(reducer, initalState);
 }

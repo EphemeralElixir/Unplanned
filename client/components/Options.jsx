@@ -8,6 +8,8 @@ class Options extends Component {
       available: false,
       interest: '',
     };
+    this.socket = window.io.connect('http://localhost:8000');
+    window.alert(this.socket.id);
   }
 
   handleChange(event) {
