@@ -32,3 +32,23 @@
   display: inline-block;
   font-size: 14px;
 }
+
+.meeting-requst {
+  background-color: rgba(0,0,0,0.85);
+  border-radius: 5px;
+  bottom: 42px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.4);
+  color: #fff;
+  display: none;
+  font-size: 12px;
+  font-family: 'Helvetica',sans-serif;
+  left: -95px;
+  padding: 7px 10px;
+  position: absolute;
+  width: 200px;
+  z-index: 4;
+  display: block;
+  -webkit-animation: fade-in .3s linear 1, move-up .3s linear 1;
+  -moz-animation: fade-in .3s linear 1, move-up .3s linear 1;
+  -ms-animation: fade-in .3s linear 1, move-up .3s linear 1;
+}

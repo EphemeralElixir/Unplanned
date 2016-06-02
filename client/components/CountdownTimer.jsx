@@ -4,7 +4,7 @@ class CountdownTimer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      secondsRemaining: 0,
+      secondsRemaining: 30,
     };
   }
 
