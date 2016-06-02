@@ -36,7 +36,6 @@ const makeSocketServer = function socketServer(http) {
     socket.on('disconnect', disconnect);
 
     const sendMeetingRequest = function sendMeetingRequest(senderId, receiverId) {
-      console.log('send meeting request', senderId, receiverId);
       socket.broadcast.to(`/#${receiverId}`).emit('receive meeting request', senderId);
     };
 
