@@ -8,28 +8,25 @@ var options = {
   'force new connection' : true
 };
 
-describe('Websocket Test Suite', function() {
+describe('Sockets Test Suite', function() {
   this.timeout(3000);
 
   var socket;
   var socket2;
-  var activeUsers = null;
-  var testUser1 = null;
-  var testUser2 = null;
+  var activeUsers = {};
+  var testUser1 = {
+    'image': 'https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/11265620_10205540926036559_4941610271170781610_n.jpg?oh=7332acab5536d15448f7529eb77963d4&oe=57CFFD27',
+    'userID': '10208148188096481',
+    'name': 'Tai Huynh',
+  };
+  var testUser2 = {
+    'image' : 'https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/12439013_1696533990605368_7084115367090611688_n.jpg?oh=fc74587fc31354a54a7e8616ccebf388&oe=57E1C3CA',
+    'userID' : '1752840011641432',
+    'name' : 'Leo Adelstein'
+  };
 
   beforeEach(function(done) {
     activeUsers = {};
-    testUser1 = {
-        'image': 'https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/11265620_10205540926036559_4941610271170781610_n.jpg?oh=7332acab5536d15448f7529eb77963d4&oe=57CFFD27',
-        'userID': '10208148188096481',
-        'name': 'Tai Huynh',
-      };
-
-      testUser2 = {
-        'image' : 'https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/12439013_1696533990605368_7084115367090611688_n.jpg?oh=fc74587fc31354a54a7e8616ccebf388&oe=57E1C3CA',
-        'userID' : '1752840011641432',
-        'name' : 'Leo Adelstein'
-      };
 
     socket = io.connect(socketUrl, options);
     socket2 = io.connect(socketUrl, options);
@@ -48,24 +45,15 @@ describe('Websocket Test Suite', function() {
   });
 
   afterEach(function(done) {
-    activeUsers = null;
-    testUser1 = null;
-    testUser2 = null;
-    testUser3 = null;
-
-    if (socket.connected) {
-      socket.disconnect();
-      done();
-    }
-
-    if (socket2.connected) {
-      socket2.disconnect();
-    }
+    activeUsers = {};
+    socket.disconnect();
+    socket2.disconnect();
+    done();
   });
 
 
-  describe('Live sockets', function() {
-    it('should communicate to server', function(done) {
+  describe('Socket connection', function() {
+    it('should be able to communicate to socket on server-side', function(done) {
       socket.emit('echo', 'Sockets are alive!');
 
       socket.once('echo', function(message) {
@@ -76,7 +64,8 @@ describe('Websocket Test Suite', function() {
   });
 
 
-  describe('Update active users list', function() {
+  describe('Passing data between client and server', function() {
+
     it('should store a new user to activeUsers object using their socket id as the key', function(done) {
       socket.emit('update one socket user', testUser1, socket.id);
       socket.on('update all users', function(data) {
@@ -87,27 +76,77 @@ describe('Websocket Test Suite', function() {
 
 
     it('should refresh all users when a new user connects', function(done) {
-      var testObj = {}
+      var testObj = {};
       testObj[socket.id] = testUser1;
       testObj[socket2.id] = testUser2;
 
       socket.emit('update one socket user', testUser1, socket.id);
-      socket.on('update all users', function(data) {
-        expect(data[socket.id]).to.deep.equal(testUser1);
+      socket2.emit('update one socket user', testUser2, socket2.id);
 
-        socket.emit('update one socket user', testUser2, socket2.id);
-        socket.on('update all users', function(data) {
-          activeUsers = data;
-          expect(activeUsers).to.deep.equal(testObj);
+      socket.on('update all users', function(data) {
+        var count = 0;
+        activeUsers = data;
+
+        if (activeUsers[socket.id] && activeUsers[socket2.id]) {
+
+          for (var user in activeUsers) {
+            if (activeUsers.hasOwnProperty(user)) {
+              count++;
+            }
+          }
+
+          expect(activeUsers[socket.id]).to.deep.equal(testUser1);
+          expect(count + ' total users').to.equal('2 total users');
           done();
-        });
+        }
+      });
+    });
+
+    //Currently broken.
+    xit('should refresh all users when a user disconnects', function(done) {
+      var testObj = {};
+      testObj[socket.id] = testUser1;
+      testObj[socket2.id] = testUser2;
+
+      socket2.emit('update one socket user', testUser2, socket2.id);
+      socket.emit('update one socket user', testUser1, socket.id);
+
+      socket.on('update all users', function(data) {
+        var disconnected = false;
+        var count = 0;
+        activeUsers = data;
+
+        if (activeUsers[socket.id] && activeUsers[socket2.id]) {
+          for (var user in activeUsers) {
+            if (activeUsers.hasOwnProperty(user)) {
+              count++;
+            }
+          }
+          expect(activeUsers[socket.id]).to.deep.equal(testUser1);
+          expect(count + ' total users before disconnect').to.equal('2 total users before disconnect');
+
+          //Disconnecting here should automatically delete the user from activeUsers on
+          //the server-side, but it currently isn't working.
+          socket2.disconnect();
+
+          count = 0;
+          disconnected = true;
+        }
+
+        if (disconnected) {
+          for (var user in data) {
+            if (data.hasOwnProperty(user)) {
+              count++;
+            }
+          }
+
+          expect(count + ' total users after disconnect').to.equal('1 total users after disconnect');
+          done();
+        }
       });
     });
 
 
-    xit('should refresh all users when a user disconnects', function(done) {
 
-
-    });
   });
 });
