@@ -17,8 +17,8 @@ class MeetingRequest extends React.Component {
         <img alt="" src="http://zblogged.com/wp-content/uploads/2015/11/17.jpg" />
         <div>JOHN APPLESEED</div>
         <CountdownTimer />
-        <img alt="" src="./lib/accept.png" onPress={() => this.setState({ accepted: true })} />
-        <img alt="" src="./lib/reject.png" onPress={() => this.setState({ accepted: false })} />
+        <img alt="" src="./assets/img/acc.png" onPress={() => this.setState({ accepted: true })} />
+        <img alt="" src="./assets/img/rej.png" onPress={() => this.setState({ accepted: false })} />
       </div>
     );
   }

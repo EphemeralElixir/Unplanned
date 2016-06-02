@@ -43,6 +43,7 @@ socketApi.user = thisUser = {
 
 socketApi.isLoggedIn = false;
 
+// User login button handler -- loads Facebook SDK
 socketApi.login = function login() {
   (function fbSdk(d, s, id) {
     const js = d.createElement(s); js.id = id;
@@ -53,31 +54,43 @@ socketApi.login = function login() {
   }(document, 'script', 'facebook-jssdk'));
 };
 
+// Waits for Facebook API to finish loading with user login and
+// then runs this function
 window.fbAsyncInit = () => {
-  window.FB.init({
+  const fb = window.FB;
+
+  fb.init({
     appId: '577393235773311',
     xfbml: true,
     version: 'v2.6',
   });
 
-  window.FB.login((response) => {
+  fb.login((response) => {
     if (response.status === undefined) {
       // do nothing
     } else {
       thisUser.userID = response.authResponse.userID;
-      window.FB.api(`/${thisUser.userID}`, (userIdResponse) => {
-        thisUser.name = userIdResponse.name;
-        window.FB.api(`/${thisUser.userID}/picture?type=large`,
-          (imageResponse) => {
-            thisUser.image = imageResponse.data.url;
-            socketApi.isLoggedIn = true;
-            socket.emit('save user to db', thisUser);
+
+      socket.emit('check for existing', thisUser.userID);
+      socket.on('is in db', (exists, user) => {
+        if (exists) {
+          thisUser.name = user.name;
+          thisUser.image = user.image;
+        } else {
+          fb.api(`/${thisUser.userID}`, (userIdResponse) => {
+            thisUser.name = userIdResponse.name;
+            fb.api(`/${thisUser.userID}/picture?type=large`,
+              (imageResponse) => {
+                thisUser.image = imageResponse.data.url;
+                socket.emit('save user to db', thisUser);
+              });
           });
+        }
+        socketApi.isLoggedIn = true;
       });
     }
   });
 };
-
 
 socketApi.sendToServer = function sendToServer() {
   if (socket.connected && socketApi.isLoggedIn) {
