@@ -1,10 +1,9 @@
 import React from 'react';
-// import actions from '../redux/actions.js';
-import RequestReceived from './RequestReceived.jsx';
-import RequestSent from './RequestSent.jsx';
-import Accepted from './Accepted.jsx';
-import Rejected from './Rejected.jsx';
-// import CountdownTimer from './CountdownTimer.jsx';
+import actions from '../redux/actions.js';
+import RequestRecieved from './RequestRecieved.jsx'
+import RequestSent from './RequestSent.jsx'
+import CountdownTimer from './CountdownTimer.jsx';
+
 
 class Popover extends React.Component {
   // setup an accepted property on state.
@@ -31,36 +30,38 @@ class Popover extends React.Component {
     return this.setState({ secondsRemaining: this.state.secondsRemaining - 1 });
   }
 
-  render() {
-    if (this.props.meet.send && this.state.secondsRemaining > 0) {
+  render () {
+    if (this.props.meet.send && !this.state.timeout) {
       return (
-        <RequestSent
-          users={this.props.users}
-          meet={this.props.meet}
-          dispatch={this.props.dispatch}
-        />
-      );
-    } else if (this.props.meet.receive && this.state.secondsRemaining > 0) {
+        <div id='request-sent'>
+          <h1>Request Sent</h1> 
+          <img src={this.props.userList[key].pic}/>
+          <div>{this.props.userList[key].name}</div>  
+          <CountdownTimer />
+          <img src='./lib/reject.png' onPress={() => this.setState({accepted: false})} />
+        </div>
+      )
+    } else if (this.props.meet.recieve && !this.state.timeout) {
       return (
-        <RequestReceived
-          users={this.props.users}
-          meet={this.props.meet}
-          dispatch={this.props.dispatch}
-        />
-        );
-    } else if (this.props.meet.accept && this.state.secondsRemaining > 0) {
+        <div id='request-recieved'>
+          <h1>Do you want to meet?</h1> 
+          <img src={this.props.userList[this.props.meet.send].pic}/>
+          <div>{this.props.userList[key].name}</div>  
+          <CountdownTimer />  
+          <img src='./lib/accept.png' onPress={() => this.setState({accepted: true})} /> 
+          <img src='./lib/reject.png' onPress={() => this.setState({accepted: false})} />          
+        </div>
+        )
+    } else if (this.props.meet.accept $$ !this.state.timeout) {
       return (
-        <Accepted
-          users={this.props.users}
-          meet={this.props.meet}
-          dispatch={this.props.dispatch}
-        />
-      );
-    } else if (this.props.meet.reject && this.state.secondsRemaining > 0) {
-      return (
-        <Rejected users={this.props.users} />
-        );
-    }
+        <div id='meeting-accepted'>
+          <h1>Lets Meet!</h1> 
+          <img src={this.props.userList[this.props.meet.send].pic}/>
+          <img src={this.props.userList[this.props.meet.send].pic}/>   
+          <div>{this.props.userList[key].name}</div>
+        </div>
+      )
+    } 
     return (null);
   }
 }

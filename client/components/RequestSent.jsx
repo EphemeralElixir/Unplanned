@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< 0556dc874cf6a06b7a6eeda0b49bdb04e93de486
 import CountdownTimer from './CountdownTimer.jsx';
 
 class RequestSent extends React.Component {
@@ -46,3 +47,9 @@ RequestSent.propTypes = {
 };
 
 export default RequestSent;
+=======
+import actions from '../redux/actions.js';
+
+import CountdownTimer from './CountdownTimer.jsx';
+import Socket from './Socket.jsx';
+>>>>>>> interim commit, still working on popover
