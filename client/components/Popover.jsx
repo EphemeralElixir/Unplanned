@@ -6,6 +6,7 @@ import RequestRecieved from './RequestRecieved.jsx';
 import RequestSent from './RequestSent.jsx';
 import actions from '../redux/actions.js';
 
+
 class Popover extends React.Component {
   constructor(props) {
     super(props);
