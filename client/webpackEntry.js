@@ -34,7 +34,16 @@ window.socket.api.user = {
 
 window.socket.api.isLoggedIn = false;
 
-// populate user
+window.socket.api.login = function login() {
+  (function fbSdk(d, s, id) {
+    const js = d.createElement(s); js.id = id;
+    const fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) { return; }
+    js.src = '//connect.facebook.net/en_US/sdk.js';
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+};
+
 window.fbAsyncInit = () => {
   window.FB.init({
     appId: '577393235773311',
