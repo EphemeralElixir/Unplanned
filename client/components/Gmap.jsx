@@ -8,14 +8,27 @@ class Gmap extends Component {
     super(props);
     this.state = {
       center: {
-        lat: 37.784817,
-        lng: -122.406358,
+        lat: 0,
+        lng: 0,
       },
     };
   }
 
-  componentWillReceiveProps() {
-    console.log('Received new props!');
+  componentDidMount() {
+    this.updateUserLocation();
+    console.log('updated user location to:====>', this.state.center);
+  }
+
+  updateUserLocation() {
+    if (navigator.geolcation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.setState({ center:
+          { lat: position.coords.latitude, lng: position.coords.longitude },
+        });
+      });
+    } else {
+      console.log('Navigator is unavailable in your browser.');
+    }
   }
 
   handleMeetRequest(socketId) {
@@ -23,6 +36,7 @@ class Gmap extends Component {
     // send dispatch to update user1s recipientId
     this.props.dispatch(actions.setRecipient(socketId));
     // emit socket to update user2s requestorId
+
   }
 
   // Toggle to 'true' to show InfoWindow and re-renders component
