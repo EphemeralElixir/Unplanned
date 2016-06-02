@@ -4,6 +4,7 @@ import RequestReceived from './RequestReceived.jsx';
 import RequestSent from './RequestSent.jsx';
 import Accepted from './Accepted.jsx';
 import Rejected from './Rejected.jsx';
+// import CountdownTimer from './CountdownTimer.jsx';
 
 class Popover extends React.Component {
   // setup an accepted property on state.
