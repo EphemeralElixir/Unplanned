@@ -24,32 +24,34 @@ class Gmap extends Component {
     this.updateCurrentLocation();
   }
 
-  // componentDidMount() {
-  //   this.updateCurrentLocation();
-  // }
-
-  updateCurrentLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.setState({ center:
-          { lat: position.coords.latitude, lng: position.coords.longitude },
-        });
-        console.log('updated user location to:====>', this.state.center);
-      });
-    } else {
-      console.log('Navigator is unavailable in your browser.');
-    }
+  // this function will filter users object down to users
+  // who match the user options of the current user
+  // it also filters out any users that are unavailable
+  // this returns an array of user socketIds that can later
+  // be used to display users as markers on map
+  getMatchedUsers() {
+    const doesUserMatch = (socketId) => {
+      const users = this.props.users;
+      const thisUser = window.socket.api.user;
+      return (
+          users[socketId].available && (
+            users[socketId].coffee && thisUser.coffee ||
+            users[socketId].food && thisUser.food ||
+            users[socketId].beer && thisUser.beer
+          )
+        );
+    };
+    const matchedUsers = Object.keys(this.props.users).filter(doesUserMatch);
+    return matchedUsers;
   }
 
   handleMeetRequest(socketId) {
-    console.log('Sending meeting request from user.');
     // send dispatch to update user1s recipientId
     this.props.dispatch(actions.setRecipient(socketId));
     // emit socket to update user2s requesterId
     window.socket.api.sendMeetingRequest(socketId);
   }
 
-  // Toggle to 'true' to show InfoWindow and re-renders component
   handleMarkerClick(marker, socketId) {
     // send dispatch to set map: openUserUserId to socketId
     this.props.dispatch(actions.updateOpenedUserId(socketId));
@@ -64,6 +66,18 @@ class Gmap extends Component {
     this.setState({ center: position });
   }
 
+  updateCurrentLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.setState({ center:
+          { lat: position.coords.latitude, lng: position.coords.longitude },
+        });
+        console.log('updated user location to:====>', this.state.center);
+      });
+    } else {
+      console.log('Navigator is unavailable in your browser.');
+    }
+  }
 
   renderInfoWindow(marker, socketId) {
     return (
@@ -112,7 +126,8 @@ class Gmap extends Component {
             defaultZoom={14}
             ref="map"
           >
-          {Object.keys(this.props.users).map((socketId, index) => {
+          {/* get matched users for the current users to display on map */}
+          {this.getMatchedUsers().map((socketId, index) => {
             const marker = this.props.users[socketId];
             const openedUserId = this.props.gmap.openedUserId;
             return (
