@@ -1,21 +1,20 @@
-var express = require('express');
-var app = express();
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
-var websocket = require('./config/socket.server');
+const express = require('express');
+const app = express();
 
-var mongoose = require('mongoose');
-var config = require('./config/env/auth');
+const http = require('http').Server(app);
 
-//Initialize socket io connection
-websocket.io(io);
+const mongoose = require('mongoose');
+const config = require('./config/env/auth');
 
 mongoose.connect(config.dbUri);
+
+const io = require('./config/socket.server');
+io.makeSocketServer(http);
 
 require('./config/middleware.js')(app, express);
 require('./config/routes.js')(app, express);
 
-server.listen(8000, function(err) {
+http.listen(8000, function(err) {
   console.log('Server is setup. Listening on port 8000...')
 });
 
