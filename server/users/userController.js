@@ -1,6 +1,8 @@
-var loginOrCreate = function(UserModel, userObj) {
+var User = require('./userModel');
 
-  UserModel.findOne({'userID': userObj.userID}, function(err, user) {
+var loginOrCreate = function(userObj) {
+
+  User.findOne({'userID': userObj.userID}, function(err, user) {
 
     if (err) {
       throw err;
@@ -12,7 +14,7 @@ var loginOrCreate = function(UserModel, userObj) {
     } else {
 
       //Create a new user if not found
-      var newUser = new UserModel();
+      var newUser = new User();
 
       newUser.name = userObj.name;
       newUser.userID = userObj.userID;
@@ -21,8 +23,22 @@ var loginOrCreate = function(UserModel, userObj) {
     }
 
   });
-}
+};
+
+var updateBio = function(userID, bio) {
+  User.findOne({'userID': userID}, function(err, user) {
+    if (err) {
+      throw err;
+    }
+
+    if (user) {
+      user.bio = bio;
+      user.save();
+    }
+  });
+};
 
 module.exports = {
-  loginOrCreate: loginOrCreate
+  loginOrCreate: loginOrCreate,
+  updateBio: updateBio
 };
