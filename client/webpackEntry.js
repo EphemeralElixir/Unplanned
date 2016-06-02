@@ -35,6 +35,8 @@ window.socket.api.user = {
 window.socket.api.isLoggedIn = false;
 
 // populate user
+
+// window.socket.api.login = function login() {
 window.fbAsyncInit = () => {
   window.FB.init({
     appId: '577393235773311',
@@ -58,8 +60,8 @@ window.fbAsyncInit = () => {
       });
     }
   });
+  // };
 };
-
 
 window.socket.api.sendToServer = function sendToServer() {
   if (window.socket.connected && window.socket.api.isLoggedIn) {

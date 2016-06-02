@@ -3,13 +3,14 @@ import AddUser from './AddUser.jsx';
 import UserList from './UserList.jsx';
 import Options from './Options.jsx';
 import MeetingRequest from './MeetingRequest.jsx';
+import Nav from './Nav.jsx';
 import { default as Gmap } from './Gmap.jsx';
 import { connect } from 'react-redux';
 import Socket from './Socket.jsx';
 
 const App = (props) => (
   <div>
-    <p>Hello World</p>
+    <Nav />
     <AddUser dispatch={props.dispatch} />
     <UserList userList={props.users} />
     <Gmap
