@@ -16,6 +16,7 @@ const makeSocketServer = function socketServer(http) {
 
     const updateActiveUsers = function updateActiveUsers(socketUser, senderId) {
       activeUsers[senderId] = socketUser;
+      updateAllUsers();
     };
 
     setInterval(updateAllUsers, 5000);
@@ -31,6 +32,7 @@ const makeSocketServer = function socketServer(http) {
 
     socket.on('update one socket user', updateActiveUsers);
     socket.on('save user to db', saveUserToDb);
+    socket.on('refresh users', updateAllUsers);
     socket.on('disconnect', disconnect);
 
     const sendMeetingRequest = function sendMeetingRequest(senderId, receiverId) {
@@ -45,9 +47,14 @@ const makeSocketServer = function socketServer(http) {
       socket.broadcast.to(`/#${receiverId}`).emit('reject meeting request', senderId);
     };
 
+
     socket.on('send meeting request', sendMeetingRequest);
     socket.on('confirm meeting request', confirmMeetingRequest);
     socket.on('reject meeting request', rejectMeetingRequest);
+
+    socket.on('echo', () => {
+      socket.emit('echo', 'Sockets are alive!'); // Tests connection
+    });
   });
 };
 
