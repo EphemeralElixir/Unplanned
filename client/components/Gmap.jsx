@@ -8,35 +8,58 @@ class Gmap extends Component {
     super(props);
     this.state = {
       center: {
-        lat: 0,
-        lng: 0,
+        lat: 37.7835896,
+        lng: -122.4092149,
       },
     };
+    // this.updateCurrentLocation();
   }
 
-  componentDidMount() {
-    this.updateUserLocation();
-    console.log('updated user location to:====>', this.state.center);
+  componentWillMount() {
+    this.updateCurrentLocation();
   }
 
-  updateUserLocation() {
-    if (navigator.geolcation) {
+  updateCurrentLocation() {
+    if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.setState({ center:
           { lat: position.coords.latitude, lng: position.coords.longitude },
         });
+        console.log('updated user location to:====>', this.state.center);
       });
     } else {
       console.log('Navigator is unavailable in your browser.');
     }
   }
 
+  // this is utility function that slightly adjusts a markers lat/lng
+  // if it is too close to another marker to avoid the markers falling
+  // on top of each other on the map
+  adjustMarkerPosition(marker) {
+    // iterate over markers
+    const users = this.props.users;
+    Object.keys(users).forEach((socketId) => {
+      const user = marker;
+      // compare this markers lat and lng to current marker
+      // abs value of difference between lat and convert to feet
+      const latDiffInFt = Math.abs(users[socketId].lat - marker.lat) * (3280.4) * (10000 / 90);
+      // abs value of difference between lng
+      const lngDiffInFt = Math.abs(users[socketId].lng - marker.lng) * (3280.4) * (10000 / 90);
+      // if current marker is too close
+      if (latDiffInFt < 50 || lngDiffInFt < 50) {
+        // adjust both lat and lng by like .00002
+        user.lat += 0.00005;
+        user.lng += 0.00005;
+      }
+    });
+  }
+
   handleMeetRequest(socketId) {
     console.log('Sending meeting request from user.');
     // send dispatch to update user1s recipientId
     this.props.dispatch(actions.setRecipient(socketId));
-    // emit socket to update user2s requestorId
-
+    // emit socket to update user2s requesterId
+    window.socket.api.sendMeetingRequest(socketId);
   }
 
   // Toggle to 'true' to show InfoWindow and re-renders component
@@ -100,6 +123,7 @@ class Gmap extends Component {
           {Object.keys(this.props.users).map((socketId) => {
             const marker = this.props.users[socketId];
             const openedUserId = this.props.gmap.openedUserId;
+            // this.adjustMarkerPosition(marker);
             return (
               // use the Marker component to render user as a marker on map
               <Marker
