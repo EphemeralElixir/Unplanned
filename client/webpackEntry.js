@@ -18,12 +18,17 @@ const initialState = {
   },
 };
 
-window.socket = window.io.connect('http://localhost:8000');
+// Performance optimization to limit number of lookups
+let thisUser;
+let socketApi;
+let socket;
 
-// add socket api's
-window.socket.api = {};
+window.socket = socket = window.io.connect('http://localhost:8000');
 
-window.socket.api.user = {
+// Add socket api's
+socket.api = socketApi = {};
+
+socketApi.user = thisUser = {
   userID: '',
   image: '',
   name: '',
@@ -32,9 +37,9 @@ window.socket.api.user = {
   lng: '',
 };
 
-window.socket.api.isLoggedIn = false;
+socketApi.isLoggedIn = false;
 
-window.socket.api.login = function login() {
+socketApi.login = function login() {
   (function fbSdk(d, s, id) {
     const js = d.createElement(s); js.id = id;
     const fjs = d.getElementsByTagName(s)[0];
@@ -55,14 +60,14 @@ window.fbAsyncInit = () => {
     if (response.status === undefined) {
       // do nothing
     } else {
-      window.socket.api.user.userID = response.authResponse.userID;
-      window.FB.api(`/${window.socket.api.user.userID}`, (userIdResponse) => {
-        window.socket.api.user.name = userIdResponse.name;
-        window.FB.api(`/${window.socket.api.user.userID}/picture?type=large`,
+      thisUser.userID = response.authResponse.userID;
+      window.FB.api(`/${thisUser.userID}`, (userIdResponse) => {
+        thisUser.name = userIdResponse.name;
+        window.FB.api(`/${thisUser.userID}/picture?type=large`,
           (imageResponse) => {
-            window.socket.api.user.image = imageResponse.data.url;
-            window.socket.api.isLoggedIn = true;
-            window.socket.emit('save user to db', window.socket.api.user);
+            thisUser.image = imageResponse.data.url;
+            socketApi.isLoggedIn = true;
+            socket.emit('save user to db', thisUser);
           });
       });
     }
@@ -70,36 +75,42 @@ window.fbAsyncInit = () => {
 };
 
 
-window.socket.api.sendToServer = function sendToServer() {
-  if (window.socket.connected && window.socket.api.isLoggedIn) {
-    window.socket.emit('update one socket user', window.socket.api.user, window.socket.id);
+socketApi.sendToServer = function sendToServer() {
+  if (socket.connected && socketApi.isLoggedIn) {
+    socket.emit('update one socket user', thisUser, socket.id);
   }
 };
 
-window.socket.api.updateLocation = function updateLocation() {
+socketApi.updateLocation = function updateLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
-      window.socket.api.user.lat = position.coords.latitude;
-      window.socket.api.user.lng = position.coords.longitude;
+      thisUser.lat = position.coords.latitude;
+      thisUser.lng = position.coords.longitude;
     });
   }
 };
 
-window.socket.api.sendMeetingRequest = function sendMeetingRequest(receiverId) {
-  if (window.socket.connected && window.socket.api.isLoggedIn) {
-    window.socket.emit('send meeting request', window.socket.id, receiverId);
+socketApi.sendMeetingRequest = function sendMeetingRequest(receiverId) {
+  if (socket.connected && socketApi.isLoggedIn) {
+    socket.emit('send meeting request', socket.id, receiverId);
   }
 };
 
-window.socket.api.confirmMeetingRequest = function confirmMeetingRequest(receiverId) {
-  if (window.socket.connected && window.socket.api.isLoggedIn) {
-    window.socket.emit('confirm meeting request', window.socket.id, receiverId);
+socketApi.confirmMeetingRequest = function confirmMeetingRequest(receiverId) {
+  if (socket.connected && socketApi.isLoggedIn) {
+    socket.emit('confirm meeting request', socket.id, receiverId);
   }
 };
 
-window.socket.api.rejectMeetingRequest = function rejectMeetingRequest(receiverId) {
-  if (window.socket.connected && window.socket.api.isLoggedIn) {
-    window.socket.emit('reject meeting request', window.socket.id, receiverId);
+socketApi.rejectMeetingRequest = function rejectMeetingRequest(receiverId) {
+  if (socket.connected && socketApi.isLoggedIn) {
+    socket.emit('reject meeting request', socket.id, receiverId);
+  }
+};
+
+socketApi.updateBio = function updateBio(bio) {
+  if (socket.connected && socketApi.isLoggedIn) {
+    socket.emit('update bio', thisUser.userID, bio);
   }
 };
 

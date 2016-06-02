@@ -1,4 +1,3 @@
-const User = require('../users/userModel');
 const userHandlers = require('../users/userController');
 
 const socketIO = require('socket.io');
@@ -26,12 +25,9 @@ const makeSocketServer = function socketServer(http) {
       updateAllUsers();
     };
 
-    const saveUserToDb = function saveUserToDb(userObj) {
-      userHandlers.loginOrCreate(User, userObj);
-    };
-
+    socket.on('save user to db', userHandlers.loginOrCreate);
+    socket.on('update bio', userHandlers.updateBio);
     socket.on('update one socket user', updateActiveUsers);
-    socket.on('save user to db', saveUserToDb);
     socket.on('refresh users', updateAllUsers);
     socket.on('disconnect', disconnect);
 
