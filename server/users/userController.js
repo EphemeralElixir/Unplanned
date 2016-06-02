@@ -1,28 +1,11 @@
 var User = require('./userModel');
 
-var loginOrCreate = function(userObj) {
-
-  User.findOne({'userID': userObj.userID}, function(err, user) {
-
-    if (err) {
-      throw err;
-    }
-
-    //Log in user if found
-    if (user) {
-      console.log('User exists inside DB');
-    } else {
-
-      //Create a new user if not found
-      var newUser = new User();
-
-      newUser.name = userObj.name;
-      newUser.userID = userObj.userID;
-      newUser.image = userObj.image;
-      newUser.save();
-    }
-
-  });
+var create = function(userObj) {
+  var newUser = new User();
+  newUser.name = userObj.name;
+  newUser.userID = userObj.userID;
+  newUser.image = userObj.image;
+  newUser.save();
 };
 
 var updateBio = function(userID, bio) {
@@ -38,7 +21,22 @@ var updateBio = function(userID, bio) {
   });
 };
 
+var checkExisting = function(userID, socket) {
+  User.findOne({'userID': userID}, function(err, user) {
+    if (err) {
+      throw err;
+    }
+
+    if (user) {
+      socket.emit('is in db', true, user);
+    } else {
+      socket.emit('is in db', false);
+    }
+  });
+};
+
 module.exports = {
-  loginOrCreate: loginOrCreate,
-  updateBio: updateBio
+  create: create,
+  updateBio: updateBio,
+  checkExisting: checkExisting
 };
