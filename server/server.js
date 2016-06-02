@@ -14,8 +14,8 @@ io.makeSocketServer(http);
 require('./config/middleware.js')(app, express);
 require('./config/routes.js')(app, express);
 
-http.listen(8000, function(err) {
-  console.log('Server is setup. Listening on port 8000...')
+http.listen(8000, () => {
+  console.log('Server is setup. Listening on port 8000...');
 });
 
 module.exports = app;
