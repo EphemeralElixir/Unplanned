@@ -33,36 +33,50 @@ class Popover extends React.Component {
   render () {
     if (this.props.meet.send && !this.state.timeout) {
       return (
-        <div id='request-sent'>
-          <h1>Request Sent</h1> 
-          <img src={this.props.userList[key].pic}/>
-          <div>{this.props.userList[key].name}</div>  
-          <CountdownTimer />
-          <img src='./lib/reject.png' onPress={() => this.setState({accepted: false})} />
+        <div id="request-sent">
         </div>
-      )
+      );
     } else if (this.props.meet.recieve && !this.state.timeout) {
       return (
-        <div id='request-recieved'>
-          <h1>Do you want to meet?</h1> 
-          <img src={this.props.userList[this.props.meet.send].pic}/>
-          <div>{this.props.userList[key].name}</div>  
-          <CountdownTimer />  
-          <img src='./lib/accept.png' onPress={() => this.setState({accepted: true})} /> 
-          <img src='./lib/reject.png' onPress={() => this.setState({accepted: false})} />          
+        <div id="request-recieved">
+          <h1>Do you want to meet?</h1>
+          <img
+            src={this.props.userList[this.props.meet.send].pic}
+            alt="something"
+          />
+          <div>{this.props.userList[key].name}</div>
+          <CountdownTimer />
+          <img
+            src="./lib/accept.png"
+            onPress={() =>
+            this.setState({ accepted: true })}
+            alt="Accept" />
+          <img
+            src="./lib/reject.png"
+            onPress={() =>
+            this.setState({ accepted: false })}
+            alt="Reject"
+          />
         </div>
-        )
-    } else if (this.props.meet.accept $$ !this.state.timeout) {
+        );
+    } else if (this.props.meet.accept && !this.state.timeout) {
       return (
-        <div id='meeting-accepted'>
-          <h1>Lets Meet!</h1> 
-          <img src={this.props.userList[this.props.meet.send].pic}/>
-          <img src={this.props.userList[this.props.meet.send].pic}/>   
+        <div id="meeting-accepted">
+          <h1>Lets Meet!</h1>
+          <img
+            src={this.props.userList[this.props.meet.send].pic}
+            alt="Current User"
+          />
+          <img
+            src={this.props.userList[this.props.meet.send].pic}
+            alt="Other User"
+          />
           <div>{this.props.userList[key].name}</div>
         </div>
-      )
-    } 
-    return (null);
+      );
+    } else {
+      return (null);
+    }
   }
 }
 

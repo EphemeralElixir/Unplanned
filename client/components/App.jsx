@@ -2,6 +2,7 @@ import React from 'react';
 import AddUser from './AddUser.jsx';
 import UserList from './UserList.jsx';
 import Options from './Options.jsx';
+import Popover from './Popover.jsx';
 import InsertBio from './InsertBio.jsx';
 import Popover from './Popover.jsx';
 
@@ -19,17 +20,12 @@ const App = (props) => (
       gmap={props.gmap}
     />
     <Options />
-<<<<<<< 0556dc874cf6a06b7a6eeda0b49bdb04e93de486
     <Popover
       users={props.users}
       meet={props.meet}
       dispatch={props.dispatch}
     />
     <InsertBio />
-=======
-    <Popover dipatch={props} />
-    <InsertBio/>
->>>>>>> interim commit, still working on popover
     <Socket dispatch={props.dispatch} />
   </div>
 );
