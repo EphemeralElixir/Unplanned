@@ -12,7 +12,15 @@ class Gmap extends Component {
         lat: 37.7835896,
         lng: -122.4092149,
       },
+      // used to test 4 user's fixed position for testing
+      fixedPos: [
+        { lat: 37.7832718, lng: -122.4035935 },
+        { lat: 37.7778119, lng: -122.4148293 },
+        { lat: 37.773109, lng: -122.4159813 },
+        { lat: 37.767617, lng: -122.4094637 },
+      ],
     };
+
     this.updateCurrentLocation();
   }
 
@@ -85,47 +93,46 @@ class Gmap extends Component {
 
   render() {
     return (
-      <div>
-        <button onClick={this.centerMap}>Center Map</button>
-        <GoogleMapLoader
-          containerElement={
-            <div
-              {...this.props}
-              style={{
-                margin: 'auto',
-                width: '600px',
-                height: '600px',
-              }}
-            >
-            </div>
+      <GoogleMapLoader
+        containerElement={
+          <div
+            {...this.props}
+            style={{
+              margin: 'auto',
+              width: '600px',
+              height: '600px',
+            }}
+          >
+          </div>
+        }
+        googleMapElement={
+          <GoogleMap
+            // google map options:
+            defaultCenter={this.state.center}
+            defaultZoom={14}
+            ref="map"
+          >
+          {Object.keys(this.props.users).map((socketId, index) => {
+            const marker = this.props.users[socketId];
+            const openedUserId = this.props.gmap.openedUserId;
+            return (
+              // use the Marker component to render user as a marker on map
+              <Marker
+                key={`marker_${socketId}`}
+                position={
+                  { lat: this.state.fixedPos[index].lat, lng: this.state.fixedPos[index].lng }
+                }
+                onClick={this.handleMarkerClick.bind(this, marker, socketId)}
+              >
+                {/* render infoWindow only if marker has been clicked */}
+                {socketId === openedUserId ? this.renderInfoWindow(marker, socketId) : null}
+              </Marker>
+            );
+          }) // end map over users here
           }
-          googleMapElement={
-            <GoogleMap
-              // google map options:
-              defaultCenter={this.state.center}
-              defaultZoom={14}
-              ref="map"
-            >
-            {Object.keys(this.props.users).map((socketId) => {
-              const marker = this.props.users[socketId];
-              const openedUserId = this.props.gmap.openedUserId;
-              return (
-                // use the Marker component to render user as a marker on map
-                <Marker
-                  key={`marker_${socketId}`}
-                  position={{ lat: marker.lat, lng: marker.lng }}
-                  onClick={this.handleMarkerClick.bind(this, marker, socketId)}
-                >
-                  {/* render infoWindow only if marker has been clicked */}
-                  {socketId === openedUserId ? this.renderInfoWindow(marker, socketId) : null}
-                </Marker>
-              );
-            }) // end map over users here
-            }
-            </GoogleMap>
-          }
-        /> // end of GoogleMapLoader
-      </div>
+          </GoogleMap>
+        }
+      /> // end of GoogleMapLoader
     );
   }
 }
