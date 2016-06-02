@@ -50,10 +50,12 @@ class Popover extends React.Component {
     return null;
   }
 }
+
 Popover.propTypes = {
   users: React.PropTypes.object,
   dispatch: React.PropTypes.func,
   gmap: React.PropTypes.object,
   meet: React.PropTypes.object,
 };
+
 export default Popover;

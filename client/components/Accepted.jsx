@@ -36,6 +36,3 @@ Accepted.propTypes = {
 };
 
 export default Accepted;
-
-        // <p>Here's {this.props.users[this.props.meet.recipientId].name}'s contact information</p>
-        // <div>{this.props.users[this.props.meet.send].name}</div>

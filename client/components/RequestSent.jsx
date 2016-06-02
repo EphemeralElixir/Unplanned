@@ -35,5 +35,3 @@ RequestSent.propTypes = {
 };
 
 export default RequestSent;
-
-// <div>{this.props.users[this.props.meet.recipientId].name}</div>
