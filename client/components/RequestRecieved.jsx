@@ -1,34 +1,40 @@
 import React from 'react';
-import actions from '../redux/actions.js';
-
-import Socket from './Socket.jsx';
+// import actions from '../redux/actions.js';
 
 class RequestReceived extends React.Component {
-  // setup an accepted property on state.
-  // listener should look for a change from null to true/false (see below)
   constructor(props) {
     super(props);
     this.state = {
-      accepted: null,
     };
   }
-
-  //Render will show popover ONLY if meetingRequested is true
-  render () {
-    if (this.props.meetingRequested) {
-      return (
-        <div id='meeting-request'>
-          <img src={this.props.userList[key].pic}/>
-          <div>{this.props.userList[key].pic}</div>  
-          <CountdownTimer />  
-          <img src='./lib/accept.png' onPress={() => this.setState({accepted: true})} /> 
-          <img src='./lib/reject.png' onPress={() => this.setState({accepted: false})} />
-        </div>
-      )
-    } else {
-      return null
-    }
+  render() {
+    return (
+      <div id="popover">
+        <h1>Would you like to meet with {this.props.users[this.props.meet.requesterId].name}</h1>
+        <img
+          alt={this.props.users[this.props.meet.requesterId].name}
+          src={this.props.users[this.props.meet.requesterId].image}
+        />
+        <img
+          alt="accept"
+          src="http://icons.iconarchive.com/icons/dryicons/simplistica/128/accept-icon.png"
+          onPress={window.socket.api.confirmMeetingRequest(this.props.meet.requesterId)}
+        />
+        <img
+          alt="reject"
+          src="https://cdn3.iconfinder.com/data/icons/musthave/128/Remove.png"
+          onPress={window.socket.api.rejectMeetingRequest(this.props.meet.requesterId)}
+        />
+      </div>
+    );
   }
 }
+
+RequestReceived.propTypes = {
+  dispatch: React.PropTypes.func,
+  users: React.PropTypes.object,
+  meet: React.PropTypes.object,
+  gmap: React.PropTypes.object,
+};
 
 export default RequestReceived;

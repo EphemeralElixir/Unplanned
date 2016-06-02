@@ -52,3 +52,11 @@
   -moz-animation: fade-in .3s linear 1, move-up .3s linear 1;
   -ms-animation: fade-in .3s linear 1, move-up .3s linear 1;
 }
+
+
+#popover {
+    position:absolute;
+    top:0; bottom:0; right:0;
+    width:200px;
+    background:#FFFFFF;
+}

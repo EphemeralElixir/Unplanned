@@ -4,7 +4,7 @@ import UserList from './UserList.jsx';
 import Options from './Options.jsx';
 import Popover from './Popover.jsx';
 import InsertBio from './InsertBio.jsx';
-import Popover from './Popover.jsx';
+import Nav from './Nav.jsx';
 
 import { default as Gmap } from './Gmap.jsx';
 import { connect } from 'react-redux';

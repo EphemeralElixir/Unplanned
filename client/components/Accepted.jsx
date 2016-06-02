@@ -11,24 +11,20 @@ class Accepted extends React.Component {
   }
 
   render() {
-    if (this.props.users[this.props.meet.socketId]) {
-      return (
-        <div id="meeting-accepted">
-          <h1>Lets Meet!</h1>
-          <img
-            alt={this.props.users[this.props.meet.socketId].name}
-            src={this.props.users[this.props.meet.socketId].pic}
-          />
-          <img
-            alt={this.props.users[this.props.meet.recipientId].name}
-            src={this.props.users[this.props.meet.recipientId].pic}
-          />
-          <p>Here's {this.props.users[this.props.meet.recipientId].name}'s contact information</p>
-          <div>{this.props.users[this.props.meet.send].name}</div>
-        </div>
-      );
-    }
-    return <h1>Meeting Accepted, but user undefined</h1>;
+    return (
+      <div id="popover">
+        <h1>Lets Meet!</h1>
+        <img
+          alt={this.props.users[this.props.meet.requesterId].name}
+          src={this.props.users[this.props.meet.requesterId].image}
+        />
+        <img
+          alt={this.props.users[this.props.meet.recipientId].name}
+          src={this.props.users[this.props.meet.recipientId].image}
+        />
+        <p>Here's everybody's contact information!</p>
+      </div>
+    );
   }
 }
 
@@ -40,3 +36,6 @@ Accepted.propTypes = {
 };
 
 export default Accepted;
+
+        // <p>Here's {this.props.users[this.props.meet.recipientId].name}'s contact information</p>
+        // <div>{this.props.users[this.props.meet.send].name}</div>
