@@ -27,7 +27,6 @@ var io = function(io) {
     setInterval(updateAllUsers, 3000);
 
     var disconnect = function() {
-      console.log(socket.id);
       delete activeUsers[socket.id.slice(2)];
       updateAllUsers();
     }
@@ -83,6 +82,11 @@ var io = function(io) {
     // socket.on('lets do it', sendConfirmation);
 
 
+    /******** Mocha testing purposes only ********/
+
+    socket.on('echo', function() {
+      socket.emit('echo', 'Sockets are alive!'); // Tests connection
+    });
   });
 };
 
