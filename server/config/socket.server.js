@@ -18,8 +18,6 @@ const makeSocketServer = function socketServer(http) {
       updateAllUsers();
     };
 
-    setInterval(updateAllUsers, 5000);
-
     const disconnect = function disconnect() {
       delete activeUsers[socket.id.slice(2)];
       updateAllUsers();
@@ -30,6 +28,8 @@ const makeSocketServer = function socketServer(http) {
     socket.on('update one socket user', updateActiveUsers);
     socket.on('refresh users', updateAllUsers);
     socket.on('disconnect', disconnect);
+
+    setInterval(updateAllUsers, 5000);
 
     const sendMeetingRequest = function sendMeetingRequest(senderId, receiverId) {
       socket.broadcast.to(`/#${receiverId}`).emit('receive meeting request', senderId);
@@ -42,7 +42,6 @@ const makeSocketServer = function socketServer(http) {
     const rejectMeetingRequest = function rejectMeetingRequest(senderId, receiverId) {
       socket.broadcast.to(`/#${receiverId}`).emit('reject meeting request', senderId);
     };
-
 
     socket.on('send meeting request', sendMeetingRequest);
     socket.on('confirm meeting request', confirmMeetingRequest);
