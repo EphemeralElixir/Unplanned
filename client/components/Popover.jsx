@@ -25,7 +25,6 @@ class Popover extends React.Component {
 
   tick() {
     if (this.state.secondsRemaining <= 1) {
-      // emit cancel or reject back to the server
       clearInterval(this.interval);
     }
     return this.setState({ secondsRemaining: this.state.secondsRemaining - 1 });
