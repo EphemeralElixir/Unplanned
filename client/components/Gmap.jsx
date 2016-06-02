@@ -7,11 +7,6 @@ class Gmap extends Component {
 
   constructor(props) {
     super(props);
-
-    // this.state = {
-    //   center: null,
-    // };
-
     this.state = {
       center: {
         lat: 37.7835896,
@@ -36,28 +31,6 @@ class Gmap extends Component {
     } else {
       console.log('Navigator is unavailable in your browser.');
     }
-  }
-
-  // this is utility function that slightly adjusts a markers lat/lng
-  // if it is too close to another marker to avoid the markers falling
-  // on top of each other on the map
-  adjustMarkerPosition(marker) {
-    // iterate over markers
-    const users = this.props.users;
-    Object.keys(users).forEach((socketId) => {
-      const user = marker;
-      // compare this markers lat and lng to current marker
-      // abs value of difference between lat and convert to feet
-      const latDiffInFt = Math.abs(users[socketId].lat - marker.lat) * (3280.4) * (10000 / 90);
-      // abs value of difference between lng
-      const lngDiffInFt = Math.abs(users[socketId].lng - marker.lng) * (3280.4) * (10000 / 90);
-      // if current marker is too close
-      if (latDiffInFt < 50 || lngDiffInFt < 50) {
-        // adjust both lat and lng by like .00002
-        user.lat += 0.00005;
-        user.lng += 0.00005;
-      }
-    });
   }
 
   handleMeetRequest(socketId) {
