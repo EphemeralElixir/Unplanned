@@ -7,7 +7,7 @@ const Nav = function Nav() {
     </div>);
   }
   return (<div>
-    <button type="button" onClick={window.fbAsyncInit}>Login with facebook </button>
+    <button type="button" onClick={window.socket.api.login}>Login with facebook </button>
   </div>);
 };
 
