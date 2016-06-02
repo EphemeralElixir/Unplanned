@@ -21,7 +21,11 @@ const makeSocketServer = function socketServer(http) {
 
     setInterval(updateAllUsers, 5000);
 
+<<<<<<< fe6d3bab7137ac3a893dc76bc50ae28c67c70baa
     const disconnect = function disconnect() {
+=======
+    var disconnect = function() {
+>>>>>>> Add 3 test cases for socket connection
       delete activeUsers[socket.id.slice(2)];
       updateAllUsers();
     };
@@ -47,9 +51,17 @@ const makeSocketServer = function socketServer(http) {
       socket.broadcast.to(`/#${receiverId}`).emit('reject meeting request', senderId);
     };
 
+<<<<<<< fe6d3bab7137ac3a893dc76bc50ae28c67c70baa
     socket.on('send meeting request', sendMeetingRequest);
     socket.on('confirm meeting request', confirmMeetingRequest);
     socket.on('reject meeting request', rejectMeetingRequest);
+=======
+    /******** Mocha testing purposes only ********/
+
+    socket.on('echo', function() {
+      socket.emit('echo', 'Sockets are alive!'); // Tests connection
+    });
+>>>>>>> Add 3 test cases for socket connection
   });
 };
 
