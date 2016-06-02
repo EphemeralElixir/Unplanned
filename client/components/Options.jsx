@@ -2,33 +2,31 @@ import React, { Component } from 'react';
 
 class Options extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      available: false,
-      interest: '',
-    };
-  }
-
-  handleChange(event) {
-    this.setState({
-      interest: event.target.value,
-    });
+  toggleOption(optionType) {
+    const thisUser = window.socket.api.user;
+    console.log('option before====>', thisUser[optionType]);
+    thisUser[optionType] = !thisUser[optionType];
+    console.log('option after====>', thisUser[optionType]);
   }
 
   render() {
-    return (<div>
-      <button> Available </button>
-      <button value="beer" onChange={this.handleChange.bind(this)}>
-        Beer
-      </button>
-      <button value="coffee" onChange={this.handleChange.bind(this)}>
-        Coffee
-      </button>
-      <button value="dinner" onChange={this.handleChange.bind(this)}>
-        Dinner
-      </button>
-    </div>);
+    return (
+      <div>
+        <button value="available" onClick={this.toggleOption.bind(this, 'available')}>
+          Available
+        </button>
+        What are you in the mood for?
+        <button value="coffee" onClick={this.toggleOption.bind(this, 'coffee')}>
+          Coffee
+        </button>
+        <button value="food" onClick={this.toggleOption.bind(this, 'food')}>
+          Food
+        </button>
+        <button value="beer" onClick={this.toggleOption.bind(this, 'beer')}>
+          Beer
+        </button>
+      </div>
+    );
   }
 }
 

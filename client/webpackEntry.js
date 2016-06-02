@@ -35,6 +35,10 @@ socketApi.user = thisUser = {
   bio: '',
   lat: '',
   lng: '',
+  available: true,
+  coffee: true,
+  food: true,
+  beer: true,
 };
 
 socketApi.isLoggedIn = false;
