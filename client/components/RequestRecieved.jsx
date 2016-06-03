@@ -9,16 +9,26 @@ class RequestReceived extends React.Component {
     };
   }
   handleReject(requesterId) {
+    window.socket.api.rejectMeetingRequest(requesterId);
     this.props.dispatch(actions.clearMeet());
-    window.socket.api.rejectMeetingRequest(requesterId, window.socket.id)();
   }
   handleAccept(requesterId) {
+    window.socket.api.confirmMeetingRequest(requesterId);
     this.props.dispatch(actions.clearMeet());
     this.props.dispatch(actions.setAccepted(requesterId));
-    window.socket.api.confirmMeetingRequest(window.socket.id, requesterId)();
+  }
+
+  startTimeOut() {
+    console.log(this.props.meet.acceptedId, 'Look!!!');
+    setTimeout(() => {
+      if (this.props.meet.acceptedId === undefined) {
+        this.handleReject.bind(this, this.props.meet.requesterId)();
+      }
+    }, 13000);
   }
 
   render() {
+    this.startTimeOut();
     return (
       <div id="popover">
         <h1>Would you like to meet with {this.props.users[this.props.meet.requesterId].name}</h1>

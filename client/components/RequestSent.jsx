@@ -27,7 +27,6 @@ class RequestSent extends React.Component {
         <button
           alt="cancel"
           className="buttonSendMeetReq"
-          // src="https://cdn3.iconfinder.com/data/icons/musthave/128/Remove.png"
           onClick={this.handleMeetRequest.bind(this, this.props.meet.recipientId)}
         >
           Cancel Request

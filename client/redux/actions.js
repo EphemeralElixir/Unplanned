@@ -16,6 +16,11 @@ const actions = {
       type: 'CLEAR_MEET',
     };
   },
+  clearAccept() {
+    return {
+      type: 'CLEAR_ACCEPT',
+    };
+  },
   setRecipient(recipientId) {
     return {
       type: 'SET_RECIPIENT',
