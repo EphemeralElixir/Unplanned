@@ -5,7 +5,10 @@ const Nav = function Nav() {
     <div className="header">
       <div className="pure-menu pure-menu-fixed pure-menu-horizontal home-menu">
         <a className="pure-menu-heading" href="/">unplanned</a>
-        <span>Welcome {window.socket.api.user.name}</span>
+          {window.socket.api.isLoggedIn ?
+            <span>Welcome {window.socket.api.user.name}</span> :
+            null
+          }
         <ul className="pure-menu-list">
           <li className="pure-menu-item">
             {window.socket.api.isLoggedIn ?
