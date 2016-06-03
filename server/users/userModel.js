@@ -4,7 +4,6 @@ var UserSchema = mongoose.Schema({
   name: String,
   image: String,
   phoneNumber: String,
-  token: String,
   userID: {
     type: String,
     unique: true

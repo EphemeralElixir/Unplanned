@@ -12,7 +12,7 @@ class Socket extends React.Component {
     window.socket.on('update all users', this.updateUserList.bind(this));
     // change local meeting state
     window.socket.on('receive meeting request', this.receivedMeetingRequest.bind(this));
-    window.socket.on('confirm meeting request', this.recievedConfirmation.bind(this));
+    window.socket.on('confirm meeting request', this.receivedConfirmation.bind(this));
     window.socket.on('reject meeting request', this.receivedRejection.bind(this));
   }
 
@@ -26,7 +26,7 @@ class Socket extends React.Component {
     this.props.dispatch(actions.setRequester(requesterId));
   }
 
-  recievedConfirmation(acceptedId) {
+  receivedConfirmation(acceptedId) {
     alert('this guy confirmed me', acceptedId);
     this.props.dispatch(actions.clearMeet());
     this.props.dispatch(actions.setAccepted(acceptedId));
