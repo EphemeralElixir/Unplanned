@@ -10,38 +10,67 @@ class Popover extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      secondsRemaining: 20,
+      // secondsRemaining: 20,
     };
   }
 
   startTimeOut() {
-    setTimeout(() => this.props.dispatch(actions.clearMeet()).bind(this), 10000);
+    setTimeout(
+      () => this.props.dispatch(actions.clearMeet()).bind(this), 20000);
   }
 
   render() {
     if (this.props.meet.recipientId !== undefined) {
-      // need to have a time out as well
-      this.startTimeOut();
+      // this.startTimeOut();
       return (
-        <RequestSent
-          meet={this.props.meet}
-          users={this.props.users}
-        />
+        <div>
+          REQUEST SENT
+          <RequestSent
+            meet={this.props.meet}
+            users={this.props.users}
+            dispatch={this.props.dispatch}
+          />
+          <p>
+            recipientId: {this.props.meet.recipientId}
+            requesterId: {this.props.meet.requesterId}
+            acceptedId: {this.props.meet.acceptedId}
+          </p>
+        </div>
       );
-    } else if (this.props.meet.requesterId !== undefined) {
-      this.startTimeOut();
+    }
+    if (this.props.meet.requesterId !== undefined) {
+      // this.startTimeOut();
       return (
-        <RequestRecieved
-          meet={this.props.meet}
-          users={this.props.users}
-        />
+        <div>
+          REQUEST RECIEVED
+          <RequestRecieved
+            meet={this.props.meet}
+            users={this.props.users}
+            dispatch={this.props.dispatch}
+          />
+          <p>
+            recipientId: {this.props.meet.recipientId}
+            requesterId: {this.props.meet.requesterId}
+            acceptedId: {this.props.meet.acceptedId}
+          </p>
+        </div>
       );
-    } else if (this.props.meet.acceptedId !== undefined) {
-      this.startTimeOut();
+    }
+    if (this.props.meet.acceptedId !== undefined) {
+      // this.startTimeOut();
       return (
-        <Accepted />
+        <div>
+          ACCEPTED
+          <Accepted />
+          <p>
+            recipientId: {this.props.meet.recipientId}
+            requesterId: {this.props.meet.requesterId}
+            acceptedId: {this.props.meet.acceptedId}
+          </p>
+        </div>
       );
-    } else if (this.props.meet.reject) {
+    }
+    if (this.props.meet.reject) {
       this.startTimeOut();
       return (
         <Rejected />

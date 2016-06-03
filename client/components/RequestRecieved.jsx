@@ -1,5 +1,6 @@
 import React from 'react';
-// import actions from '../redux/actions.js';
+import CountdownTimer from './CountdownTimer.jsx';
+import actions from '../redux/actions.js';
 
 class RequestReceived extends React.Component {
   constructor(props) {
@@ -7,6 +8,16 @@ class RequestReceived extends React.Component {
     this.state = {
     };
   }
+  handleReject(requesterId) {
+    this.props.dispatch(actions.clearMeet());
+    window.socket.api.rejectMeetingRequest(requesterId, window.socket.id)();
+  }
+  handleAccept(requesterId) {
+    this.props.dispatch(actions.clearMeet());
+    this.props.dispatch(actions.setAccepted(requesterId));
+    window.socket.api.confirmMeetingRequest(window.socket.id, requesterId)();
+  }
+
   render() {
     return (
       <div id="popover">
@@ -15,16 +26,19 @@ class RequestReceived extends React.Component {
           alt={this.props.users[this.props.meet.requesterId].name}
           src={this.props.users[this.props.meet.requesterId].image}
         />
-        <img
-          alt="accept"
-          src="http://icons.iconarchive.com/icons/dryicons/simplistica/128/accept-icon.png"
-          onPress={window.socket.api.confirmMeetingRequest(this.props.meet.requesterId)}
-        />
-        <img
-          alt="reject"
-          src="https://cdn3.iconfinder.com/data/icons/musthave/128/Remove.png"
-          onPress={window.socket.api.rejectMeetingRequest(this.props.meet.requesterId)}
-        />
+        <CountdownTimer />
+        <button
+          className="buttonSendMeetReq"
+          onClick={this.handleAccept.bind(this, this.props.meet.requesterId)}
+        >
+          Accept
+        </button>
+        <button
+          className="buttonSendMeetReq"
+          onClick={this.handleReject.bind(this, this.props.meet.requesterId)}
+        >
+          Reject
+        </button>
       </div>
     );
   }
