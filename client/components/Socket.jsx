@@ -4,16 +4,21 @@ import actions from '../redux/actions.js';
 class Socket extends React.Component {
 
   componentDidMount() {
-    setInterval(window.socket.api.sendToServer, 5000);
-    setInterval(window.socket.api.updateLocation, 5000);
+    // Performance optimization
+    const socketClient = window.socket;
+    const sendToServer = socketClient.api.sendToServer;
+    const updateLocation = socketClient.api.updateLocation;
 
+    setInterval(sendToServer, 5000);
+    setInterval(updateLocation, 5000);
 
-    // change of local state
-    window.socket.on('update all users', this.updateUserList.bind(this));
-    // change local meeting state
-    window.socket.on('receive meeting request', this.receivedMeetingRequest.bind(this));
-    window.socket.on('confirm meeting request', this.receivedConfirmation.bind(this));
-    window.socket.on('reject meeting request', this.receivedRejection.bind(this));
+    // Listens for update then changes local state
+    socketClient.on('update all users', this.updateUserList.bind(this));
+
+    // Listens for meeting requests and updates the component's state depending on decision
+    socketClient.on('receive meeting request', this.receivedMeetingRequest.bind(this));
+    socketClient.on('confirm meeting request', this.receivedConfirmation.bind(this));
+    socketClient.on('reject meeting request', this.receivedRejection.bind(this));
   }
 
   updateUserList(activeUsers) {
@@ -21,28 +26,26 @@ class Socket extends React.Component {
   }
 
   receivedMeetingRequest(requesterId) {
-    alert('this guy requested me');
+    // alert('this guy requested me');
     this.props.dispatch(actions.clearMeet());
     this.props.dispatch(actions.setRequester(requesterId));
   }
 
   receivedConfirmation(acceptedId) {
-    alert('this guy confirmed me', acceptedId);
+    // alert('this guy confirmed me', acceptedId);
     this.props.dispatch(actions.clearMeet());
     this.props.dispatch(actions.setAccepted(acceptedId));
   }
 
   receivedRejection() {
-    alert('i got rejected');
+    // alert(`i got rejected. My name is ${window.socket.api.user.name}`);
     this.props.dispatch(actions.clearMeet());
   }
 
   render() {
     return (<div>
-      Socket loaded
     </div>);
   }
-
 }
 
 Socket.propTypes = {

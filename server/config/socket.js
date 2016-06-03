@@ -45,6 +45,7 @@ const makeSocketServer = function socketServer(http) {
     };
 
     const rejectMeetingRequest = function rejectMeetingRequest(senderId, receiverId) {
+      console.log('This is being sent over and over again ===>', activeUsers[senderId].name);
       socket.broadcast.to(`/#${receiverId}`).emit('reject meeting request', senderId);
     };
 

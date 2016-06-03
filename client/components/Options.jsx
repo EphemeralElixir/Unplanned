@@ -12,10 +12,14 @@ class Options extends Component {
   }
 
   render() {
-    const availStyle = this.user.available ? 'pure-button pure-button-active' : 'pure-button';
-    const coffeeStyle = this.user.coffee ? 'pure-button pure-button-active' : 'pure-button';
-    const foodStyle = this.user.food ? 'pure-button pure-button-active' : 'pure-button';
-    const beerStyle = this.user.beer ? 'pure-button pure-button-active' : 'pure-button';
+    const availStyle = this.user.available ? 'pure-button pure-button-active button-success' :
+      'pure-button button-error';
+    const coffeeStyle = this.user.coffee ? 'pure-button pure-button-active button-success' :
+      'pure-button button-error';
+    const foodStyle = this.user.food ? 'pure-button pure-button-active button-success' :
+      'pure-button button-error';
+    const beerStyle = this.user.beer ? 'pure-button pure-button-active button-success' :
+      'pure-button button-error';
     return (
       <div className="options">
         <button

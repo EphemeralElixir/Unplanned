@@ -13,7 +13,8 @@ import Socket from './Socket.jsx';
 const App = (props) => (
   <div className="app">
     <Nav />
-    {window.socket.api.isLoggedIn ?
+
+    {window.socket.api.isLoggedIn ? // If logged in, render main app...
       <div>
         <Options />
         <Gmap
@@ -28,7 +29,7 @@ const App = (props) => (
         <InsertBio />
         <UserList userList={props.users} />
         <Socket dispatch={props.dispatch} />
-      </div> :
+      </div> : // If NOT logged in, render splash...
       <div>
         <Splash />
         <Socket dispatch={props.dispatch} />

@@ -65,6 +65,7 @@ socketApi.logout = function logout() {
 window.fbAsyncInit = () => {
   const fb = window.FB;
 
+  // Initializes Facebook SDK with the App ID.
   fb.init({
     appId: '577393235773311',
     xfbml: true,
@@ -84,10 +85,10 @@ window.fbAsyncInit = () => {
           thisUser.image = user.image;
         } else {
           fb.api(`/${thisUser.userID}`, (userIdResponse) => {
-            thisUser.name = userIdResponse.name;
+            thisUser.name = userIdResponse.name; // Set the name
             fb.api(`/${thisUser.userID}/picture?type=large`,
               (imageResponse) => {
-                thisUser.image = imageResponse.data.url;
+                thisUser.image = imageResponse.data.url; // Set the image url
                 socket.emit('save user to db', thisUser);
               });
           });
@@ -139,7 +140,7 @@ socketApi.updateBio = function updateBio(bio) {
 
 let store = configureStore(initialState);
 
-// start it up by loading the App component on the dom
+// Initial rendering of App component on the dom
 render(
   <Provider store={store}>
     <App />

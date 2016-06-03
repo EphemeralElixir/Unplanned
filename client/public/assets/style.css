@@ -39,7 +39,7 @@ body {
 
 .pure-menu .pure-menu-fixed {
   border-bottom: none;
-  z-index: 4; 
+  z-index: 4;
 }
 
 .pure-menu .pure-menu-heading {
@@ -131,4 +131,16 @@ body {
     top:0; bottom:0; right:0;
     width:200px;
     background:#FFFFFF;
+}
+
+.button-success {
+    background: rgba(28, 184, 65, 0.70) !important; /* this is a green */
+    border-radius: 6px !important;
+    /*text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);*/
+}
+
+.button-error {
+    background: rgba(202, 60, 60, 0.70) !important; /* this is a maroon */
+    border-radius: 6px !important;
+    /*text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);*/
 }
