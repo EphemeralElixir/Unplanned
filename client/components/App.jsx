@@ -12,19 +12,18 @@ import Socket from './Socket.jsx';
 const App = (props) => (
   <div>
     <Nav />
-    <UserList userList={props.users} />
+    <Options />
     <Gmap
       users={props.users} dispatch={props.dispatch}
       gmap={props.gmap}
     />
-    <Options />
     <Popover
       users={props.users}
       meet={props.meet}
       dispatch={props.dispatch}
     />
     <InsertBio />
-
+    <UserList userList={props.users} />
     <Socket dispatch={props.dispatch} />
   </div>
 );
