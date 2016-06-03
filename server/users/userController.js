@@ -9,14 +9,9 @@ var create = function(userObj) {
 };
 
 var updateBio = function(userID, bio) {
-  User.findOne({'userID': userID}, function(err, user) {
+  User.findOneAndUpdate({ userID: userID }, { bio: bio }, function(err, user) {
     if (err) {
       throw err;
-    }
-
-    if (user) {
-      user.bio = bio;
-      user.save();
     }
   });
 };

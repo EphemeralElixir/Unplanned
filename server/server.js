@@ -1,19 +1,16 @@
 const express = require('express');
 const app = express();
-
 const http = require('http').Server(app);
-
 const mongoose = require('mongoose');
-
-mongoose.connect('mongodb://localhost/elixir');
-
 const io = require('./config/socket');
-io.makeSocketServer(http);
 
+app.set('port', process.env.PORT || 8000);
+io.makeSocketServer(http);
+mongoose.connect('mongodb://localhost/elixir');
 require('./config/middleware.js')(app, express);
 
-http.listen(8000, () => {
-  console.log('Server is setup. Listening on port 8000...');
+http.listen(app.get('port'), () => {
+  console.log('Express server started in ' + app.get('env') + ' mode on port ' + app.get('port'));
 });
 
 module.exports = app;
