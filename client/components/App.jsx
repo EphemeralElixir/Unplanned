@@ -4,6 +4,7 @@ import Options from './Options.jsx';
 import Popover from './Popover.jsx';
 import InsertBio from './InsertBio.jsx';
 import Nav from './Nav.jsx';
+import Splash from './Splash.jsx';
 
 import { default as Gmap } from './Gmap.jsx';
 import { connect } from 'react-redux';
@@ -12,22 +13,29 @@ import Socket from './Socket.jsx';
 const App = (props) => (
   <div>
     <Nav />
-    <Options />
-    <Gmap
-      users={props.users} dispatch={props.dispatch}
-      gmap={props.gmap}
-    />
-    <Popover
-      users={props.users}
-      meet={props.meet}
-      dispatch={props.dispatch}
-    />
-    <InsertBio />
-    <UserList userList={props.users} />
-    <Socket dispatch={props.dispatch} />
+    {window.socket.api.isLoggedIn ?
+      <div>
+        <Options />
+        <Gmap
+          users={props.users} dispatch={props.dispatch}
+          gmap={props.gmap}
+        />
+        <Popover
+          users={props.users}
+          meet={props.meet}
+          dispatch={props.dispatch}
+        />
+        <InsertBio />
+        <UserList userList={props.users} />
+        <Socket dispatch={props.dispatch} />
+      </div> :
+      <div>
+        <Splash />
+        <Socket dispatch={props.dispatch} />
+      </div>
+    }
   </div>
 );
-
 
 // only return the part of the state/store that the component needs
 function mapStateToProps(state) {
