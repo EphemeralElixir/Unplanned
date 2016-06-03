@@ -4,7 +4,7 @@ const Nav = function Nav() {
   return (
     <div className="header">
       <div className="pure-menu pure-menu-fixed pure-menu-horizontal home-menu">
-        <a className="pure-menu-heading" href="/">unplan!</a>
+        <a className="pure-menu-heading" href="/">unplanned</a>
         <span>Welcome {window.socket.api.user.name}</span>
         <ul className="pure-menu-list">
           <li className="pure-menu-item">
@@ -14,7 +14,10 @@ const Nav = function Nav() {
             }
           </li>
           <li className="pure-menu-item">
-            <a href="#">Logout</a>
+            {window.socket.api.isLoggedIn ?
+              <a href="#" onClick={window.socket.api.logout}>Logout</a> :
+              null
+            }
           </li>
         </ul>
       </div>
