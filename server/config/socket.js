@@ -34,7 +34,7 @@ const makeSocketServer = function socketServer(http) {
     socket.on('refresh users', updateAllUsers);
     socket.on('disconnect', disconnect);
 
-    setInterval(updateAllUsers, 5000);
+    setInterval(updateAllUsers, 2000);
 
     const sendMeetingRequest = function sendMeetingRequest(senderId, receiverId) {
       socket.broadcast.to(`/#${receiverId}`).emit('receive meeting request', senderId);
