@@ -9,7 +9,6 @@ class CountdownTimer extends React.Component {
   }
 
   componentDidMount() {
-    // this.setState({ secondsRemaining: 30 });
     this.interval = setInterval(this.tick.bind(this), 1000);
   }
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import actions from '../redux/actions.js';
 
 class InsertBio extends Component {
 
