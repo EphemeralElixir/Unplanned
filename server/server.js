@@ -5,12 +5,8 @@ const mongoose = require('mongoose');
 const io = require('./config/socket');
 
 app.set('port', process.env.PORT || 8000);
-
 io.makeSocketServer(http);
-
 mongoose.connect('mongodb://localhost/elixir');
-
-
 require('./config/middleware.js')(app, express);
 
 http.listen(app.get('port'), () => {
