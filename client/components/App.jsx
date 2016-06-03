@@ -20,17 +20,13 @@ const App = (props) => (
       gmap={props.gmap}
     />
     <Options />
-<<<<<<< 0556dc874cf6a06b7a6eeda0b49bdb04e93de486
     <Popover
       users={props.users}
       meet={props.meet}
       dispatch={props.dispatch}
     />
     <InsertBio />
-=======
-    <Popover dipatch={props} />
-    <InsertBio/>
->>>>>>> interim commit, still working on popover
+
     <Socket dispatch={props.dispatch} />
   </div>
 );
