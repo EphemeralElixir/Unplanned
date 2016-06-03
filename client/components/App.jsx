@@ -1,5 +1,4 @@
 import React from 'react';
-import AddUser from './AddUser.jsx';
 import UserList from './UserList.jsx';
 import Options from './Options.jsx';
 import Popover from './Popover.jsx';
@@ -13,7 +12,6 @@ import Socket from './Socket.jsx';
 const App = (props) => (
   <div>
     <Nav />
-    <AddUser dispatch={props.dispatch} />
     <UserList userList={props.users} />
     <Gmap
       users={props.users} dispatch={props.dispatch}

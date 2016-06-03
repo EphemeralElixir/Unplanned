@@ -22,10 +22,6 @@ const makeSocketServer = function socketServer(http) {
     const disconnect = function disconnect() {
       delete activeUsers[socket.id.slice(2)];
       updateAllUsers();
-
-    var addBio = function (id, bio) {
-      activeUsers[id].bio = bio;
-      //save bio to the database
     };
 
     // Database handlers
@@ -37,7 +33,6 @@ const makeSocketServer = function socketServer(http) {
     socket.on('update one socket user', updateActiveUsers);
     socket.on('refresh users', updateAllUsers);
     socket.on('disconnect', disconnect);
-
 
     setInterval(updateAllUsers, 5000);
 
@@ -53,16 +48,15 @@ const makeSocketServer = function socketServer(http) {
       socket.broadcast.to(`/#${receiverId}`).emit('reject meeting request', senderId);
     };
 
-
     // Meeting request handlers
     socket.on('send meeting request', sendMeetingRequest);
     socket.on('confirm meeting request', confirmMeetingRequest);
     socket.on('reject meeting request', rejectMeetingRequest);
-    socket.on('send meeting', deliverMeetingRequest);
-    socket.on('no thanks', sendRejection);
-    socket.on('lets do it', sendConfirmation);
-    socket.on('addBio', addBio);
 
+    // Test handlers for mocha
+    socket.on('echo', () => {
+      socket.emit('echo', 'Sockets are alive!');
+    });
   });
 };
 
