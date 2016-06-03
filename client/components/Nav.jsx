@@ -6,9 +6,10 @@ const Nav = function Nav() {
       <p> Welcome {window.socket.api.user.name} </p>
     </div>);
   }
-  return (<div>
-    <button type="button" onClick={window.socket.api.login}>Login with facebook </button>
-  </div>);
+  return (
+    <div className="pure-menu pure-menu-horizontal">
+      <button type="button" onClick={window.socket.api.login}>Login with facebook </button>
+    </div>);
 };
 
 export default Nav;
