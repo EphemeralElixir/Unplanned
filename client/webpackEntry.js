@@ -54,6 +54,12 @@ socketApi.login = function login() {
   }(document, 'script', 'facebook-jssdk'));
 };
 
+// User logout butto handler set isLoggedIn to false
+socketApi.logout = function logout() {
+  window.socket.api.isLoggedIn = false;
+};
+
+
 // Waits for Facebook API to finish loading with user login and
 // then runs this function
 window.fbAsyncInit = () => {

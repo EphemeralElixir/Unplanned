@@ -2,6 +2,7 @@
 
 body {
   font-family: 'Jaldi', sans-serif;
+  font-size: 18px;
 }
 
 .markerInfoWindow {
@@ -25,10 +26,15 @@ body {
 
 }
 
+/*set the app's top margin since the nav bar is absolutely positioned*/
+.app {
+  margin-top: 6em;
+}
+
 .home-menu {
-  padding: 0.5em;
   box-shadow: 0 1px 1px rgba(0,0,0, 0.10);
   background-color: #e74c3c;
+  color: white;
 }
 
 .pure-menu .pure-menu-fixed {
@@ -40,7 +46,7 @@ body {
   color: white;
   font-weight: 400;
   text-transform: lowercase;
-  font-size: 1.2em;
+  font-size: 2em;
   margin-left: 2em;
 }
 
@@ -59,6 +65,13 @@ body {
   background: none;
   border: none;
   color: #AECFE5;
+}
+
+.pure-button {
+    background-color: #1f8dd6;
+    color: white;
+    padding: 0.5em 2em;
+    border-radius: 5px;
 }
 
 .options {
@@ -91,10 +104,6 @@ body {
   text-decoration: none;
   display: inline-block;
   font-size: 14px;
-}
-
-.app {
-  margin-top: 5em;
 }
 
 .meeting-requst {
