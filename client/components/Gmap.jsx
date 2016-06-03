@@ -24,20 +24,20 @@ class Gmap extends Component {
     this.updateCurrentLocation();
   }
 
-  // this function will filter users object down to users
-  // who match the user options of the current user
-  // it also filters out any users that are unavailable
-  // this returns an array of user socketIds that can later
+  // This function will filter users object down to users
+  // who match the user options of the current user.
+  // It also filters out any users that are unavailable.
+  // This returns an array of user socketIds that can later
   // be used to display users as markers on map
   getMatchedUsers() {
     const doesUserMatch = (socketId) => {
-      const users = this.props.users;
+      const users = this.props.users[socketId];
       const thisUser = window.socket.api.user;
       return (
-          users[socketId].available && (
-            users[socketId].coffee && thisUser.coffee ||
-            users[socketId].food && thisUser.food ||
-            users[socketId].beer && thisUser.beer
+          users.available && (
+            users.coffee && thisUser.coffee ||
+            users.food && thisUser.food ||
+            users.beer && thisUser.beer
           )
         );
     };
@@ -69,13 +69,13 @@ class Gmap extends Component {
   updateCurrentLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        this.setState({ center:
-          { lat: position.coords.latitude, lng: position.coords.longitude },
+        this.setState({
+          center: {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          },
         });
-        console.log('updated user location to:====>', this.state.center);
       });
-    } else {
-      console.log('Navigator is unavailable in your browser.');
     }
   }
 

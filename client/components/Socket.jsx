@@ -38,12 +38,12 @@ class Socket extends React.Component {
   }
 
   receivedRejection() {
-    // alert('i got rejected');
+    // alert(`i got rejected. My name is ${window.socket.api.user.name}`);
     this.props.dispatch(actions.clearMeet());
   }
+
   render() {
     return (<div>
-
     </div>);
   }
 }

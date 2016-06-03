@@ -1,7 +1,7 @@
 import React from 'react';
 import Accepted from './Accepted.jsx';
 import Rejected from './Rejected.jsx';
-import RequestRecieved from './RequestRecieved.jsx';
+import RequestReceived from './RequestReceived.jsx';
 import RequestSent from './RequestSent.jsx';
 
 class Popover extends React.Component {
@@ -27,7 +27,7 @@ class Popover extends React.Component {
     if (this.props.meet.requesterId !== undefined) {
       return (
         <div>
-          <RequestRecieved
+          <RequestReceived
             meet={this.props.meet}
             users={this.props.users}
             dispatch={this.props.dispatch}
