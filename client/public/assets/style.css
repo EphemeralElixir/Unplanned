@@ -1,4 +1,9 @@
-/*These styles are used for the InfoWindow (rendered on clicking a marker)*/
+@import url(https://fonts.googleapis.com/css?family=Jaldi);
+
+body {
+  font-family: 'Jaldi', sans-serif;
+}
+
 .markerInfoWindow {
   margin: auto;
 }
@@ -20,6 +25,61 @@
 
 }
 
+.home-menu {
+  padding: 0.5em;
+  box-shadow: 0 1px 1px rgba(0,0,0, 0.10);
+  background-color: #e74c3c;
+}
+
+.pure-menu .pure-menu-fixed {
+  border-bottom: none;
+  z-index: 4; 
+}
+
+.pure-menu .pure-menu-heading {
+  color: white;
+  font-weight: 400;
+  text-transform: lowercase;
+  font-size: 1.2em;
+  margin-left: 2em;
+}
+
+.pure-menu-list {
+  float: right;
+}
+
+.home-menu a {
+  color: white;
+  text-decoration: none;
+  margin-right: 2em;
+}
+
+.home-menu li a:hover,
+.home-menu li a:focus {
+  background: none;
+  border: none;
+  color: #AECFE5;
+}
+
+.options {
+  width: 570px;
+  max-width: 570px;
+  padding: 1em;
+  margin: auto;
+  margin-bottom: 0.5em;
+  background-color: #ecf0f1;
+  text-align: center;
+}
+
+.optionType {
+  width: 22%;
+  margin-right: 0.5em;
+}
+
+.optionType:last-child {
+  margin-right: 0;
+}
+
 .buttonSendMeetReq {
   width: 100%;
   margin-top: 5px;
@@ -31,6 +91,10 @@
   text-decoration: none;
   display: inline-block;
   font-size: 14px;
+}
+
+.app {
+  margin-top: 5em;
 }
 
 .meeting-requst {

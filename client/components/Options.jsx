@@ -17,29 +17,34 @@ class Options extends Component {
     const foodStyle = this.user.food ? 'pure-button pure-button-active' : 'pure-button';
     const beerStyle = this.user.beer ? 'pure-button pure-button-active' : 'pure-button';
     return (
-      <div>
+      <div className="options">
         <button
-          value="available" className={availStyle}
+          value="available" className={`${availStyle} optionType`}
           onClick={this.toggleOption.bind(this, 'available')}
         >
-          {this.user.available ? 'Available' : 'Unavailable'}
+          <i
+            className={this.user.available ? 'fa fa-smile-o' : 'fa fa-meh-o'}
+            aria-hidden="true"
+          >
+          </i>
+          {this.user.available ? ' Available' : ' Unavailable'}
         </button>
         <button
-          value="coffee" className={coffeeStyle}
+          value="coffee" className={`${coffeeStyle} optionType`}
           onClick={this.toggleOption.bind(this, 'coffee')}
         >
           <i className="fa fa-coffee" aria-hidden="true"></i>
           {' '}Coffee
         </button>
         <button
-          value="food" className={foodStyle}
+          value="food" className={`${foodStyle} optionType`}
           onClick={this.toggleOption.bind(this, 'food')}
         >
           <i className="fa fa-cutlery" aria-hidden="true"></i>
           {' '}Food
         </button>
         <button
-          value="beer" className={beerStyle}
+          value="beer" className={`${beerStyle} optionType`}
           onClick={this.toggleOption.bind(this, 'beer')}
         >
           <i className="fa fa-beer" aria-hidden="true"></i>

@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import Socket from './Socket.jsx';
 
 const App = (props) => (
-  <div>
+  <div className="app">
     <Nav />
     {window.socket.api.isLoggedIn ?
       <div>
