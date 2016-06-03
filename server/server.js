@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/elixir');
 
-const io = require('./config/socket.server');
+const io = require('./config/socket');
 io.makeSocketServer(http);
 
 require('./config/middleware.js')(app, express);
