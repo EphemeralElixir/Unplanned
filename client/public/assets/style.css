@@ -94,6 +94,10 @@ body {
   font-size: 14px;
 }
 
+.app {
+  margin-top: 5em;
+}
+
 .meeting-requst {
   background-color: rgba(0,0,0,0.85);
   border-radius: 5px;
