@@ -1,5 +1,6 @@
 import React from 'react';
 import CountdownTimer from './CountdownTimer.jsx';
+import actions from '../redux/actions.js';
 
 class RequestSent extends React.Component {
   constructor(props) {
@@ -7,6 +8,12 @@ class RequestSent extends React.Component {
     this.state = {
     };
   }
+
+  handleMeetRequest(recipientId) {
+    window.socket.api.rejectMeetingRequest(recipientId, window.socket.id);
+    this.props.dispatch(actions.clearMeet());
+  }
+
   render() {
     return (
       <div id="popover">
@@ -17,11 +24,13 @@ class RequestSent extends React.Component {
         />
         <p>Bio: {this.props.users[this.props.meet.recipientId].bio}</p>
         <CountdownTimer />
-        <img
+        <button
           alt="cancel"
-          src="https://cdn3.iconfinder.com/data/icons/musthave/128/Remove.png"
-          onPress={window.socket.api.cancelMeetingRequest}
-        />
+          className="buttonSendMeetReq"
+          onClick={this.handleMeetRequest.bind(this, this.props.meet.recipientId)}
+        >
+          Cancel Request
+        </button>
       </div>
     );
   }

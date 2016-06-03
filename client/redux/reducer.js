@@ -25,6 +25,15 @@ export default function reducer(state, action) {
         meet: {
           recipientId: undefined,
           requesterId: undefined,
+        },
+        gmap: state.gmap,
+      });
+    }
+
+    case 'CLEAR_ACCEPT': {
+      return Object.assign({}, {
+        users: state.users,
+        meet: {
           acceptedId: undefined,
         },
         gmap: state.gmap,

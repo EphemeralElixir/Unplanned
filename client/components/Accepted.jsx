@@ -14,15 +14,12 @@ class Accepted extends React.Component {
     return (
       <div id="popover">
         <h1>Lets Meet!</h1>
+        <p>Your meeting with {this.props.users[this.props.meet.acceptedId].name} is confirmed!</p>
         <img
-          alt={this.props.users[this.props.meet.requesterId].name}
-          src={this.props.users[this.props.meet.requesterId].image}
+          alt={this.props.users[this.props.meet.acceptedId].name}
+          src={this.props.users[this.props.meet.acceptedId].image}
         />
-        <img
-          alt={this.props.users[this.props.meet.recipientId].name}
-          src={this.props.users[this.props.meet.recipientId].image}
-        />
-        <p>Here's everybody's contact information!</p>
+        <p>Here's {this.props.users[this.props.meet.acceptedId].name}'s contact information:</p>
       </div>
     );
   }

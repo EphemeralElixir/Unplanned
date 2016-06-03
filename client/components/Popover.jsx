@@ -1,47 +1,52 @@
 import React from 'react';
-// import actions from '../redux/actions.js';
 import Accepted from './Accepted.jsx';
 import Rejected from './Rejected.jsx';
 import RequestRecieved from './RequestRecieved.jsx';
 import RequestSent from './RequestSent.jsx';
-import actions from '../redux/actions.js';
 
 class Popover extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      secondsRemaining: 20,
+      // secondsRemaining: 20,
     };
-  }
-
-  startTimeOut() {
-    setTimeout(() => this.props.dispatch(actions.clearMeet()).bind(this), 10000);
   }
 
   render() {
     if (this.props.meet.recipientId !== undefined) {
-      // need to have a time out as well
-      this.startTimeOut();
       return (
-        <RequestSent
-          meet={this.props.meet}
-          users={this.props.users}
-        />
+        <div>
+          <RequestSent
+            meet={this.props.meet}
+            users={this.props.users}
+            dispatch={this.props.dispatch}
+          />
+        </div>
       );
-    } else if (this.props.meet.requesterId !== undefined) {
-      this.startTimeOut();
+    }
+    if (this.props.meet.requesterId !== undefined) {
       return (
-        <RequestRecieved
-          meet={this.props.meet}
-          users={this.props.users}
-        />
+        <div>
+          <RequestRecieved
+            meet={this.props.meet}
+            users={this.props.users}
+            dispatch={this.props.dispatch}
+          />
+        </div>
       );
-    } else if (this.props.meet.acceptedId !== undefined) {
-      this.startTimeOut();
+    }
+    if (this.props.meet.acceptedId !== undefined) {
       return (
-        <Accepted />
+        <div>
+          <Accepted
+            meet={this.props.meet}
+            users={this.props.users}
+            dispatch={this.props.dispatch}
+          />
+        </div>
       );
-    } else if (this.props.meet.reject) {
+    }
+    if (this.props.meet.reject) {
       this.startTimeOut();
       return (
         <Rejected />
