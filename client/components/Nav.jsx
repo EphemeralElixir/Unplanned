@@ -4,7 +4,10 @@ const Nav = function Nav() {
   return (
     <div className="header">
       <div className="pure-menu pure-menu-fixed pure-menu-horizontal home-menu">
-        <a className="pure-menu-heading" href="/">Unplanned!</a>
+        <a className="pure-menu-heading" href="/">
+          <img className="logo" alt="" src="./assets/img/logo-sm.png" />
+          Unplanned
+        </a>
           {window.socket.api.isLoggedIn ?
             <span>Welcome {window.socket.api.user.name}</span> :
             null
@@ -15,7 +18,7 @@ const Nav = function Nav() {
               <a
                 href="#" onClick={window.showProfile}
               >My Profile</a> :
-              <a href="#" onClick={window.socket.api.login}>Login</a>
+              <div></div>
             }
           </li>
           <li className="pure-menu-item">

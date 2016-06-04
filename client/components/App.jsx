@@ -4,7 +4,7 @@ import Options from './Options.jsx';
 import Popover from './Popover.jsx';
 import EditProfile from './EditProfile.jsx';
 import Nav from './Nav.jsx';
-import Splash from './Splash.jsx';
+import Splash from './splash/Splash.jsx';
 
 import Gmap from './Gmap.jsx';
 import { connect } from 'react-redux';
