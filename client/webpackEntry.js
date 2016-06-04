@@ -33,6 +33,7 @@ socketApi.user = thisUser = {
   image: '',
   name: '',
   bio: '',
+  phoneNumber: '',
   lat: '',
   lng: '',
   available: true,
@@ -77,12 +78,13 @@ window.fbAsyncInit = () => {
       // do nothing
     } else {
       thisUser.userID = response.authResponse.userID;
-
       socket.emit('check for existing', thisUser.userID);
       socket.on('is in db', (exists, user) => {
         if (exists) {
           thisUser.name = user.name;
           thisUser.image = user.image;
+          thisUser.bio = user.bio;
+          thisUser.phoneNumber = user.phoneNumber;
         } else {
           fb.api(`/${thisUser.userID}`, (userIdResponse) => {
             thisUser.name = userIdResponse.name; // Set the name
@@ -132,9 +134,9 @@ socketApi.rejectMeetingRequest = function rejectMeetingRequest(receiverId) {
   }
 };
 
-socketApi.updateBio = function updateBio(bio) {
+socketApi.updateBio = function updateBio() {
   if (socket.connected && socketApi.isLoggedIn) {
-    socket.emit('update bio', thisUser.userID, bio);
+    socket.emit('update bio', thisUser);
   }
 };
 

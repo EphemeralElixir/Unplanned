@@ -2,11 +2,11 @@ import React from 'react';
 import UserList from './UserList.jsx';
 import Options from './Options.jsx';
 import Popover from './Popover.jsx';
-import InsertBio from './InsertBio.jsx';
+import EditProfile from './EditProfile.jsx';
 import Nav from './Nav.jsx';
 import Splash from './Splash.jsx';
 
-import { default as Gmap } from './Gmap.jsx';
+import Gmap from './Gmap.jsx';
 import { connect } from 'react-redux';
 import Socket from './Socket.jsx';
 
@@ -26,7 +26,7 @@ const App = (props) => (
           meet={props.meet}
           dispatch={props.dispatch}
         />
-        <InsertBio />
+        <EditProfile />
         <UserList userList={props.users} />
         <Socket dispatch={props.dispatch} />
       </div> : // If NOT logged in, render splash...

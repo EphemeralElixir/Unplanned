@@ -1,5 +1,13 @@
 @import url(https://fonts.googleapis.com/css?family=Jaldi);
 
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
 body {
   font-family: 'Jaldi', sans-serif;
   font-size: 18px;
@@ -72,6 +80,22 @@ body {
     color: white;
     padding: 0.5em 2em;
     border-radius: 5px;
+}
+
+.pure-group  {
+  width: 400px;
+  font-size: 14px;
+}
+
+.editProfileContainer {
+  width: 240px;
+  position: absolute;
+  text-align: center;
+  padding: 1em;
+  border: 1px #bdc3c7 solid;
+  top: 6em;
+  right: 4em;
+  background-color: #ecf0f1;
 }
 
 .options {
