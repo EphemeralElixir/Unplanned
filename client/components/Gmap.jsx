@@ -20,7 +20,7 @@ class Gmap extends Component {
         { lat: 37.767617, lng: -122.4094637 },
       ],
     };
-
+    this.user = window.socket.api.user;
     this.updateCurrentLocation();
   }
 
@@ -31,13 +31,14 @@ class Gmap extends Component {
   // be used to display users as markers on map
   getMatchedUsers() {
     const doesUserMatch = (socketId) => {
+      // get all users:
       const users = this.props.users[socketId];
-      const thisUser = window.socket.api.user;
+      // return only users that match this.user
       return (
           users.available && (
-            users.coffee && thisUser.coffee ||
-            users.food && thisUser.food ||
-            users.beer && thisUser.beer
+            users.coffee && this.user.coffee ||
+            users.food && this.user.food ||
+            users.beer && this.user.beer
           )
         );
     };
@@ -92,12 +93,16 @@ class Gmap extends Component {
           </div>
           <div className="markerName">{marker.name}</div>
           <div className="markerBio">{marker.bio}</div>
-          <button
-            className="buttonSendMeetReq"
-            onClick={this.handleMeetRequest.bind(this, socketId)}
-          >
-            Let's Meet
-          </button>
+          {// Don't show the Let's Meet button for myself
+          marker.userID !== this.user.userID ?
+            <button
+              className="buttonSendMeetReq"
+              onClick={this.handleMeetRequest.bind(this, socketId)}
+            >
+              Let's Meet
+            </button> :
+            null
+          }
         </div>
         }
 
