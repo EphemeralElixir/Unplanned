@@ -24,7 +24,7 @@ const Testimonial = function Testimonial() {
           we had a scary amount of things in common. She's my bestie, and I love hanging
           out with her.
         </p>
-        <em>-Jennifer M.</em>
+        <em id="About">-Jennifer M.</em>
       </div>
     </div>
     );

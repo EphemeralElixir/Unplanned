@@ -23,7 +23,7 @@ const Splash = function Splash() {
           </p>
         </div>
       </div>
-      <div className="content-wrapper">
+      <div className="content-wrapper" id="Adventure">
         <Adventure />
         <Testimonial />
         <AboutTheDevelopers />

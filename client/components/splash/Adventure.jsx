@@ -2,7 +2,7 @@ import React from 'react';
 
 const Adventure = function Adventure() {
   return (
-    <div className="content">
+    <div id="Adventure" className="content">
       <h2 className="content-head is-center">Go on an adventure RIGHT NOW</h2>
       <div className="pure-g">
         <div className="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
@@ -43,7 +43,7 @@ const Adventure = function Adventure() {
             <i className="fa fa-check-square-o"></i>
             Connect With People
           </h3>
-          <p>
+          <p id="Testimonial">
             Signing up is simple. Log in with Facebook, make yourself available to
             meet new people, and go have coffee, food, or beer with someone new.
           </p>
