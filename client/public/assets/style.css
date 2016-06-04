@@ -484,3 +484,9 @@ video#bgvid {
   vertical-align: middle;
   margin-right: 20px;
 }
+
+.titles {
+  font-size: 20px;
+  margin-top: 0px;
+  padding-top: 5px;
+}

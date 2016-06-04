@@ -1,5 +1,4 @@
 import React from 'react';
-import UserList from './UserList.jsx';
 import Options from './Options.jsx';
 import Popover from './Popover.jsx';
 import EditProfile from './EditProfile.jsx';
@@ -27,7 +26,6 @@ const App = (props) => (
           dispatch={props.dispatch}
         />
         <EditProfile />
-        <UserList userList={props.users} />
         <Socket dispatch={props.dispatch} />
       </div> : // If NOT logged in, render splash...
       <div>
