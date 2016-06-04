@@ -31,7 +31,7 @@ class Options extends Component {
             aria-hidden="true"
           >
           </i>
-          {this.user.available ? ' Available' : ' Unavailable'}
+          {this.user.available ? ' Online' : ' Offline'}
         </button>
         <button
           value="coffee" className={`${coffeeStyle} optionType`}

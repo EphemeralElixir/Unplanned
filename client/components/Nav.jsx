@@ -12,7 +12,9 @@ const Nav = function Nav() {
         <ul className="pure-menu-list">
           <li className="pure-menu-item">
             {window.socket.api.isLoggedIn ?
-              <a href="#">My Profile</a> :
+              <a
+                href="#" onClick={window.showProfile}
+              >My Profile</a> :
               <a href="#" onClick={window.socket.api.login}>Login</a>
             }
           </li>
