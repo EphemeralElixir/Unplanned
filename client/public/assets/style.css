@@ -99,8 +99,8 @@ body {
 }
 
 .options {
-  width: 570px;
-  max-width: 570px;
+  width: 600px;
+  max-width: 600px;
   padding: 1em;
   margin: auto;
   margin-bottom: 0.5em;
@@ -109,8 +109,8 @@ body {
 }
 
 .optionType {
-  width: 22%;
-  margin-right: 0.5em;
+  width: 23%;
+  margin-right: 0.7em;
 }
 
 .optionType:last-child {

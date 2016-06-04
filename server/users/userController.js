@@ -5,11 +5,17 @@ const create = (userObj) => {
   newUser.name = userObj.name;
   newUser.userID = userObj.userID;
   newUser.image = userObj.image;
+  newUser.bio = userObj.bio;
+  newUser.phoneNumber = userObj.phoneNumber;
   newUser.save();
 };
 
 const updateBio = function updateBio(user) {
-  User.findOneAndUpdate({ userID: user.userID }, { user })
+  User.findOneAndUpdate({ userID: user.userID },
+    { bio: user.bio, phoneNumber: user.phoneNumber })
+    .then(() => {
+      // success
+    })
     .catch((err) => {
       throw err;
     });
