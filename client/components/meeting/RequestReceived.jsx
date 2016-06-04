@@ -1,6 +1,6 @@
 import React from 'react';
 import CountdownTimer from './CountdownTimer.jsx';
-import actions from '../redux/actions.js';
+import actions from '../../redux/actions.js';
 
 class RequestReceived extends React.Component {
   constructor(props) {

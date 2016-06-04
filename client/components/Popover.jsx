@@ -1,8 +1,8 @@
 import React from 'react';
-import Accepted from './Accepted.jsx';
-import Rejected from './Rejected.jsx';
-import RequestReceived from './RequestReceived.jsx';
-import RequestSent from './RequestSent.jsx';
+import Accepted from './meeting/Accepted.jsx';
+import Rejected from './meeting/Rejected.jsx';
+import RequestReceived from './meeting/RequestReceived.jsx';
+import RequestSent from './meeting/RequestSent.jsx';
 
 class Popover extends React.Component {
   constructor(props) {
