@@ -27,6 +27,12 @@ const Nav = function Nav() {
               null
             }
           </li>
+          <li>
+            <a href="#">Main</a>
+            <a href="#Adventure">Adventure</a>
+            <a href="#Testimonial">Testimonial</a>
+            <a href="#About">About the Developers</a>
+          </li>
         </ul>
       </div>
     </div>

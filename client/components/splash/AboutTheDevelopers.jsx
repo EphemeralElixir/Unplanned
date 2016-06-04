@@ -2,7 +2,7 @@ import React from 'react';
 
 const AboutTheDevelopers = function AboutTheDevelopers() {
   return (
-    <div className="content">
+    <div id="About" className="content">
       <h1 className="content-head is-center">About the original developers</h1>
       <br />
       <div className="pure-g">
