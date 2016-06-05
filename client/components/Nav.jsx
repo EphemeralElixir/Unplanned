@@ -5,13 +5,13 @@ const SplashNav = function splashNav() {
   return (
     <div>
       <li className="pure-menu-item">
-        <a href="#">Main</a>
+        <a href="#Main">Main</a>
       </li>
       <li className="pure-menu-item">
         <a href="#Adventure">Adventure</a>
       </li>
       <li className="pure-menu-item">
-        <a href="#Testimonial">Testimonial</a>
+        <a href="#Test">Testimonial</a>
       </li>
       <li className="pure-menu-item">
         <a href="#About">About the Developers</a>
@@ -38,9 +38,9 @@ const MainAppNav = function MainAppNav() {
 
 const Nav = function Nav() {
   return (
-    <div className="header">
+    <div className="header pure-menu-heading">
       <div className="pure-menu pure-menu-fixed pure-menu-horizontal home-menu">
-        <a className="pure-menu-heading" href="/">
+        <a className="me" href="/">
           <img className="logo" alt="" src="./assets/img/logo-sm.png" />
           Unplanned
         </a>

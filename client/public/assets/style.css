@@ -47,7 +47,7 @@ h1, h2, h3, h4, h5, h6, label {
  * -- PURE FORM STYLES --
  * Style the form inputs and labels
  */
-.pure-form label {
+/*.pure-form label {
     margin: 1em 0 0;
     font-weight: bold;
     font-size: 100%;
@@ -57,9 +57,9 @@ h1, h2, h3, h4, h5, h6, label {
     border: 2px solid #ddd;
     box-shadow: none;
     font-size: 100%;
-    width: 100%;
+    width: 50%;
     margin-bottom: 1em;
-}
+}*/
 
 /*
  * -- PURE BUTTON STYLES --
@@ -282,12 +282,9 @@ a.pure-button-primary {
 
 
 
-
-
-
-
-
-
+textarea {
+  resize: none;
+}
 
 
 
@@ -349,9 +346,16 @@ body, p {
   font-size: 2em;
   /*margin-left: 2em;*/
 }
+.pure-menu-heading {
+  text-transform: lowercase !important;
+}
 
 .pure-menu-list {
   float: right;
+  margin-top:  !important;
+  display: inline-flex !important;
+  margin-top: 8px !important;
+
 }
 
 .home-menu a {
@@ -466,7 +470,7 @@ video#bgvid {
     top: 50%;
     left: 50%;
     min-width: 100%;
-    min-height: 70%;
+    min-height: 90%;
     width: auto;
     height: auto;
     z-index: -100;
@@ -490,3 +494,4 @@ video#bgvid {
   margin-top: 0px;
   padding-top: 5px;
 }
+
