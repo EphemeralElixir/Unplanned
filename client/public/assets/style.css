@@ -47,7 +47,7 @@ h1, h2, h3, h4, h5, h6, label {
  * -- PURE FORM STYLES --
  * Style the form inputs and labels
  */
-.pure-form label {
+/*.pure-form label {
     margin: 1em 0 0;
     font-weight: bold;
     font-size: 100%;
@@ -57,9 +57,9 @@ h1, h2, h3, h4, h5, h6, label {
     border: 2px solid #ddd;
     box-shadow: none;
     font-size: 100%;
-    width: 100%;
+    width: 50%;
     margin-bottom: 1em;
-}
+}*/
 
 /*
  * -- PURE BUTTON STYLES --
@@ -282,12 +282,9 @@ a.pure-button-primary {
 
 
 
-
-
-
-
-
-
+textarea {
+  resize: none;
+}
 
 
 
