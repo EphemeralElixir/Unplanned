@@ -1,5 +1,41 @@
 import React from 'react';
 
+// These navigation links display only on the main splash page
+const SplashNav = function splashNav() {
+  return (
+    <div>
+      <li className="pure-menu-item">
+        <a href="#">Main</a>
+      </li>
+      <li className="pure-menu-item">
+        <a href="#Adventure">Adventure</a>
+      </li>
+      <li className="pure-menu-item">
+        <a href="#Testimonial">Testimonial</a>
+      </li>
+      <li className="pure-menu-item">
+        <a href="#About">About the Developers</a>
+      </li>
+    </div>
+  );
+};
+
+// These navigation links display only inside the app (after login)
+const MainAppNav = function MainAppNav() {
+  return (
+    <div>
+      <li className="pure-menu-item">
+        <a
+          href="#" onClick={window.showProfile}
+        >My Profile</a>
+      </li>
+      <li className="pure-menu-item">
+        <a href="#" onClick={window.socket.api.logout}>Logout</a>
+      </li>
+    </div>
+  );
+};
+
 const Nav = function Nav() {
   return (
     <div className="header">
@@ -13,26 +49,10 @@ const Nav = function Nav() {
             null
           }
         <ul className="pure-menu-list">
-          <li className="pure-menu-item">
-            {window.socket.api.isLoggedIn ?
-              <a
-                href="#" onClick={window.showProfile}
-              >My Profile</a> :
-              <div></div>
-            }
-          </li>
-          <li className="pure-menu-item">
-            {window.socket.api.isLoggedIn ?
-              <a href="#" onClick={window.socket.api.logout}>Logout</a> :
-              null
-            }
-          </li>
-          <li>
-            <a href="#">Main</a>
-            <a href="#Adventure">Adventure</a>
-            <a href="#Testimonial">Testimonial</a>
-            <a href="#About">About the Developers</a>
-          </li>
+          {window.socket.api.isLoggedIn ?
+            <MainAppNav /> :
+            <SplashNav />
+          }
         </ul>
       </div>
     </div>
