@@ -5,7 +5,7 @@ import AboutTheDevelopers from './AboutTheDevelopers.jsx';
 
 const Splash = function Splash() {
   return (
-    <div>
+    <div id="Main">
       <div className="splash-container">
         <video autoPlay loop id="bgvid">
           <source src="./assets/fair.mp4" type="video/mp4" />

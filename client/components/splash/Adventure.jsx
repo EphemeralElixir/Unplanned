@@ -2,7 +2,7 @@ import React from 'react';
 
 const Adventure = function Adventure() {
   return (
-    <div id="Adventure" className="content">
+    <div id="Adventure" className="content"><br />
       <h2 className="content-head is-center">Go on an adventure RIGHT NOW</h2>
       <div className="pure-g">
         <div className="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">

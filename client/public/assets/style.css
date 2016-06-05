@@ -349,9 +349,16 @@ body, p {
   font-size: 2em;
   /*margin-left: 2em;*/
 }
+.pure-menu-heading {
+  text-transform: lowercase !important;
+}
 
 .pure-menu-list {
   float: right;
+  margin-top:  !important;
+  display: inline-flex !important;
+  margin-top: 8px !important;
+
 }
 
 .home-menu a {
@@ -466,7 +473,7 @@ video#bgvid {
     top: 50%;
     left: 50%;
     min-width: 100%;
-    min-height: 70%;
+    min-height: 90%;
     width: auto;
     height: auto;
     z-index: -100;
@@ -490,3 +497,4 @@ video#bgvid {
   margin-top: 0px;
   padding-top: 5px;
 }
+
