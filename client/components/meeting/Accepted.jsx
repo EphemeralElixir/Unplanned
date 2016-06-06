@@ -1,4 +1,5 @@
 import React from 'react';
+import actions from '../../redux/actions.js';
 
 class Accepted extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class Accepted extends React.Component {
   componentDidMount() {
     navigator.getUserMedia = navigator.getUserMedia ||
     navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
 
     window.peer.api.callSomeone = function callSomeone(peerName) {
       navigator.getUserMedia({ video: true, audio: true }, (stream) => {
@@ -38,6 +40,10 @@ class Accepted extends React.Component {
     }
   }
 
+  handleHangUp() {
+    this.props.dispatch(actions.setAccepted(actions.clearMeet()));
+  }
+
   render() {
     return (
       <div className="popup">
@@ -45,6 +51,12 @@ class Accepted extends React.Component {
         <p>Your meeting with {this.props.users[this.props.meet.acceptedId].name} is confirmed!</p>
         <div id="Peer">
           <video id="PeerStream" autoPlay="true"></video>
+          <button
+            className="buttonSendMeetReq"
+            onClick={this.handleHangUp.bind(this)}
+          >
+            HangUp
+          </button>
         </div>
       </div>
     );
