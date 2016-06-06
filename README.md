@@ -25,7 +25,7 @@ Unplanned is a Single-Page Application utilizing the Facebook API for authentica
 
 Once there, a map will have markers on there that you'll be able to click on to review user information, as well as a "Meet" button to request a meeting. If you tap on meet, the user will receive a request to accept or reject the meeting, and a timer will start counting down from 13.
 
-If they accept, contact information will be shared so the users can connect and meet up for coffee/food/beer.
+If they accept, a video call will pop up on both users browsers to quickly discuss meeting up for coffee/food/beer.
 
 If they reject, the user will receive a rejection notice and then be able to go back to the map to hang out with someone else.
 
@@ -37,7 +37,6 @@ You also have the option to filter if you want coffee, food, or beer so it will 
 ![Meet Accept / Reject](https://cloud.githubusercontent.com/assets/15970451/15833835/529ddcf6-2bdd-11e6-96c0-383f7f93a0d2.png) ![Let's Meet Request](https://cloud.githubusercontent.com/assets/15970451/15833836/529e38a4-2bdd-11e6-9268-f2b8b00ed94e.png)
 
 ![Waiting on Confirm](https://cloud.githubusercontent.com/assets/15970451/15833837/529f83e4-2bdd-11e6-917c-e29cba66e2f7.png) ![Confirmed Meet](https://cloud.githubusercontent.com/assets/15970451/15833839/52aae112-2bdd-11e6-82d7-3afbbb161fb2.png)
-
 
 ## Prerequisites
 
