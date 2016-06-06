@@ -34,6 +34,7 @@ socketApi.user = thisUser = {
   name: '',
   bio: '',
   phoneNumber: '',
+  flagCount: '',
   lat: '',
   lng: '',
   available: true,
@@ -81,10 +82,15 @@ window.fbAsyncInit = () => {
       socket.emit('check for existing', thisUser.userID);
       socket.on('is in db', (exists, user) => {
         if (exists) {
-          thisUser.name = user.name;
-          thisUser.image = user.image;
-          thisUser.bio = user.bio;
-          thisUser.phoneNumber = user.phoneNumber;
+          if (user.flagCount > 1) {
+            alert('You have been flagged and are no longer able to use unplanned!');
+          } else {
+            thisUser.name = user.name;
+            thisUser.image = user.image;
+            thisUser.bio = user.bio;
+            thisUser.phoneNumber = user.phoneNumber;
+            socketApi.isLoggedIn = true;
+          }
         } else {
           fb.api(`/${thisUser.userID}`, (userIdResponse) => {
             thisUser.name = userIdResponse.name; // Set the name
@@ -94,8 +100,8 @@ window.fbAsyncInit = () => {
                 socket.emit('save user to db', thisUser);
               });
           });
+          socketApi.isLoggedIn = true;
         }
-        socketApi.isLoggedIn = true;
       });
     }
   });
