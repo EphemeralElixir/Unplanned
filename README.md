@@ -34,15 +34,10 @@ You also have the option to filter if you want coffee, food, or beer so it will 
 ## Screenshots
 ![Main App](https://cloud.githubusercontent.com/assets/15970451/15833829/5289ed2c-2bdd-11e6-826c-68379a715046.png)
 
-![Meet Accept / Reject](https://cloud.githubusercontent.com/assets/15970451/15833835/529ddcf6-2bdd-11e6-96c0-383f7f93a0d2.png)
+![Meet Accept / Reject](https://cloud.githubusercontent.com/assets/15970451/15833835/529ddcf6-2bdd-11e6-96c0-383f7f93a0d2.png) ![Let's Meet Request](https://cloud.githubusercontent.com/assets/15970451/15833836/529e38a4-2bdd-11e6-9268-f2b8b00ed94e.png)
 
-![Let's Meet Request](https://cloud.githubusercontent.com/assets/15970451/15833836/529e38a4-2bdd-11e6-9268-f2b8b00ed94e.png)
+![Waiting on Confirm](https://cloud.githubusercontent.com/assets/15970451/15833837/529f83e4-2bdd-11e6-917c-e29cba66e2f7.png) ![Confirmed Meet](https://cloud.githubusercontent.com/assets/15970451/15833839/52aae112-2bdd-11e6-82d7-3afbbb161fb2.png)
 
-![Waiting on Confirm](https://cloud.githubusercontent.com/assets/15970451/15833837/529f83e4-2bdd-11e6-917c-e29cba66e2f7.png)
-
-![Confirmed Meet](https://cloud.githubusercontent.com/assets/15970451/15833839/52aae112-2bdd-11e6-82d7-3afbbb161fb2.png)
-
-![Filter Food Beer Coffee](https://cloud.githubusercontent.com/assets/15970451/15833827/52808570-2bdd-11e6-8e0b-7a0075ff0e4b.png)
 
 ## Prerequisites
 
@@ -52,10 +47,13 @@ You will also need to grab a few API keys in order to develop for Unplanned:
 
 [Google Maps API Key](https://developers.google.com/maps/documentation/android-api/signup#get_an_api_key_from_the_console_name) - Set the key inside of script tag src in index.html
 
+![Index Html Example](https://cloud.githubusercontent.com/assets/15970451/15833878/81930ce8-2bdd-11e6-888d-ec9300ae9ed1.png)
+
 [Facebook Login Key/APP ID](https://developers.facebook.com/) - You'll want to create a new Login app. Also make sure that you set up the callback inside of the App settings inside Facebook ie http://localhost:8000/auth/facebook/callback. -- This will be set inside webpackEntry.js from the client folder
 
 [PeerJS Key](http://peerjs.com/) - For access to Video Calling. You will need to store this in a new file called peer.min.js inside of the public folder. Check the index.html file for reference.
 
+![Peer Key Example](https://cloud.githubusercontent.com/assets/15970451/15833879/8194f526-2bdd-11e6-8aed-561373f3ea77.png)
 Everything else will be included inside NPM install.
 
 ## The Tech Stack
