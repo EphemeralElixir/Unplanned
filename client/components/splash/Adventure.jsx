@@ -35,7 +35,7 @@ const Adventure = function Adventure() {
             Despite being ever-more connected, we still end up hanging out with the
             same group of people on a daily basis, rarely meeting new people and
             being spontaneous. Studies have shown that life full of quality
-            relationships is a happy,
+            relationships is a happy, healthy life.
           </p>
         </div>
         <div className="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
