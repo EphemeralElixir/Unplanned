@@ -17,13 +17,13 @@ require('./config/middleware.js')(app, express);
 app.get('/flag', userHandlers.flagUser);
 
 
-function sendReportEmail(email, userId) {
+function sendReportEmail(name, email, userId) {
   const transporter = nodemailer.createTransport('smtps://greenprojectfun@gmail.com:Fred1!1!@smtp.gmail.com');
   const mail = {
     from: '"Unplanned 👥" <no-reply@macla.local>', // sender address
     to: `${email}`, // list of receivers
-    subject: 'Hello 😸', // Subject line
-    html: `<p> Enjoy your unplanned meetup! If you experience problems with this user please </p> <a href="http://macla.local:8000/flag?fbId=${userId}">click here</a>`,
+    subject: `Hello ${name} 😸`, // Subject line
+    html: `<p> Enjoy your unplanned meetup! If you experience problems with this user please </p> <a href="http://192.241.203.99:8000/flag?fbId=${userId}">click here</a>`,
   };
 
   // send mail with defined transport object
@@ -36,13 +36,10 @@ function sendReportEmail(email, userId) {
 }
 
 app.post('/flag', (req, res) => {
-  console.log(req.body);
   userHandlers.getEmail(req.body.user1, (userObj) => {
-    console.log(userObj.email);
-    sendReportEmail(userObj.email, req.body.user2);
+    sendReportEmail(userObj.name, userObj.email, req.body.user2);
   });
   userHandlers.getEmail(req.body.user2, (userObj) => {
-    console.log(userObj.email);
     sendReportEmail(userObj.email, req.body.user1);
   });
 
