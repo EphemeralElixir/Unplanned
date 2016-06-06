@@ -7,13 +7,14 @@ The app's goal is to prevent us from overthinking decisions and encourage us to 
 
 ## Table of Contents
 
-1. [Using the app](#using-the-app)
+1. [Using the App](#using-the-app)
 1. [Prerequisites](#prerequisites)
-1. [Requirements](#requirements-and-the-tech-stack)
+1. [The Tech Stack](#the-tech-stack)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
 1. [Understanding the Code Base](#understanding-the-code-base)
     1. [File Structure](#file-structure)
+    1. [Where to Begin](#where-to-begin)
 1. [Team](#team)
 1. [Contributing](#contributing)
 
@@ -35,7 +36,7 @@ Install [Node](https://nodejs.org/en/) and [MongoDB](https://www.mongodb.com/dow
 
 Everything else will be included inside NPM install.
 
-## Requirements and the Tech Stack
+## The Tech Stack
 
 - Node
 - Express
@@ -51,6 +52,13 @@ Everything else will be included inside NPM install.
 ## Development
 
 ### Installing Dependencies
+
+Before installing any dependencies, you will need to grab a few API keys in order to develop for Unplanned:
+
+[Google Maps API Key](https://developers.google.com/maps/documentation/android-api/signup#get_an_api_key_from_the_console_name) - Set the key inside of script tag src in index.html
+[Facebook Login Key/APP ID](https://developers.facebook.com/) - You'll want to create a new Login app. Also make sure that you set up the callback inside of the App settings inside Facebook ie http://localhost:8000/auth/facebook/callback. -- This will be set inside webpackEntry.js from the client folder
+[PeerJS Key](http://peerjs.com/) - For access to Video Calling. You will need to store this in a new file called peer.min.js inside of the public folder. Check the index.html file for reference.
+
 
 From within the root directory:
 
@@ -163,13 +171,16 @@ Ephemeral Elixir
 #### Front-End Code Base
 The front end views are broken up into multiple components, which are named by their purposes.
 
+1. Data is stored, maintained, and dispatched from the redux store
+1. Most of the event and socket request handlers are stored inside Socket.jsx, which also serves as the parent component that renders the entire app.
+1. Each component may have their own functions and handlers as well, since they are only used inside their individual component.
+
 - The components related to the main landing page (splash) are grouped together inside the splash/ directory.
 - The components related to the meeting/rejecting requests are grouped inside the meeting/ directory.
 
 #### Server-side Code Base
 
-The server-side code is a lot simpler compared to the front-end -- it shouldn't take too long to understand the code and how it relates to the front end. Here's the gist of it:
-
+The server-side code is a lot simpler compared to the front-end. Here's the gist of it:
 1. Most of the heavy-duty work is in socket.js
 1. In order to maintain a real-time storage of all users that are currently online at one time, we use what we call a "master" activeUsers object on the server side (line 3 of server/config/socket.js).
   1. The user's data (containing their name, image url, bio, phone number, facebook ID) is stored in here using their unique socket ID, which is generated on every unique connection.
@@ -183,18 +194,23 @@ The server-side code is a lot simpler compared to the front-end -- it shouldn't 
   1. In any of those cases, a socket event is fired back to the server with the same two socket IDs
   1. The server forwards this response back to the original requester
 
+[Click here](https://scotch.io/tutorials/a-realtime-room-chat-app-using-node-webkit-socket-io-and-mean) for a brief tutorial on sockets
+
 #### Database Code Base
 
 This application is not database-heavy, so there aren't a lot of code to review here. Just know that:
-
 1. The schema is userID (unique), name, image (the url used to render picture), phone number, and bio.
+
 1. The controller has three functions:
   1. Create and store a new user to the database.
   1. Update an existing user's bio and phone number if they decide to change it.
   1. Check for an existing user in the DB to see it needs to create and save a new one or retrieve,
 
+#### TDD Code Base
 
-[click here for a brief tutorial on sockets](https://scotch.io/tutorials/a-realtime-room-chat-app-using-node-webkit-socket-io-and-mean)
+Currently very limited -- we're using Mocha and Chai at the moment, and it is currently testing for socket connections. Feel free to add testing across the stack.
+
+
 ## Team
 
   - __Product Owner__: Leo

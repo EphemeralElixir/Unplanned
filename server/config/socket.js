@@ -37,7 +37,9 @@ const makeSocketServer = function socketServer(http) {
     socket.on('refresh users', updateAllUsers);
     socket.on('disconnect', removeUser);
 
-    setInterval(updateAllUsers, 2000); // Push the updated activeUsers object every 2 seconds.
+    // Push the updated activeUsers object every 2 seconds
+    // to all connected clients for real-time update
+    setInterval(updateAllUsers, 2000);
 
     const sendMeetingRequest = function sendMeetingRequest(senderId, receiverId) {
       socket.broadcast.to(`/#${receiverId}`).emit('receive meeting request', senderId);
