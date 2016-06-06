@@ -1,4 +1,5 @@
-# Project Name: Unplanned
+![Main Project Header](https://cloud.githubusercontent.com/assets/15970451/15841590/4985f0ac-2c07-11e6-8ac3-254db6512772.png)
+---
 
 ## Description
 > Unplanned is a location-based app that brings strangers together over coffee, food, or beer in the spur-of-the-moment. The catch is, they have to make a decision within 13 seconds of someone asking to meet up, otherwise, they'll lose the chance of meeting that person. The app's goal is to prevent us from overthinking decisions and encourage us to step out of our comfort zone to get to know people who we otherwise would never bother striking up a conversation.
