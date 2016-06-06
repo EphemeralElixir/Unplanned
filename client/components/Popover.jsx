@@ -14,7 +14,7 @@ class Popover extends React.Component {
   render() {
     if (this.props.meet.recipientId !== undefined) {
       return (
-        <div>
+        <div className="overlay">
           <RequestSent
             meet={this.props.meet}
             users={this.props.users}
@@ -25,7 +25,7 @@ class Popover extends React.Component {
     }
     if (this.props.meet.requesterId !== undefined) {
       return (
-        <div>
+        <div className="overlay">
           <RequestReceived
             meet={this.props.meet}
             users={this.props.users}
@@ -36,7 +36,7 @@ class Popover extends React.Component {
     }
     if (this.props.meet.acceptedId !== undefined) {
       return (
-        <div>
+        <div className="overlay">
           <Accepted
             meet={this.props.meet}
             users={this.props.users}

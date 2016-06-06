@@ -28,7 +28,7 @@ class RequestReceived extends React.Component {
 
   render() {
     return (
-      <div id="popover">
+      <div className="popup">
         <h1>Would you like to meet with {this.props.users[this.props.meet.requesterId].name}</h1>
         <img
           alt={this.props.users[this.props.meet.requesterId].name}
