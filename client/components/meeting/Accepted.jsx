@@ -41,7 +41,7 @@ class Accepted extends React.Component {
   }
 
   handleHangUp() {
-    this.props.dispatch(actions.setAccepted(actions.clearMeet()));
+    this.props.dispatch(actions.clearMeet());
   }
 
   render() {
