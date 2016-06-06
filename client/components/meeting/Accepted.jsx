@@ -1,13 +1,41 @@
 import React from 'react';
 
 class Accepted extends React.Component {
-  // setup an accepted property on state.
-  // listener should look for a change from null to true/false (see below)
   constructor(props) {
     super(props);
     this.state = {
-      // secondsRemaining: 5,
     };
+  }
+
+  componentDidMount() {
+    navigator.getUserMedia = navigator.getUserMedia ||
+    navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+    window.peer.api.callSomeone = function callSomeone(peerName) {
+      navigator.getUserMedia({ video: true, audio: true }, (stream) => {
+        const call = window.peer.api.user.call(peerName, stream);
+        call.on('stream', (remoteStream) => {
+          document.getElementById('PeerStream').src = URL.createObjectURL(remoteStream);
+        });
+      }, (err) => {
+        console.log(`Failed to get local stream ${err}`);
+      });
+    };
+
+    window.peer.api.user.on('call', (call) => {
+      navigator.getUserMedia({ video: true, audio: true }, (stream) => {
+        call.answer(stream); // Answer the call with an A/V stream.
+        call.on('stream', (remoteStream) => {
+          document.getElementById('PeerStream').src = URL.createObjectURL(remoteStream);
+        });
+      }, (err) => {
+        console.log(`Failed to get local stream ${err}`);
+      });
+    });
+
+    if (this.props.users[this.props.meet.acceptedId].userID < window.socket.api.user.userID) {
+      window.peer.api.callSomeone(this.props.users[this.props.meet.acceptedId].name);
+    }
   }
 
   render() {
@@ -15,11 +43,9 @@ class Accepted extends React.Component {
       <div id="popover">
         <h1>Lets Meet!</h1>
         <p>Your meeting with {this.props.users[this.props.meet.acceptedId].name} is confirmed!</p>
-        <img
-          alt={this.props.users[this.props.meet.acceptedId].name}
-          src={this.props.users[this.props.meet.acceptedId].image}
-        />
-        <p>Here's {this.props.users[this.props.meet.acceptedId].name}'s contact information:</p>
+        <div id="Peer">
+          <video id="PeerStream" autoPlay="true"></video>
+        </div>
       </div>
     );
   }
