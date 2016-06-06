@@ -7,8 +7,8 @@ The app's goal is to prevent us from overthinking decisions and encourage us to 
 
 ## Table of Contents
 
-1. [Usage](#Usage)
-1. [Requirements and Tech Stack](#Requirements and Tech Stack)
+1. [Usage](#usage)
+1. [Requirements and Tech Stack](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
     1. [Tasks](#tasks)
