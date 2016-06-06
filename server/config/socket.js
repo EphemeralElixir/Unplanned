@@ -19,7 +19,10 @@ const makeSocketServer = function socketServer(http) {
       userHandlers.checkExisting(userID, socket);
     };
 
-    const disconnect = function disconnect() {
+    const removeUser = function removeUser() {
+      // We need to slice here because on the front end, the code to send
+      // to a unique socket ID requires '/#' at the beginning of the socket ID,
+      // which is not how they are stored in the activeUsers object.
       delete activeUsers[socket.id.slice(2)];
       updateAllUsers();
     };
@@ -32,8 +35,10 @@ const makeSocketServer = function socketServer(http) {
     // Active users handlers
     socket.on('update one socket user', updateActiveUsers);
     socket.on('refresh users', updateAllUsers);
-    socket.on('disconnect', disconnect);
+    socket.on('disconnect', removeUser);
 
+    // Push the updated activeUsers object every 2 seconds
+    // to all connected clients for real-time update
     setInterval(updateAllUsers, 2000);
 
     const sendMeetingRequest = function sendMeetingRequest(senderId, receiverId) {
