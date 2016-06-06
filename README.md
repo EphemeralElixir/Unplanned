@@ -5,6 +5,7 @@ Unplanned is a location-based app that brings strangers together over coffee, fo
 
 [Live demo the app here](http://192.241.203.99:8000/)
 
+
 ![Screenshot of Entire App](https://cloud.githubusercontent.com/assets/15970451/15838035/ee7e741a-2bf0-11e6-996d-17a01c98a81a.png)
 
 ## Table of Contents
@@ -180,6 +181,10 @@ Using React, each component view have their own JSX file. If you would like to a
 - The components related to the meeting/rejecting requests are grouped inside the meeting/ directory.
 
 #### Server-side
+- There are almost no HTTP ajax requests used in this application, so don't go lookin' for them.
+- Most of the heavy-duty work is in socket.js
+- The server uses sockets as a medium for clients to send and listen for individual requests. You can get really creative since it is very simple and flexible to use
+
 Server-side is heavily dependent on using websockets, since the app requires real-time data communication. We use the lightweight Socket.io JS framework.
 
 Keep in mind that socket connections are an upgraded version of HTTP, which effectively trims the data being sent back and forth between client and server (to a couple of bytes) and allows real-time communication. After the initial "handshake" between the server and client, the server does not need to wait for a request before sending back any data -- it can push data back and forth, to and from clients whenever it needs, through **event emitters** and **event listeners**.
@@ -188,16 +193,17 @@ Example usage:
 
 ```javascript
 
-const someHelperFunction() {
+const someHelperFunction = () => {
   const bool = true;
   const num = 10;
   let obj = { me: 'Tai' };
   let arr = [60];
 
   // Client emitting an event to server, sending any number of arguments over
-  // (5 arguments in this example) It literally can be anything you want.
-  // This could easily be the server emitting to a client as well.
+  // Here, we are sending over some data as defined above
   socket.emit('WriteYourOwnDescriptiveEventHere', "stringyyy", obj, arr, num, bool);
+
+  // FYI this could easily be the server emitting to a client as well.
 };
 
 //Invokes the function... it could be a click handler for example
@@ -214,9 +220,6 @@ socket.on('WriteYourOwnDescriptiveEventHere', function(str, obj, arr, num, bool)
 });
 
 ```
-- There are almost no HTTP ajax requests used in this application, so don't go lookin' for them.
-- Most of the heavy-duty work is in socket.js
-- The server uses sockets as a medium for clients to send and listen for individual requests. You can get really creative since it is very simple and flexible to use
 
 [Click here](https://scotch.io/tutorials/a-realtime-room-chat-app-using-node-webkit-socket-io-and-mean) for a brief tutorial on sockets
 
@@ -225,15 +228,15 @@ socket.on('WriteYourOwnDescriptiveEventHere', function(str, obj, arr, num, bool)
 #### Database Code
 
 This application is not database-heavy
-- The schema is userID (unique), name, image (the url used to render picture), phone number, and bio.
+- The schema is userID (unique), name, image url, email, and bio.
 - The controller has three functions:
   1. Create and store a new user to the database
-  1. Update an existing user's bio and phone number if they decide to change it
+  1. Update an existing user's bio if they decide to change it
   1. Check for an existing user in the DB to see it needs to create and save a new one or retrieve
 
 ## Testing
 
-Current scope is small - Feel free to add testing across the stack. Bless your heart if you can add testing for the front-end using React Test Utilities/Addons and React JSDOM.
+The current scope of testing is small. Feel free to add testing across the stack. Bless your heart if you can add testing for the front-end using React Test Utilities/Addons and React JSDOM.
 
 Make sure mongod and nodemon is running, and then run the following code inside terminal:
 
@@ -245,7 +248,7 @@ mocha specs/socket-server-test.js
 
 - Node
 - Express
-- MonogDB
+- MongoDB
 - Mongoose
 - Webpack, Webpack Hotloaders
 - React, React Dom, React Google Maps
