@@ -11,8 +11,8 @@ const Splash = function Splash() {
           <source src="./assets/fair.mp4" type="video/mp4" />
         </video>
         <div className="splash">
-          <h1 className="splash-head">Unplanned</h1>
-          <p className="splash-subhead">Enjoy the moment</p>
+          <h1 className="splash-head">life is: unplanned</h1>
+          <p className="splash-subhead">seize the moment</p>
           <p>
             <button
               className="pure-button pure-button-primary"
@@ -29,7 +29,7 @@ const Splash = function Splash() {
         <AboutTheDevelopers />
         <div className="footer l-box is-center">
           <p>
-            Built with <span className="fa fa-heart" aria-hidden="true" /> in San Francisco, CA.
+            Made with <span className="fa fa-heart" aria-hidden="true" /> in San Francisco, CA.
           </p>
         </div>
       </div>

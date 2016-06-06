@@ -15,7 +15,7 @@ const App = (props) => (
     <Nav />
 
     {window.socket.api.isLoggedIn ? // If logged in, render main app...
-      <div>
+      <div className="mapContainer">
         <Options />
         <Gmap
           users={props.users} dispatch={props.dispatch}
