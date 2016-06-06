@@ -4,6 +4,7 @@ import Popover from './Popover.jsx';
 import EditProfile from './EditProfile.jsx';
 import Nav from './Nav.jsx';
 import Splash from './splash/Splash.jsx';
+import Peer from './PeerConfig.jsx';
 
 import Gmap from './Gmap.jsx';
 import { connect } from 'react-redux';
@@ -27,6 +28,7 @@ const App = (props) => (
         />
         <EditProfile />
         <Socket dispatch={props.dispatch} />
+        <Peer />
       </div> : // If NOT logged in, render splash...
       <div>
         <Splash />
