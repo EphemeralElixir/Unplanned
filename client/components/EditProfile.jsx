@@ -7,7 +7,6 @@ class EditProfile extends Component {
     this.state = {
       shouldRender: window.editProfile,
       bio: this.user.bio,
-      phoneNumber: this.user.phoneNumber,
     };
   }
 
@@ -26,7 +25,6 @@ class EditProfile extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.user.bio = e.target.bio.value;
-    this.user.phoneNumber = e.target.phoneNumber.value;
     window.socket.api.updateBio();
   }
 
