@@ -50,7 +50,12 @@ class Accepted extends React.Component {
         <h1>Lets Meet!</h1>
         <p>Your meeting with {this.props.users[this.props.meet.acceptedId].name} is confirmed!</p>
         <div id="Peer">
-          <video id="PeerStream" autoPlay="true"></video>
+          <video
+            id="PeerStream"
+            autoPlay="true"
+            height="200"
+            width="200"
+          ></video>
           <button
             className="buttonSendMeetReq"
             onClick={this.handleHangUp.bind(this)}
