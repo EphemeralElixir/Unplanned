@@ -51,9 +51,12 @@ You will also need to grab a few API keys in order to develop for Unplanned:
 
 [Facebook Login Key/APP ID](https://developers.facebook.com/) - You'll want to create a new Login app. Also make sure that you set up the callback inside of the App settings inside Facebook ie http://localhost:8000/auth/facebook/callback. -- This will be set inside webpackEntry.js from the client folder
 
+![Facebook Callback URL](https://cloud.githubusercontent.com/assets/15970451/15833832/528e0722-2bdd-11e6-846b-4cd0638b2fd2.png)
+
 [PeerJS Key](http://peerjs.com/) - For access to Video Calling. You will need to store this in a new file called peer.min.js inside of the public folder. Check the index.html file for reference.
 
 ![Peer Key Example](https://cloud.githubusercontent.com/assets/15970451/15833879/8194f526-2bdd-11e6-8aed-561373f3ea77.png)
+
 Everything else will be included inside NPM install.
 
 ## The Tech Stack
