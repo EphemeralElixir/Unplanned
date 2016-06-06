@@ -122,7 +122,7 @@ Ephemeral Elixir
 |   |   ├── peer.js
 |   |   └── webpack.min.js
 |   |
-|   └── redux/
+|   ├── redux/
 |   |   ├── actions.js
 |   |   ├── reducer.js
 |   |   └── store.js
@@ -152,7 +152,7 @@ Ephemeral Elixir
 ├── _STYLE-GUIDE
 ├── package.json
 ├── README.md
-├── webpack.config.js
+└── webpack.config.js
 
 ```
 
