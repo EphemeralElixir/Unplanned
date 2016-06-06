@@ -37,6 +37,14 @@ class Accepted extends React.Component {
 
     if (this.props.users[this.props.meet.acceptedId].userID < window.socket.api.user.userID) {
       window.peer.api.callSomeone(this.props.users[this.props.meet.acceptedId].name);
+      const $ = window.$;
+      $.ajax({
+        type: 'POST',
+        url: '/email',
+        data: { user1: window.socket.api.user.userID,
+        user2: this.props.users[this.props.meet.acceptedId].userID },
+        success: () => {},
+      });
     }
   }
 
