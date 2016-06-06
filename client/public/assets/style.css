@@ -41,26 +41,6 @@ h1, h2, h3, h4, h5, h6, label {
     text-align: center;
 }
 
-
-
-/*
- * -- PURE FORM STYLES --
- * Style the form inputs and labels
- */
-/*.pure-form label {
-    margin: 1em 0 0;
-    font-weight: bold;
-    font-size: 100%;
-}
-
-.pure-form input[type] {
-    border: 2px solid #ddd;
-    box-shadow: none;
-    font-size: 100%;
-    width: 50%;
-    margin-bottom: 1em;
-}*/
-
 /*
  * -- PURE BUTTON STYLES --
  * I want my pure-button elements to look a little different
@@ -119,7 +99,6 @@ a.pure-button-primary {
     border: none;
     color: #AECFE5;
 }
-
 
 /*
  * -- SPLASH STYLES --
@@ -276,18 +255,9 @@ a.pure-button-primary {
     }
 }
 
-
-
-
-
-
-
 textarea {
   resize: none;
 }
-
-
-
 
 *,
 *:before,
@@ -311,15 +281,12 @@ body, p {
   font-size: 1.2em;
 }
 
-.markerProfile {
-
-}
-
 .markerProfilePic {
-
+  width: 200px;
 }
 
 .markerBio {
+  width: 200px;
 
 }
 
@@ -344,7 +311,6 @@ body, p {
   font-weight: 400;
   text-transform: lowercase;
   font-size: 2em;
-  /*margin-left: 2em;*/
 }
 .pure-menu-heading {
   text-transform: lowercase !important;
@@ -379,19 +345,7 @@ body, p {
 }
 
 .pure-group  {
-  width: 400px;
   font-size: 14px;
-}
-
-.editProfileContainer {
-  width: 240px;
-  position: absolute;
-  text-align: center;
-  padding: 1em;
-  border: 1px #bdc3c7 solid;
-  top: 6em;
-  right: 4em;
-  background-color: #ecf0f1;
 }
 
 .options {
@@ -424,33 +378,6 @@ body, p {
   text-decoration: none;
   display: inline-block;
   font-size: 14px;
-}
-
-.meeting-requst {
-  background-color: rgba(0,0,0,0.85);
-  border-radius: 5px;
-  bottom: 42px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.4);
-  color: #fff;
-  display: none;
-  font-size: 12px;
-  font-family: 'Helvetica',sans-serif;
-  left: -95px;
-  padding: 7px 10px;
-  position: absolute;
-  width: 200px;
-  z-index: 4;
-  display: block;
-  -webkit-animation: fade-in .3s linear 1, move-up .3s linear 1;
-  -moz-animation: fade-in .3s linear 1, move-up .3s linear 1;
-  -ms-animation: fade-in .3s linear 1, move-up .3s linear 1;
-}
-
-#popover {
-    position:absolute;
-    top:0; bottom:0; right:0;
-    width:200px;
-    background:#FFFFFF;
 }
 
 .button-success {
@@ -494,4 +421,31 @@ video#bgvid {
   margin-top: 0px;
   padding-top: 5px;
 }
+
+.overlay {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: block;
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  z-index: 9;
+}
+
+.overlay .popup {
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: fixed;
+  top: 4%;
+  left: 35%;
+  padding: 25px;
+  margin: 70px auto;
+  z-index: 10;
+  -webkit-transition: all 0.6s ease-in-out;
+  -moz-transition: all 0.6s ease-in-out;
+  transition: all 0.6s ease-in-out;
+}
+
 

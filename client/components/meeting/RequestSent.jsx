@@ -10,7 +10,7 @@ class RequestSent extends React.Component {
 
   render() {
     return (
-      <div id="popover">
+      <div className="popup">
         <h1>Waiting on {this.props.users[this.props.meet.recipientId].name} to confirm...</h1>
         <img
           src={this.props.users[this.props.meet.recipientId].image}

@@ -118,8 +118,8 @@ class Gmap extends Component {
             {...this.props}
             style={{
               margin: 'auto',
-              width: '600px',
-              height: '600px',
+              width: '800px',
+              height: '800px',
             }}
           >
           </div>

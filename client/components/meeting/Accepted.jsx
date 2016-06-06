@@ -40,7 +40,7 @@ class Accepted extends React.Component {
 
   render() {
     return (
-      <div id="popover">
+      <div className="popup">
         <h1>Lets Meet!</h1>
         <p>Your meeting with {this.props.users[this.props.meet.acceptedId].name} is confirmed!</p>
         <div id="Peer">
