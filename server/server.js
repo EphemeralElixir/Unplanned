@@ -17,39 +17,33 @@ require('./config/middleware.js')(app, express);
 app.get('/flag', userHandlers.flagUser);
 
 
-app.post('/flag', (req, res) => {
-  console.log(req.body);
-  // create reusable transporter object using the default SMTP transport
+function sendReportEmail(email, userId) {
   const transporter = nodemailer.createTransport('smtps://greenprojectfun@gmail.com:Fred1!1!@smtp.gmail.com');
-
-  const email1 = 'leoadelstein@gmail.com';
-  const email2 = 'adelstein96@gmail.com';
-  // setup e-mail data with unicode symbols
-  const mail1 = {
+  const mail = {
     from: '"Unplanned 👥" <no-reply@macla.local>', // sender address
-    to: `${email1}`, // list of receivers
+    to: `${email}`, // list of receivers
     subject: 'Hello ✔', // Subject line
-    html: `<p> Enjoy your unplanned meetup! If you experience problems with this user please </p> <a href="http://macla.local:8000/flag?fbId=${req.body.user2}">click here</a>`,
-  };
-  const mail2 = {
-    from: '"Unplanned 👥" <no-reply@macla.local>', // sender address
-    to: `${email2}`, // list of receivers
-    subject: 'Hello ✔', // Subject line
-    html: `<p> Enjoy your unplanned meetup! If you experience problems with this user please </p> <a href="http://macla.local:8000/flag?fbId=${req.body.user1}">click here</a>`,
+    html: `<p> Enjoy your unplanned meetup! If you experience problems with this user please </p> <a href="http://macla.local:8000/flag?fbId=${userId}">click here</a>`,
   };
 
   // send mail with defined transport object
-  transporter.sendMail(mail1, (error, info) => {
+  transporter.sendMail(mail, (error, info) => {
     if (error) {
       console.log(error);
     }
     console.log('Message sent: ' + info.response);
   });
-  transporter.sendMail(mail2, (error, info) => {
-    if (error) {
-      console.log(error);
-    }
-    console.log('Message sent: ' + info.response);
+}
+
+app.post('/flag', (req, res) => {
+  console.log(req.body);
+  userHandlers.getEmail(req.body.user1, (userObj) => {
+    console.log(userObj.email);
+    sendReportEmail(userObj.email, req.body.user2);
+  });
+  userHandlers.getEmail(req.body.user2, (userObj) => {
+    console.log(userObj.email);
+    sendReportEmail(userObj.email, req.body.user1);
   });
 
   res.end();

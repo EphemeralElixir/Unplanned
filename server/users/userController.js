@@ -23,6 +23,16 @@ const updateBio = function updateBio(user) {
     });
 };
 
+const getEmail = function getEmail(userId, callback) {
+  User.findOne({ userID: userId })
+    .then((res) => {
+      callback(res);
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
+
 const checkExisting = (userID, socket) => {
   User.findOne({ userID })
     .then((user) => {
@@ -60,4 +70,5 @@ module.exports = {
   updateBio,
   checkExisting,
   flagUser,
+  getEmail,
 };
