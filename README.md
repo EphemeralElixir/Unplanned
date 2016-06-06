@@ -79,7 +79,81 @@ The app should be up and running.
 
 ### File Structure and Hierarchy
 
-The
+```sh
+
+Ephemeral Elixir
+├── .github/
+|   └── PULL_REQUEST_TEMPLATE
+|
+├── client/
+|   └── components/
+|   |   ├── meeting/
+|   |   |   ├── Accepted.jsx
+|   |   |   ├── CountdownTimer.jsx
+|   |   |   ├── Rejected.jsx
+|   |   |   ├── RequestReceived.jsx
+|   |   |   └── RequestSent.jsx
+|   |   |
+|   |   ├── splash/
+|   |   |   ├── AboutTheDevelopers.jsx
+|   |   |   ├── Adventure.jsx
+|   |   |   ├── Splash.jsx
+|   |   |   └── Testimonial.jsx
+|   |   |
+|   |   ├── App.jsx
+|   |   ├── EditProfile.jsx
+|   |   ├── Gmap.jsx
+|   |   ├── InsertBio.jsx
+|   |   ├── Nav.jsx
+|   |   ├── Options.jsx
+|   |   ├── PeerConfig.jsx
+|   |   ├── Popover.jsx
+|   |   └── Socket.jsx
+|   |
+|   ├── public/
+|   |   ├── assets/
+|   |   |   ├── font-awesome/
+|   |   |   ├── img/
+|   |   |   ├── fair.mp4
+|   |   |   ├── smoothscroll.js
+|   |   |   └── style.css
+|   |   |
+|   |   ├── index.html
+|   |   ├── peer.js
+|   |   └── webpack.min.js
+|   |
+|   └── redux/
+|   |   ├── actions.js
+|   |   ├── reducer.js
+|   |   └── store.js
+|   |
+|   └── webpackEntry.js
+|
+├── node_modules/
+├── server/
+|   ├── config/
+|   |   ├── middleware.js
+|   |   └── socket.js
+|   |
+|   ├── users/
+|   |   ├── userController.js
+|   |   └── userModel.js
+|   |
+|   └── server.js
+|
+├── specs/
+|   └── socket-server-test.js
+|
+├── .eslintrc.js
+├── .gitignore
+├── _CONTRIBUTING.md
+├── _PRESS-RELEASE.md
+├── _STYLE-GUIDE
+├── package.json
+├── README.md
+├── webpack.config.js
+
+```
 
 ## Team
 
