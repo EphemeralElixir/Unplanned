@@ -29,7 +29,8 @@ const Splash = function Splash() {
         <AboutTheDevelopers />
         <div className="footer l-box is-center">
           <p>
-            Made with <span className="fa fa-heart" aria-hidden="true" /> in San Francisco, CA.
+            Built with <span className="fa fa-heart" aria-hidden="true" /> at
+            Hack Reactor - San Francisco, CA.
           </p>
         </div>
       </div>

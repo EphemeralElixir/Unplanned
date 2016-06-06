@@ -1,77 +1,66 @@
 # Project Name: Unplanned
 
 ## Description
-Unplanned is a location-based app that brings strangers together over coffee, food, or beer in the spur-of-the-moment. The catch is, they have to make a decision within 13 seconds of someone asking to meet up, otherwise, they'll lose the chance of meeting that person.
+Unplanned is a location-based app that brings strangers together over coffee, food, or beer in the spur-of-the-moment. The catch is, they have to make a decision within 13 seconds of someone asking to meet up, otherwise, they'll lose the chance of meeting that person. The app's goal is to prevent us from overthinking decisions and encourage us to step out of our comfort zone to get to know people who we otherwise would never bother striking up a conversation.
 
-The app's goal is to prevent us from overthinking decisions and encourage us to step out of our comfort zone to get to know people who we otherwise would never bother striking up a conversation. It steps away from the idea of never talking to strangers, and instead inspires us to open our minds to share in our human experiences, and perhaps, even build meaningful relationships.
+[Live demo the app here](http://192.241.203.99:8000/)
+
+
+![Screenshot of Entire App](https://cloud.githubusercontent.com/assets/15970451/15838035/ee7e741a-2bf0-11e6-996d-17a01c98a81a.png)
 
 ## Table of Contents
 
-1. [Using the App](#using-the-app)
+1. [Usage](#usage)
 1. [Screenshots](#screenshots)
-1. [Prerequisites](#prerequisites)
-1. [The Tech Stack](#the-tech-stack)
-1. [Development](#development)
+1. [Getting Started](#getting-started)
+    1. [Prerequisites](#prerequisites)
     1. [Installing Dependencies](#installing-dependencies)
 1. [Understanding the Code Base](#understanding-the-code-base)
     1. [File Structure](#file-structure)
     1. [Where to Begin](#where-to-begin)
-1. [Team](#team)
+1. [The Tech Stack](#tech-stack)
+1. [Core Team](#core-team)
 1. [Contributing](#contributing)
 
-## Using the app
+## Usage
 
-Unplanned is a Single-Page Application utilizing the Facebook API for authentication, so a single login will bring you straight to the main app.
-
-Once there, a map will have markers on there that you'll be able to click on to review user information, as well as a "Meet" button to request a meeting. If you tap on meet, the user will receive a request to accept or reject the meeting, and a timer will start counting down from 13.
-
-If they accept, a video call will pop up on both users browsers to quickly discuss meeting up for coffee/food/beer.
-
-If they reject, the user will receive a rejection notice and then be able to go back to the map to hang out with someone else.
-
-You also have the option to filter if you want coffee, food, or beer so it will match you with people who are down for similar things. You can also make take yourself off the map by flipping the Online/Offline button.
+1. Login with Facebook.
+1. Click on my profile to edit your contact information and profile
+1. Click on a user (represented by a marker) to view their profile
+1. Click on "Let's Meet" to send a meeting request
+1. Accept or reject a meeting request
+1. Enable sharing of location and microphone and video camera
 
 ## Screenshots
-![Main App](https://cloud.githubusercontent.com/assets/15970451/15833829/5289ed2c-2bdd-11e6-826c-68379a715046.png)
+![Meet Accept / Reject](https://cloud.githubusercontent.com/assets/15970451/15833835/529ddcf6-2bdd-11e6-96c0-383f7f93a0d2.png)
 
-![Meet Accept / Reject](https://cloud.githubusercontent.com/assets/15970451/15833835/529ddcf6-2bdd-11e6-96c0-383f7f93a0d2.png) ![Let's Meet Request](https://cloud.githubusercontent.com/assets/15970451/15833836/529e38a4-2bdd-11e6-9268-f2b8b00ed94e.png)
+![Let's Meet Request](https://cloud.githubusercontent.com/assets/15970451/15833836/529e38a4-2bdd-11e6-9268-f2b8b00ed94e.png)
 
-![Waiting on Confirm](https://cloud.githubusercontent.com/assets/15970451/15833837/529f83e4-2bdd-11e6-917c-e29cba66e2f7.png) ![Confirmed Meet](https://cloud.githubusercontent.com/assets/15970451/15833839/52aae112-2bdd-11e6-82d7-3afbbb161fb2.png)
+![Waiting on Confirm](https://cloud.githubusercontent.com/assets/15970451/15833837/529f83e4-2bdd-11e6-917c-e29cba66e2f7.png)
 
-## Prerequisites
+![Confirmed Meet](https://cloud.githubusercontent.com/assets/15970451/15833839/52aae112-2bdd-11e6-82d7-3afbbb161fb2.png)
 
-Install [Node](https://nodejs.org/en/) and [MongoDB](https://www.mongodb.com/download-center?jmp=nav#community) if you haven't already.
+## Getting Started
 
-You will also need to grab a few API keys in order to develop for Unplanned:
+### Prerequisites
 
-[Google Maps API Key](https://developers.google.com/maps/documentation/android-api/signup#get_an_api_key_from_the_console_name) - Set the key inside of script tag src in index.html
+Install [Node](https://nodejs.org/en/) and [MongoDB](https://www.mongodb.com/download-center?jmp=nav#community) in your development environment.
+
+You'll also need to set up Facebook, Google Maps, and Peer JS API keys in order to develop for Unplanned:
+
+[Google Maps API Key](https://developers.google.com/maps/documentation/android-api/signup#get_an_api_key_from_the_console_name) - Set the key inside of script tag src in index.html like so:
 
 ![Index Html Example](https://cloud.githubusercontent.com/assets/15970451/15833878/81930ce8-2bdd-11e6-888d-ec9300ae9ed1.png)
 
-[Facebook Login Key/APP ID](https://developers.facebook.com/) - You'll want to create a new Login app. Also make sure that you set up the callback inside of the App settings inside Facebook ie http://localhost:8000/auth/facebook/callback. -- This will be set inside webpackEntry.js from the client folder
+[Facebook Login Key/APP ID](https://developers.facebook.com/) - Create a new Facebook App and retrieve the App ID. The Facebook callback URL should be set as http://localhost:8000/auth/facebook/callback, and then the APP ID should be set inside webpackEntry.js
 
 ![Facebook Callback URL](https://cloud.githubusercontent.com/assets/15970451/15833832/528e0722-2bdd-11e6-846b-4cd0638b2fd2.png)
 
-[PeerJS Key](http://peerjs.com/) - For access to Video Calling. You will need to store this in a new file called peer.min.js inside of the public folder. Check the index.html file for reference.
+[PeerJS Key](http://peerjs.com/) - For access to Video Calling. You will need to store this in a new file called peer.min.js inside of the public folder. Check the index.html file for reference
 
 ![Peer Key Example](https://cloud.githubusercontent.com/assets/15970451/15833879/8194f526-2bdd-11e6-8aed-561373f3ea77.png)
 
 Everything else will be included inside NPM install.
-
-## The Tech Stack
-
-- Node
-- Express
-- MonogDB
-- Mongoose
-- Webpack, Webpack Hotloaders
-- React, React Dom, React Google Maps
-- Redux
-- Eslint
-- Babel
-- SocketIO
-
-## Development
 
 ### Installing Dependencies
 
@@ -95,18 +84,18 @@ then run nodemon on the server.js file:
 nodemon server/server.js
 ```
 
-You may have to wait for a moment while webpack compiles the code for the very first time. Once it finishes, go to your browser and visit the localhost server on port 8000:
+Webpack will automatically compile the code using the hotloader mechanism after the server starts; this could take a moment the first time. On completion, visit the localhost server on port 8000:
 
 [http://localhost:8000](http://localhost:8000)
 
-The app should be up and running.
+You'll be directed to the Splash page, and the app should be up and running.
 ## Understanding the Code Base
 
 ### File Structure
 
 ```sh
+EphemeralElixir
 
-Ephemeral Elixir
 ├── .github/
 |   └── PULL_REQUEST_TEMPLATE
 |
@@ -178,60 +167,103 @@ Ephemeral Elixir
 ├── package.json
 ├── README.md
 └── webpack.config.js
-
 ```
 
 ### Where to Begin
 
-#### Front-End Code Base
-The front end views are broken up into multiple components, which are named by their purposes.
+#### Front-End
+Using React, each component view have their own JSX file. If you would like to add a new feature, create a brand new component for it.
 
-1. Data is stored, maintained, and dispatched from the redux store
-1. Most of the event and socket request handlers are stored inside Socket.jsx.
-1. Each component may have their own functions and handlers as well, since they are only used inside their individual component.
-
+- Data is stored, maintained, and dispatched from the redux store
+- Most of the socket **event listeners** are stored inside Socket.jsx
+- The socket **event emitters** are stored inside of webpackEntry.js
 - The components related to the main landing page (splash) are grouped together inside the splash/ directory.
 - The components related to the meeting/rejecting requests are grouped inside the meeting/ directory.
 
-#### Server-side Code Base
+#### Server-side
+- There are almost no HTTP ajax requests used in this application, so don't go lookin' for them.
+- Most of the heavy-duty work is in socket.js
+- The server uses sockets as a medium for clients to send and listen for individual requests. You can get really creative since it is very simple and flexible to use
 
-The server-side code is a lot simpler compared to the front-end. Here's the gist of it:
+Server-side is heavily dependent on using websockets, since the app requires real-time data communication. We use the lightweight Socket.io JS framework.
 
-1. Most of the heavy-duty work is in socket.js
-1. In order to maintain a real-time storage of all users that are currently online at one time, we use what we call a "master" activeUsers object on the server side (line 3 of server/config/socket.js).
-  1. The user's data (containing their name, image url, bio, phone number, facebook ID) is stored in here using their unique socket ID, which is generated on every unique connection.
-  1. The server is responsible for pushing this activeUsers object to every connected client, so that every client can render the locations on the map.
-  1. The server is also responsible for keeping the activeUsers object updated in real time, so if a client signs out, the server will remove them from the activeUsers object and then update every connected client.
-1. The server uses sockets as a medium for clients to send and listen for individual requests.
-  1. A client emits a request event to the server with their unique socket ID and the socket ID of the client they want to meet
-  1. The server listens for that request and takes in both socket IDs, and forwards it to the client that is receiving the request
-  1. The client receiving the request will see a component rendered, and is given a choice to reject, accept, or do nothing.
-  1. In any of those cases, a socket event is fired back to the server with the same two socket IDs
-  1. The server forwards this response back to the original requester
+Keep in mind that socket connections are an upgraded version of HTTP, which effectively trims the data being sent back and forth between client and server (to a couple of bytes) and allows real-time communication. After the initial "handshake" between the server and client, the server does not need to wait for a request before sending back any data -- it can push data back and forth, to and from clients whenever it needs, through **event emitters** and **event listeners**.
+
+Example usage:
+
+```javascript
+
+const someHelperFunction = () => {
+  const bool = true;
+  const num = 10;
+  let obj = { me: 'Tai' };
+  let arr = [60];
+
+  // Client emitting an event to server, sending any number of arguments over
+  // Here, we are sending over some data as defined above
+  socket.emit('WriteYourOwnDescriptiveEventHere', "stringyyy", obj, arr, num, bool);
+
+  // FYI this could easily be the server emitting to a client as well.
+};
+
+//Invokes the function... it could be a click handler for example
+someHelperFunction();
+
+// Server or client listening for this specific event, and then accessing the
+// arguments passed in through the callback function
+socket.on('WriteYourOwnDescriptiveEventHere', function(str, obj, arr, num, bool) {
+  if (bool) {
+    obj[str] = arr;
+    obj[str].push(num, num + 2);
+  }
+  console.log(obj[str]); // { me: 'Tai', stringyyy: [60, 10, 12] }
+});
+
+```
 
 [Click here](https://scotch.io/tutorials/a-realtime-room-chat-app-using-node-webkit-socket-io-and-mean) for a brief tutorial on sockets
 
-#### Database Code Base
+[Nice little cheat sheet for Socket.IO methods](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#emphasis)
 
-This application is not database-heavy, so there aren't a lot of code to review here. Just know that:
+#### Database Code
 
-1. The schema is userID (unique), name, image (the url used to render picture), phone number, and bio.
-1. The controller has three functions:
-  1. Create and store a new user to the database.
-  1. Update an existing user's bio and phone number if they decide to change it.
-  1. Check for an existing user in the DB to see it needs to create and save a new one or retrieve,
+This application is not database-heavy
+- The schema is userID (unique), name, image url, email, and bio.
+- The controller has three functions:
+  1. Create and store a new user to the database
+  1. Update an existing user's bio if they decide to change it
+  1. Check for an existing user in the DB to see it needs to create and save a new one or retrieve
 
-#### TDD Code Base
+## Testing
 
-Currently very limited -- we're using Mocha and Chai at the moment, and it is currently testing for socket connections. Feel free to add testing across the stack.
+The current scope of testing is small. Feel free to add testing across the stack. Bless your heart if you can add testing for the front-end using React Test Utilities/Addons and React JSDOM.
 
+Make sure mongod and nodemon is running, and then run the following code inside terminal:
 
-## Team
+```sh
+mocha specs/socket-server-test.js
+```
 
-  - __Product Owner__: Leo
-  - __Scrum Master__: Tai
-  - __Development Team Members__: Sepehr, Shane, Leo, Tai
+## Tech Stack
 
+- Node
+- Express
+- MongoDB
+- Mongoose
+- Webpack, Webpack Hotloaders
+- React, React Dom, React Google Maps
+- Redux
+- Eslint
+- Babel
+- Mocha
+- Chai
+- SocketIO
+
+## Core Team
+
+  - __Product Owner__: [Leo Adelstein](https://github.com/leoadelstein)
+  - __Scrum Master__: [Tai Huynh](https://github.com/anhtaiH)
+  - __Development Team Members__: [Sepehr Vakili](https://github.com/sepehrvakili), [Shane Hubbell](https://github.com/shanehubbell), [Leo Adelstein](https://github.com/leoadelstein), [Tai Huynh](https://github.com/anhtaiH)
 
 ## Contributing
 
@@ -246,3 +278,7 @@ Currently very limited -- we're using Mocha and Chai at the moment, and it is cu
 1. Repeat until the pull request is merged.
 
 See [CONTRIBUTING.md](_CONTRIBUTING.md) for contribution guidelines in detail.
+
+## License
+
+M.I.T
