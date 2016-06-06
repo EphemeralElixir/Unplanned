@@ -22,7 +22,7 @@ function sendReportEmail(email, userId) {
   const mail = {
     from: '"Unplanned 👥" <no-reply@macla.local>', // sender address
     to: `${email}`, // list of receivers
-    subject: 'Hello ✔', // Subject line
+    subject: 'Hello 😸', // Subject line
     html: `<p> Enjoy your unplanned meetup! If you experience problems with this user please </p> <a href="http://macla.local:8000/flag?fbId=${userId}">click here</a>`,
   };
 
