@@ -40,7 +40,7 @@ class Accepted extends React.Component {
       const $ = window.$;
       $.ajax({
         type: 'POST',
-        url: '/email',
+        url: '/flag',
         data: { user1: window.socket.api.user.userID,
         user2: this.props.users[this.props.meet.acceptedId].userID },
         success: () => {},

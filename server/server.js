@@ -16,7 +16,8 @@ require('./config/middleware.js')(app, express);
 // will increment that users flagCount in the db.
 app.get('/flag', userHandlers.flagUser);
 
-app.post('/email', (req, res) => {
+
+app.post('/flag', (req, res) => {
   console.log(req.body);
   // create reusable transporter object using the default SMTP transport
   const transporter = nodemailer.createTransport('smtps://greenprojectfun@gmail.com:Fred1!1!@smtp.gmail.com');
@@ -28,13 +29,13 @@ app.post('/email', (req, res) => {
     from: '"Unplanned 👥" <no-reply@macla.local>', // sender address
     to: `${email1}`, // list of receivers
     subject: 'Hello ✔', // Subject line
-    html: '<p> Enjoy your unplanned meetup! If you experience problems with this user please </p> <a href="http://macla.local:8000/email">click here</a>', // html body
+    html: `<p> Enjoy your unplanned meetup! If you experience problems with this user please </p> <a href="http://macla.local:8000/flag?fbId=${req.body.user2}">click here</a>`,
   };
   const mail2 = {
     from: '"Unplanned 👥" <no-reply@macla.local>', // sender address
     to: `${email2}`, // list of receivers
     subject: 'Hello ✔', // Subject line
-    html: '<p> Enjoy your unplanned meetup! If you experience problems with this user please </p> <a href="http://macla.local:8000/email">click here</a>', // html body
+    html: `<p> Enjoy your unplanned meetup! If you experience problems with this user please </p> <a href="http://macla.local:8000/flag?fbId=${req.body.user1}">click here</a>`,
   };
 
   // send mail with defined transport object
@@ -53,7 +54,6 @@ app.post('/email', (req, res) => {
 
   res.end();
 });
->>>>>>> started email feature
 
 http.listen(app.get('port'), () => {
   console.log('Express server started in ' + app.get('env') + ' mode on port ' + app.get('port'));
