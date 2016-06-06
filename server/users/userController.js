@@ -7,6 +7,7 @@ const create = (userObj) => {
   newUser.image = userObj.image;
   newUser.bio = userObj.bio;
   newUser.phoneNumber = userObj.phoneNumber;
+  newUser.flagCount = 0;
   newUser.save();
 };
 
@@ -35,8 +36,27 @@ const checkExisting = (userID, socket) => {
     });
 };
 
+const flagUser = (req, res) => {
+  const userID = req.query.fbId;
+  User.findOne({ userID })
+    .then((user) => {
+      if (user) {
+        const dbUser = user;
+        dbUser.flagCount += 1;
+        dbUser.save();
+        res.send('User flag count has been incremented.');
+      } else {
+        res.send('User does not exist.');
+      }
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
+
 module.exports = {
   create,
   updateBio,
   checkExisting,
+  flagUser,
 };

@@ -9,6 +9,7 @@ const UserSchema = mongoose.Schema({
   image: String,
   phoneNumber: String,
   bio: String,
+  flagCount: Number,
 });
 
 module.exports = mongoose.model('User', UserSchema);
