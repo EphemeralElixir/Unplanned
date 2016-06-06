@@ -56,7 +56,9 @@ Everything else will be included inside NPM install.
 Before installing any dependencies, you will need to grab a few API keys in order to develop for Unplanned:
 
 [Google Maps API Key](https://developers.google.com/maps/documentation/android-api/signup#get_an_api_key_from_the_console_name) - Set the key inside of script tag src in index.html
+
 [Facebook Login Key/APP ID](https://developers.facebook.com/) - You'll want to create a new Login app. Also make sure that you set up the callback inside of the App settings inside Facebook ie http://localhost:8000/auth/facebook/callback. -- This will be set inside webpackEntry.js from the client folder
+
 [PeerJS Key](http://peerjs.com/) - For access to Video Calling. You will need to store this in a new file called peer.min.js inside of the public folder. Check the index.html file for reference.
 
 
