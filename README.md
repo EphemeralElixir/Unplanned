@@ -130,6 +130,7 @@ Ephemeral Elixir
 |   └── webpackEntry.js
 |
 ├── node_modules/
+|
 ├── server/
 |   ├── config/
 |   |   ├── middleware.js
