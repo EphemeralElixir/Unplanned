@@ -1,6 +1,5 @@
 import React from 'react';
 import Accepted from './meeting/Accepted.jsx';
-import Rejected from './meeting/Rejected.jsx';
 import RequestReceived from './meeting/RequestReceived.jsx';
 import RequestSent from './meeting/RequestSent.jsx';
 
@@ -15,7 +14,7 @@ class Popover extends React.Component {
   render() {
     if (this.props.meet.recipientId !== undefined) {
       return (
-        <div className="overlay">
+        <div>
           <RequestSent
             meet={this.props.meet}
             users={this.props.users}
@@ -26,7 +25,7 @@ class Popover extends React.Component {
     }
     if (this.props.meet.requesterId !== undefined) {
       return (
-        <div className="overlay">
+        <div>
           <RequestReceived
             meet={this.props.meet}
             users={this.props.users}
@@ -35,10 +34,9 @@ class Popover extends React.Component {
         </div>
       );
     }
-    // change this to show Accepted only if showAcceptedProp is true
     if (this.props.meet.acceptedId !== undefined) {
       return (
-        <div className="overlay">
+        <div>
           <Accepted
             meet={this.props.meet}
             users={this.props.users}
@@ -47,13 +45,7 @@ class Popover extends React.Component {
         </div>
       );
     }
-    if (this.props.meet.reject) {
-      this.startTimeOut();
-      return (
-        <Rejected />
-      );
-    }
-    return null;
+    return (<div></div>);
   }
 }
 
