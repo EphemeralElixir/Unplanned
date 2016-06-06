@@ -5,11 +5,7 @@ Unplanned is a location-based app that brings strangers together over coffee, fo
 
 The app's goal is to prevent us from overthinking decisions and encourage us to step out of our comfort zone to get to know people who we otherwise would never bother striking up a conversation. It steps away from the idea of never talking to strangers, and instead inspires us to open our minds to share in our human experiences, and perhaps, even build meaningful relationships.
 
-## Team
 
-  - __Product Owner__: Leo
-  - __Scrum Master__: Tai
-  - __Development Team Members__: Sepehr, Shane, Leo, Tai
 
 ## Table of Contents
 
@@ -65,7 +61,7 @@ After installing all dependencies, turn on MongoDB in terminal:
 
 ```sh
 mongod
-```sh
+```
 
 then run nodemon on the server.js file:
 
@@ -80,6 +76,12 @@ http://localhost:8000
 The app should be up and running from there.
 
 <!-- View the project roadmap [here](LINK_TO_PROJECT_ISSUES) -->
+
+## Team
+
+  - __Product Owner__: Leo
+  - __Scrum Master__: Tai
+  - __Development Team Members__: Sepehr, Shane, Leo, Tai
 
 
 ## Contributing
