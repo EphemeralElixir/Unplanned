@@ -1,7 +1,7 @@
 # Project Name: Unplanned
 
 ## Description
-Unplanned is a location-based app that brings strangers together over coffee, food, or beer in the spur-of-the-moment. The catch is, they have to make a decision within 13 seconds of someone asking to meet up, otherwise, they'll lose the chance of meeting that person. The app's goal is to prevent us from overthinking decisions and encourage us to step out of our comfort zone to get to know people who we otherwise would never bother striking up a conversation.
+> Unplanned is a location-based app that brings strangers together over coffee, food, or beer in the spur-of-the-moment. The catch is, they have to make a decision within 13 seconds of someone asking to meet up, otherwise, they'll lose the chance of meeting that person. The app's goal is to prevent us from overthinking decisions and encourage us to step out of our comfort zone to get to know people who we otherwise would never bother striking up a conversation.
 
 [Live demo the app here](http://192.241.203.99:8000/)
 
@@ -21,6 +21,7 @@ Unplanned is a location-based app that brings strangers together over coffee, fo
 1. [The Tech Stack](#tech-stack)
 1. [Core Team](#core-team)
 1. [Contributing](#contributing)
+1. [Licensing](#license)
 
 ## Usage
 
@@ -104,7 +105,6 @@ EphemeralElixir
 |   |   ├── meeting/
 |   |   |   ├── Accepted.jsx
 |   |   |   ├── CountdownTimer.jsx
-|   |   |   ├── Rejected.jsx
 |   |   |   ├── RequestReceived.jsx
 |   |   |   └── RequestSent.jsx
 |   |   |
@@ -184,6 +184,7 @@ Using React, each component view have their own JSX file. If you would like to a
 - There are almost no HTTP ajax requests used in this application, so don't go lookin' for them.
 - Most of the heavy-duty work is in socket.js
 - The server uses sockets as a medium for clients to send and listen for individual requests. You can get really creative since it is very simple and flexible to use
+- The server also makes use of Node Mailer (a javascript library) to handle sending emails between users
 
 Server-side is heavily dependent on using websockets, since the app requires real-time data communication. We use the lightweight Socket.io JS framework.
 
@@ -252,6 +253,8 @@ mocha specs/socket-server-test.js
 - Mongoose
 - Webpack, Webpack Hotloaders
 - React, React Dom, React Google Maps
+- Pure JS Video Streaming
+- Node Mailer
 - Redux
 - Eslint
 - Babel
