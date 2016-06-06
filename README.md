@@ -7,15 +7,17 @@ The app's goal is to prevent us from overthinking decisions and encourage us to 
 
 ## Table of Contents
 
-1. [Usage](#usage)
-1. [Requirements and Tech Stack](#requirements)
+1. [Using the app](#using-the-app)
+1. [Prerequisites](#prerequisites)
+1. [Requirements](#requirements-and-the-tech-stack)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
+1. [Understanding the Code Base](#understanding-the-code-base)
+    1. [File Structure](#file-structure)
 1. [Team](#team)
 1. [Contributing](#contributing)
 
-## Usage
+## Using the app
 
 Unplanned is a Single-Page Application utilizing the Facebook API for authentication, so a single login will bring you straight to the main app.
 
@@ -33,7 +35,7 @@ Install [Node](https://nodejs.org/en/) and [MongoDB](https://www.mongodb.com/dow
 
 Everything else will be included inside NPM install.
 
-## Requirements and Tech Stack
+## Requirements and the Tech Stack
 
 - Node
 - Express
@@ -77,7 +79,7 @@ You may have to wait for a moment while webpack compiles the code for the very f
 The app should be up and running.
 ## Understanding the Code Base
 
-### File Structure and Hierarchy
+### File Structure
 
 ```sh
 
@@ -156,6 +158,43 @@ Ephemeral Elixir
 
 ```
 
+### Where to Begin
+
+#### Front-End Code Base
+The front end views are broken up into multiple components, which are named by their purposes.
+
+- The components related to the main landing page (splash) are grouped together inside the splash/ directory.
+- The components related to the meeting/rejecting requests are grouped inside the meeting/ directory.
+
+#### Server-side Code Base
+
+The server-side code is a lot simpler compared to the front-end -- it shouldn't take too long to understand the code and how it relates to the front end. Here's the gist of it:
+
+1. Most of the heavy-duty work is in socket.js
+1. In order to maintain a real-time storage of all users that are currently online at one time, we use what we call a "master" activeUsers object on the server side (line 3 of server/config/socket.js).
+  1. The user's data (containing their name, image url, bio, phone number, facebook ID) is stored in here using their unique socket ID, which is generated on every unique connection.
+  1. The server is responsible for pushing this activeUsers object to every connected client, so that every client can render the locations on the map.
+  1. The server is also responsible for keeping the activeUsers object updated in real time, so if a client signs out, the server will remove them from the activeUsers object and then update every connected client.
+
+1. The server uses sockets as a medium for clients to send and listen for individual requests.
+  1. A client emits a request event to the server with their unique socket ID and the socket ID of the client they want to meet
+  1. The server listens for that request and takes in both socket IDs, and forwards it to the client that is receiving the request
+  1. The client receiving the request will see a component rendered, and is given a choice to reject, accept, or do nothing.
+  1. In any of those cases, a socket event is fired back to the server with the same two socket IDs
+  1. The server forwards this response back to the original requester
+
+#### Database Code Base
+
+This application is not database-heavy, so there aren't a lot of code to review here. Just know that:
+
+1. The schema is userID (unique), name, image (the url used to render picture), phone number, and bio.
+1. The controller has three functions:
+  1. Create and store a new user to the database.
+  1. Update an existing user's bio and phone number if they decide to change it.
+  1. Check for an existing user in the DB to see it needs to create and save a new one or retrieve,
+
+
+[click here for a brief tutorial on sockets](https://scotch.io/tutorials/a-realtime-room-chat-app-using-node-webkit-socket-io-and-mean)
 ## Team
 
   - __Product Owner__: Leo
