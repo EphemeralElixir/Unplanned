@@ -52,10 +52,6 @@ class EditProfile extends Component {
                   name="bio" defaultValue={this.state.bio} className="pure-input-1-2"
                   placeholder={`About ${this.user.name}`}
                 />
-                <input
-                  name="phoneNumber" defaultValue={this.state.phoneNumber}
-                  className="pure-input-1-2" type="text" placeholder="Phone Number"
-                />
               </fieldset>
               <button
                 className="pure-button" type="submit"

@@ -53,8 +53,8 @@ class Accepted extends React.Component {
           <video
             id="PeerStream"
             autoPlay="true"
-            height="200"
-            width="200"
+            height="300"
+            width="300"
           ></video>
           <button
             className="buttonSendMeetReq"
