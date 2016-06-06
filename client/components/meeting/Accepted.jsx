@@ -10,15 +10,19 @@ class Accepted extends React.Component {
   componentDidMount() {
     navigator.getUserMedia = navigator.getUserMedia ||
     navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-
+    if (navigator.getUserMedia) {
+      navigator.getUserMedia({ video: true, audio: true });
+    } else {
+      alert('getUserMedia failed.');
+    }
     window.peer.api.callSomeone = function callSomeone(peerName) {
       navigator.getUserMedia({ video: true, audio: true }, (stream) => {
         const call = window.peer.api.user.call(peerName, stream);
         call.on('stream', (remoteStream) => {
           document.getElementById('PeerStream').src = URL.createObjectURL(remoteStream);
         });
-      }, (err) => {
-        console.log(`Failed to get local stream ${err}`);
+      }, () => {
+        alert('Failed to get local stream');
       });
     };
 
@@ -28,8 +32,8 @@ class Accepted extends React.Component {
         call.on('stream', (remoteStream) => {
           document.getElementById('PeerStream').src = URL.createObjectURL(remoteStream);
         });
-      }, (err) => {
-        console.log(`Failed to get local stream ${err}`);
+      }, () => {
+        alert('Failed to get local stream');
       });
     });
 
