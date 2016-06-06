@@ -7,15 +7,13 @@ class RequestReceived extends React.Component {
     super(props);
     this.state = {
     };
-    this.callOnce = false;
+    this.rejectTimer = setTimeout(() => {
+      this.handleReject.call(this, this.props.meet.requesterId);
+    }, 13000);
   }
 
-  componentDidMount() {
-    setTimeout(() => {
-      if (this.props.meet.acceptedId === undefined) {
-        this.handleReject.call(this, this.props.meet.requesterId);
-      }
-    }, 13000);
+  componentWillUnmount() {
+    clearTimeout(this.rejectTimer);
   }
 
   handleReject(requesterId) {
@@ -23,11 +21,10 @@ class RequestReceived extends React.Component {
     this.props.dispatch(actions.clearMeet());
   }
   handleAccept(requesterId) {
+    clearTimeout(this.rejectTimer);
     window.socket.api.confirmMeetingRequest(requesterId);
-    this.props.dispatch(actions.clearMeet());
     this.props.dispatch(actions.setAccepted(requesterId));
   }
-
 
   render() {
     return (

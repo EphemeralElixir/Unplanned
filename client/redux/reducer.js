@@ -25,15 +25,6 @@ export default function reducer(state, action) {
         meet: {
           recipientId: undefined,
           requesterId: undefined,
-        },
-        gmap: state.gmap,
-      });
-    }
-
-    case 'CLEAR_ACCEPT': {
-      return Object.assign({}, {
-        users: state.users,
-        meet: {
           acceptedId: undefined,
         },
         gmap: state.gmap,
@@ -45,8 +36,8 @@ export default function reducer(state, action) {
         users: state.users,
         meet: {
           recipientId: action.recipientId,
-          requesterId: state.meet.requesterId,
-          acceptedId: state.meet.acceptedId,
+          requesterId: undefined,
+          acceptedId: undefined,
         },
         gmap: state.gmap,
       });
@@ -56,9 +47,9 @@ export default function reducer(state, action) {
       return Object.assign({}, {
         users: state.users,
         meet: {
-          recipientId: state.meet.requesterId,
+          recipientId: undefined,
           requesterId: action.requesterId,
-          acceptedId: state.meet.acceptedId,
+          acceptedId: undefined,
         },
         gmap: state.gmap,
       });
@@ -68,8 +59,8 @@ export default function reducer(state, action) {
       return Object.assign({}, {
         users: state.users,
         meet: {
-          recipientId: state.meet.recipientId,
-          requesterId: state.meet.requesterId,
+          recipientId: undefined,
+          requesterId: undefined,
           acceptedId: action.acceptedId,
         },
         gmap: state.gmap,

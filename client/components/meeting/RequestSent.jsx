@@ -1,17 +1,11 @@
 import React from 'react';
 import CountdownTimer from './CountdownTimer.jsx';
-import actions from '../../redux/actions.js';
 
 class RequestSent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
     };
-  }
-
-  handleMeetRequest(recipientId) {
-    window.socket.api.rejectMeetingRequest(recipientId, window.socket.id);
-    this.props.dispatch(actions.clearMeet());
   }
 
   render() {
@@ -23,14 +17,11 @@ class RequestSent extends React.Component {
           alt={this.props.users[this.props.meet.recipientId].name}
         />
         <p>Bio: {this.props.users[this.props.meet.recipientId].bio}</p>
-        <CountdownTimer />
-        <button
-          alt="cancel"
-          className="buttonSendMeetReq"
-          onClick={this.handleMeetRequest.bind(this, this.props.meet.recipientId)}
-        >
-          Cancel Request
-        </button>
+
+        <CountdownTimer
+          meet={this.props.meet}
+          dispatch={this.props.dispatch}
+        />
       </div>
     );
   }
@@ -44,4 +35,3 @@ RequestSent.propTypes = {
 };
 
 export default RequestSent;
-

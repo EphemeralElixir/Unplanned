@@ -1,6 +1,5 @@
 import React from 'react';
 import Accepted from './meeting/Accepted.jsx';
-import Rejected from './meeting/Rejected.jsx';
 import RequestReceived from './meeting/RequestReceived.jsx';
 import RequestSent from './meeting/RequestSent.jsx';
 
@@ -46,13 +45,7 @@ class Popover extends React.Component {
         </div>
       );
     }
-    if (this.props.meet.reject) {
-      this.startTimeOut();
-      return (
-        <Rejected />
-      );
-    }
-    return null;
+    return (<div></div>);
   }
 }
 
