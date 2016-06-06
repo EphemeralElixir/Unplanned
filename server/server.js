@@ -22,8 +22,8 @@ function sendReportEmail(name, email, userId) {
   const mail = {
     from: '"Unplanned 👥" <no-reply@macla.local>', // sender address
     to: `${email}`, // list of receivers
-    subject: 'Hello 😸', // Subject line
-    html: `<p> Enjoy your unplanned meetup with ${name}! If you experience problems with this user please </p> <a href="http://192.241.203.99:8000/flag?fbId=${userId}">click here</a>`,
+    subject: `Hello ${name} 😸`, // Subject line
+    html: `<p> Enjoy your unplanned meetup! If you experience problems with this user please </p> <a href="http://192.241.203.99:8000/flag?fbId=${userId}">click here</a>`,
   };
 
   // send mail with defined transport object
