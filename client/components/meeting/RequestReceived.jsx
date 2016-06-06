@@ -7,29 +7,32 @@ class RequestReceived extends React.Component {
     super(props);
     this.state = {
     };
-    this.rejectTimer = setTimeout(() => {
-      this.handleReject.call(this, this.props.meet.requesterId);
-    }, 13000);
+    this.callOnce = false;
   }
 
-  componentWillUnmount() {
-    clearTimeout(this.rejectTimer);
+  componentDidMount() {
+    setTimeout(() => {
+      if (this.props.meet.acceptedId === undefined) {
+        this.handleReject.call(this, this.props.meet.requesterId);
+      }
+    }, 13000);
   }
 
   handleReject(requesterId) {
     window.socket.api.rejectMeetingRequest(requesterId);
     this.props.dispatch(actions.clearMeet());
   }
+
   handleAccept(requesterId) {
-    clearTimeout(this.rejectTimer);
     window.socket.api.confirmMeetingRequest(requesterId);
+    this.props.dispatch(actions.clearMeet());
     this.props.dispatch(actions.setAccepted(requesterId));
   }
 
   render() {
     return (
-      <div id="popover">
-        <h1>Would you like to meet with {this.props.users[this.props.meet.requesterId].name}</h1>
+      <div className="popup">
+        <h1>Would you like to meet with {this.props.users[this.props.meet.requesterId].name}?</h1>
         <img
           alt={this.props.users[this.props.meet.requesterId].name}
           src={this.props.users[this.props.meet.requesterId].image}

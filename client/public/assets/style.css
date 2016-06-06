@@ -383,17 +383,6 @@ body, p {
   font-size: 14px;
 }
 
-.editProfileContainer {
-  width: 240px;
-  position: absolute;
-  text-align: center;
-  padding: 1em;
-  border: 1px #bdc3c7 solid;
-  top: 6em;
-  right: 4em;
-  background-color: #ecf0f1;
-}
-
 .options {
   width: 600px;
   max-width: 600px;
@@ -493,5 +482,36 @@ video#bgvid {
   font-size: 20px;
   margin-top: 0px;
   padding-top: 5px;
+}
+
+.overlay {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: block;
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  z-index: 9;
+}
+
+.popup {
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: fixed;
+  top: 4%;
+  left: 35%;
+  padding: 25px;
+  margin: 70px auto;
+  z-index: 10;
+  -webkit-transition: all 0.6s ease-in-out;
+  -moz-transition: all 0.6s ease-in-out;
+  transition: all 0.6s ease-in-out;
+}
+
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
 }
 
