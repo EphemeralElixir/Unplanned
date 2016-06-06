@@ -201,7 +201,6 @@ The server-side code is a lot simpler compared to the front-end. Here's the gist
   1. The user's data (containing their name, image url, bio, phone number, facebook ID) is stored in here using their unique socket ID, which is generated on every unique connection.
   1. The server is responsible for pushing this activeUsers object to every connected client, so that every client can render the locations on the map.
   1. The server is also responsible for keeping the activeUsers object updated in real time, so if a client signs out, the server will remove them from the activeUsers object and then update every connected client.
-
 1. The server uses sockets as a medium for clients to send and listen for individual requests.
   1. A client emits a request event to the server with their unique socket ID and the socket ID of the client they want to meet
   1. The server listens for that request and takes in both socket IDs, and forwards it to the client that is receiving the request
@@ -214,8 +213,8 @@ The server-side code is a lot simpler compared to the front-end. Here's the gist
 #### Database Code Base
 
 This application is not database-heavy, so there aren't a lot of code to review here. Just know that:
-1. The schema is userID (unique), name, image (the url used to render picture), phone number, and bio.
 
+1. The schema is userID (unique), name, image (the url used to render picture), phone number, and bio.
 1. The controller has three functions:
   1. Create and store a new user to the database.
   1. Update an existing user's bio and phone number if they decide to change it.
