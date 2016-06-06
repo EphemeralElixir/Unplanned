@@ -201,6 +201,7 @@ The server-side code is a lot simpler compared to the front-end. Here's the gist
   1. The user's data (containing their name, image url, bio, phone number, facebook ID) is stored in here using their unique socket ID, which is generated on every unique connection.
   1. The server is responsible for pushing this activeUsers object to every connected client, so that every client can render the locations on the map.
   1. The server is also responsible for keeping the activeUsers object updated in real time, so if a client signs out, the server will remove them from the activeUsers object and then update every connected client.
+
 1. The server uses sockets as a medium for clients to send and listen for individual requests.
   1. A client emits a request event to the server with their unique socket ID and the socket ID of the client they want to meet
   1. The server listens for that request and takes in both socket IDs, and forwards it to the client that is receiving the request
