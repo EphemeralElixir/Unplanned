@@ -34,7 +34,6 @@ socketApi.user = thisUser = {
   name: '',
   bio: '',
   phoneNumber: '',
-  flagCount: '',
   lat: '',
   lng: '',
   available: true,
