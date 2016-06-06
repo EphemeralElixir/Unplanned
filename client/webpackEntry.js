@@ -24,7 +24,7 @@ let socketApi;
 let socket;
 
 window.socket = socket = window.io.connect('http://localhost:8000');
-
+// window.socket = socket = window.io.connect('http://macla.local:8000/');
 // Add socket api's
 socket.api = socketApi = {};
 
