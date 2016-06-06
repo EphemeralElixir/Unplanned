@@ -187,7 +187,7 @@ Ephemeral Elixir
 The front end views are broken up into multiple components, which are named by their purposes.
 
 1. Data is stored, maintained, and dispatched from the redux store
-1. Most of the event and socket request handlers are stored inside Socket.jsx, which also serves as the parent component that renders the entire app.
+1. Most of the event and socket request handlers are stored inside Socket.jsx.
 1. Each component may have their own functions and handlers as well, since they are only used inside their individual component.
 
 - The components related to the main landing page (splash) are grouped together inside the splash/ directory.
