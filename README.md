@@ -8,6 +8,7 @@ The app's goal is to prevent us from overthinking decisions and encourage us to 
 ## Table of Contents
 
 1. [Using the App](#using-the-app)
+1. [Screenshots](#screenshots)
 1. [Prerequisites](#prerequisites)
 1. [The Tech Stack](#the-tech-stack)
 1. [Development](#development)
@@ -29,6 +30,19 @@ If they accept, contact information will be shared so the users can connect and 
 If they reject, the user will receive a rejection notice and then be able to go back to the map to hang out with someone else.
 
 You also have the option to filter if you want coffee, food, or beer so it will match you with people who are down for similar things. You can also make take yourself off the map by flipping the Online/Offline button.
+
+## Screenshots
+![Main App](https://cloud.githubusercontent.com/assets/15970451/15833829/5289ed2c-2bdd-11e6-826c-68379a715046.png)
+
+![Meet Accept / Reject](https://cloud.githubusercontent.com/assets/15970451/15833835/529ddcf6-2bdd-11e6-96c0-383f7f93a0d2.png)
+
+![Let's Meet Request](https://cloud.githubusercontent.com/assets/15970451/15833836/529e38a4-2bdd-11e6-9268-f2b8b00ed94e.png)
+
+![Waiting on Confirm](https://cloud.githubusercontent.com/assets/15970451/15833837/529f83e4-2bdd-11e6-917c-e29cba66e2f7.png)
+
+![Confirmed Meet](https://cloud.githubusercontent.com/assets/15970451/15833839/52aae112-2bdd-11e6-82d7-3afbbb161fb2.png)
+
+![Filter Food Beer Coffee](https://cloud.githubusercontent.com/assets/15970451/15833827/52808570-2bdd-11e6-8e0b-7a0075ff0e4b.png)
 
 ## Prerequisites
 
