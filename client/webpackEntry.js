@@ -96,14 +96,17 @@ window.fbAsyncInit = () => {
             fb.api(`/${thisUser.userID}/picture?type=large`,
               (imageResponse) => {
                 thisUser.image = imageResponse.data.url; // Set the image url
-                socket.emit('save user to db', thisUser);
+                fb.api('/me?fields=email', (data) => {
+                  thisUser.email = data.email; // set the user email
+                  socket.emit('save user to db', thisUser);
+                });
               });
           });
           socketApi.isLoggedIn = true;
         }
       });
     }
-  });
+  }, { scope: 'email' }, { return_scopes: true });
 };
 
 socketApi.sendToServer = function sendToServer() {

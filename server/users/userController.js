@@ -6,6 +6,7 @@ const create = (userObj) => {
   newUser.userID = userObj.userID;
   newUser.image = userObj.image;
   newUser.bio = userObj.bio;
+  newUser.email = userObj.email;
   newUser.phoneNumber = userObj.phoneNumber;
   newUser.flagCount = 0;
   newUser.save();
@@ -16,6 +17,16 @@ const updateBio = function updateBio(user) {
     { bio: user.bio, phoneNumber: user.phoneNumber })
     .then(() => {
       // success
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
+
+const getEmail = function getEmail(userId, callback) {
+  User.findOne({ userID: userId })
+    .then((res) => {
+      callback(res);
     })
     .catch((err) => {
       throw err;
@@ -59,4 +70,5 @@ module.exports = {
   updateBio,
   checkExisting,
   flagUser,
+  getEmail,
 };
