@@ -38,31 +38,29 @@ class EditProfile extends Component {
     let editProfilePage;
     if (this.state.shouldRender) {
       editProfilePage = (
-        <div className="overlay">
-          <div className="popup">
-            <div>Edit Your Profile</div>
-            <img alt="" src={this.user.image} />
-            <div>{this.user.name}</div>
-            <form
-              className="pure-form pure-form-stacked"
-              onSubmit={this.handleSubmit.bind(this)}
-            >
-              <fieldset className="pure-group">
-                <textarea
-                  name="bio" defaultValue={this.state.bio} className="pure-input-1-2"
-                  placeholder={`About ${this.user.name}`}
-                />
-                <input
-                  name="phoneNumber" defaultValue={this.state.phoneNumber}
-                  className="pure-input-1-2" type="text" placeholder="Phone Number"
-                />
-              </fieldset>
-              <button
-                className="pure-button" type="submit"
-              >Save</button>{' '}
-              <button className="pure-button" onClick={this.hideProfile.bind(this)}>Close</button>
-            </form>
-          </div>
+        <div className="editProfileContainer">
+          <div>Edit Your Profile</div>
+          <img alt="" src={this.user.image} />
+          <div>{this.user.name}</div>
+          <form
+            className="pure-form pure-form-stacked"
+            onSubmit={this.handleSubmit.bind(this)}
+          >
+            <fieldset className="pure-group">
+              <textarea
+                name="bio" defaultValue={this.state.bio} className="pure-input-1-2"
+                placeholder={`About ${this.user.name}`}
+              />
+              <input
+                name="phoneNumber" defaultValue={this.state.phoneNumber}
+                className="pure-input-1-2" type="text" placeholder="Phone Number"
+              />
+            </fieldset>
+            <button
+              className="pure-button" type="submit"
+            >Save</button>{' '}
+            <button className="pure-button" onClick={this.hideProfile.bind(this)}>Close</button>
+          </form>
         </div>
       );
     } else {
