@@ -40,7 +40,7 @@ app.post('/flag', (req, res) => {
     sendReportEmail(userObj.name, userObj.email, req.body.user2);
   });
   userHandlers.getEmail(req.body.user2, (userObj) => {
-    sendReportEmail(userObj.email, req.body.user1);
+    sendReportEmail(userObj.name, userObj.email, req.body.user1);
   });
 
   res.end();
