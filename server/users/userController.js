@@ -6,6 +6,7 @@ const create = (userObj) => {
   newUser.userID = userObj.userID;
   newUser.image = userObj.image;
   newUser.bio = userObj.bio;
+  newUser.email = userObj.email;
   newUser.phoneNumber = userObj.phoneNumber;
   newUser.flagCount = 0;
   newUser.save();
