@@ -79,6 +79,7 @@ The app should be up and running.
 
 ### File Structure and Hierarchy
 
+The
 
 ## Team
 
