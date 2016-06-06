@@ -7,7 +7,6 @@ class EditProfile extends Component {
     this.state = {
       shouldRender: window.editProfile,
       bio: this.user.bio,
-      phoneNumber: this.user.phoneNumber,
     };
   }
 
@@ -26,7 +25,6 @@ class EditProfile extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.user.bio = e.target.bio.value;
-    this.user.phoneNumber = e.target.phoneNumber.value;
     window.socket.api.updateBio();
   }
 
@@ -51,10 +49,6 @@ class EditProfile extends Component {
                 <textarea
                   name="bio" defaultValue={this.state.bio} className="pure-input-1-2"
                   placeholder={`About ${this.user.name}`}
-                />
-                <input
-                  name="phoneNumber" defaultValue={this.state.phoneNumber}
-                  className="pure-input-1-2" type="text" placeholder="Phone Number"
                 />
               </fieldset>
               <button
