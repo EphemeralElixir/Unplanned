@@ -63,6 +63,9 @@ You'll also need to set up Facebook, Google Maps, and Peer JS API keys in order 
 
 [PeerJS Key](http://peerjs.com/) - For access to Video Calling. You will need to store your peer api key in apiKeys.js inside of the public folder. apiKey.example.js is provided as a template.
 
+Finally, **set up your Sublime Text with the ESLinter using Package Install.** This is crucial to enforce linting convention. 
+[Use this guide](https://medium.com/@dan_abramov/lint-like-it-s-2015-6987d44c5b48#.ne1ikvdg9) to set up your Sublime for linting.
+
 Everything else will be included inside NPM install.
 
 ### Installing Dependencies
