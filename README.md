@@ -55,17 +55,13 @@ Install [Node](https://nodejs.org/en/) and [MongoDB](https://www.mongodb.com/dow
 
 You'll also need to set up Facebook, Google Maps, and Peer JS API keys in order to develop for Unplanned:
 
-[Google Maps API Key](https://developers.google.com/maps/documentation/android-api/signup#get_an_api_key_from_the_console_name) - Set the key inside of script tag src in index.html like so:
-
-![Index Html Example](https://cloud.githubusercontent.com/assets/15970451/15833878/81930ce8-2bdd-11e6-888d-ec9300ae9ed1.png)
-
 [Facebook Login Key/APP ID](https://developers.facebook.com/) - Create a new Facebook App and retrieve the App ID. The Facebook callback URL should be set as http://localhost:8000/auth/facebook/callback, and then the APP ID should be set inside webpackEntry.js
 
 ![Facebook Callback URL](https://cloud.githubusercontent.com/assets/15970451/15833832/528e0722-2bdd-11e6-846b-4cd0638b2fd2.png)
 
-[PeerJS Key](http://peerjs.com/) - For access to Video Calling. You will need to store this in a new file called peer.min.js inside of the public folder. Check the index.html file for reference
+[Google Maps API Key](https://developers.google.com/maps/documentation/android-api/signup#get_an_api_key_from_the_console_name) - You will need to store your Google Maps API key in apiKeys.js inside of the public folder. apiKey.example.js is provided as a template.
 
-![Peer Key Example](https://cloud.githubusercontent.com/assets/15970451/15833879/8194f526-2bdd-11e6-8aed-561373f3ea77.png)
+[PeerJS Key](http://peerjs.com/) - For access to Video Calling. You will need to store your peer api key in apiKeys.js inside of the public folder. apiKey.example.js is provided as a template.
 
 Everything else will be included inside NPM install.
 

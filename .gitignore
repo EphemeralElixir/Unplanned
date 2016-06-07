@@ -2,6 +2,7 @@ node_modules
 .DS_Store
 client/public/peer.js
 client/public/temp.peer.js
+client/public/apiKeys.js
 # Ignore bundled webpack modules #
 client/public/webpack.min.js
 client/public/webpack.min.js.map
