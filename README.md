@@ -274,11 +274,12 @@ mocha specs/socket-server-test.js
  
 - Try testing using one of the computers using internet sharing, which will allow other macbooks in the same wifi network to connect directly to the same localhost. IE Sepehr starts up his server in his localhost and turns on internet sharing, Tai is able to go into the app by going to http://macla.local:8000 (assuming his macbook is named macla, etc..). 
  
-- To set up unsecured testing so you can bypass the Chrome HTTPS requirement, run this in terminal:
+- To set up unsecured testing so you can bypass the Chrome HTTPS requirement, run this in terminal: 
 
 ```sh
 /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --user-data-dir=/tmp/foo -unsafely-treat-insecure-origin-as-secure="http://TYPE_THE_URL_HERE"
 ```
+You'll want to fill out the actual URL of the person's laptop in order so Chrome will know.
 
 ## Core Team
 
