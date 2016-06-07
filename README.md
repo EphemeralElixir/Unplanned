@@ -8,8 +8,9 @@
 
 [Live demo the app here](http://192.241.203.99:8000/)
 
-
-![Screenshot of Entire App](https://cloud.githubusercontent.com/assets/15970451/15838035/ee7e741a-2bf0-11e6-996d-17a01c98a81a.png)
+<p align="center">
+  <img src="https://cloud.githubusercontent.com/assets/15970451/15838035/ee7e741a-2bf0-11e6-996d-17a01c98a81a.png">
+</p>
 
 ## Table of Contents
 
@@ -36,13 +37,15 @@
 1. Enable sharing of location and microphone and video camera
 
 ## Screenshots
-![Meet Accept / Reject](https://cloud.githubusercontent.com/assets/15970451/15833835/529ddcf6-2bdd-11e6-96c0-383f7f93a0d2.png)
+<p align="center">
+  <img src="https://cloud.githubusercontent.com/assets/15970451/15833835/529ddcf6-2bdd-11e6-96c0-383f7f93a0d2.png">
 
-![Let's Meet Request](https://cloud.githubusercontent.com/assets/15970451/15833836/529e38a4-2bdd-11e6-9268-f2b8b00ed94e.png)
+  <img src="https://cloud.githubusercontent.com/assets/15970451/15833836/529e38a4-2bdd-11e6-9268-f2b8b00ed94e.png">
 
-![Waiting on Confirm](https://cloud.githubusercontent.com/assets/15970451/15833837/529f83e4-2bdd-11e6-917c-e29cba66e2f7.png)
+  <img src="https://cloud.githubusercontent.com/assets/15970451/15833837/529f83e4-2bdd-11e6-917c-e29cba66e2f7.png">
 
-![Confirmed Meet](https://cloud.githubusercontent.com/assets/15970451/15833839/52aae112-2bdd-11e6-82d7-3afbbb161fb2.png)
+  <img src="https://cloud.githubusercontent.com/assets/15970451/15833839/52aae112-2bdd-11e6-82d7-3afbbb161fb2.png">
+</p>
 
 ## Getting Started
 
