@@ -1,4 +1,6 @@
-![Main Project Header](https://cloud.githubusercontent.com/assets/15970451/15841590/4985f0ac-2c07-11e6-8ac3-254db6512772.png)
+
+<img src="https://cloud.githubusercontent.com/assets/15970451/15841590/4985f0ac-2c07-11e6-8ac3-254db6512772.png" align="center">
+
 ---
 
 ## Description
