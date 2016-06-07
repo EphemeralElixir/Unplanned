@@ -190,9 +190,9 @@ Using React, each component view have their own JSX file. If you would like to a
 - There are almost no HTTP ajax requests used in this application, so don't go lookin' for them.
 - Most of the heavy-duty work is in socket.js
 - The server uses sockets as a medium for clients to send and listen for individual requests. You can get really creative since it is very simple and flexible to use
-- The server also makes use of Node Mailer (a javascript library) to handle sending emails between users
+- The server also makes use of Node Mailer (a javascript library) to handle sending emails to users
 
-Server-side is heavily dependent on using websockets, since the app requires real-time data communication. We use the lightweight Socket.io JS framework.
+Server-side is heavily dependent on using websockets, since the app requires real-time data communication, especially with the video chat using Peer JS. We use the lightweight Socket.io JS framework to abstract and provide additionality functionality to work with websockets.
 
 Keep in mind that socket connections are an upgraded version of HTTP, which effectively trims the data being sent back and forth between client and server (to a couple of bytes) and allows real-time communication. After the initial "handshake" between the server and client, the server does not need to wait for a request before sending back any data -- it can push data back and forth, to and from clients whenever it needs, through **event emitters** and **event listeners**.
 
@@ -216,6 +216,7 @@ const someHelperFunction = () => {
 //Invokes the function... it could be a click handler for example
 someHelperFunction();
 
+
 // Server or client listening for this specific event, and then accessing the
 // arguments passed in through the callback function
 socket.on('WriteYourOwnDescriptiveEventHere', function(str, obj, arr, num, bool) {
@@ -230,7 +231,7 @@ socket.on('WriteYourOwnDescriptiveEventHere', function(str, obj, arr, num, bool)
 
 [Click here](https://scotch.io/tutorials/a-realtime-room-chat-app-using-node-webkit-socket-io-and-mean) for a brief tutorial on sockets
 
-[Nice little cheat sheet for Socket.IO methods](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#emphasis)
+[Nice little cheat sheet for Socket.IO methods](https://gist.github.com/alexpchin/3f257d0bb813e2c8c476)
 
 #### Database Code
 
@@ -258,8 +259,8 @@ mocha specs/socket-server-test.js
 - MongoDB
 - Mongoose
 - Webpack, Webpack Hotloaders
-- React, React Dom, React Google Maps
-- Pure JS Video Streaming
+- React, Redux, React Dom, React Google Maps
+- Peer JS Video Streaming
 - Node Mailer
 - Redux
 - Eslint
