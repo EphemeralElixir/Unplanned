@@ -1,12 +1,16 @@
-# Project Name: Unplanned
+<p align="center">
+  <img src="https://cloud.githubusercontent.com/assets/15970451/15841590/4985f0ac-2c07-11e6-8ac3-254db6512772.png" >
+</p>
+---
 
 ## Description
-Unplanned is a location-based app that brings strangers together over coffee, food, or beer in the spur-of-the-moment. The catch is, they have to make a decision within 13 seconds of someone asking to meet up, otherwise, they'll lose the chance of meeting that person. The app's goal is to prevent us from overthinking decisions and encourage us to step out of our comfort zone to get to know people who we otherwise would never bother striking up a conversation.
+> Unplanned is a location-based app that brings strangers together over coffee, food, or beer in the spur-of-the-moment. The catch is, they have to make a decision within 13 seconds of someone asking to meet up, otherwise, they'll lose the chance of meeting that person. The app's goal is to prevent us from overthinking decisions and encourage us to step out of our comfort zone to get to know people who we otherwise would never bother striking up a conversation.
 
 [Live demo the app here](http://192.241.203.99:8000/)
 
-
-![Screenshot of Entire App](https://cloud.githubusercontent.com/assets/15970451/15838035/ee7e741a-2bf0-11e6-996d-17a01c98a81a.png)
+<p align="center">
+  <img src="https://cloud.githubusercontent.com/assets/15970451/15838035/ee7e741a-2bf0-11e6-996d-17a01c98a81a.png">
+</p>
 
 ## Table of Contents
 
@@ -21,6 +25,7 @@ Unplanned is a location-based app that brings strangers together over coffee, fo
 1. [The Tech Stack](#tech-stack)
 1. [Core Team](#core-team)
 1. [Contributing](#contributing)
+1. [Licensing](#license)
 
 ## Usage
 
@@ -32,13 +37,15 @@ Unplanned is a location-based app that brings strangers together over coffee, fo
 1. Enable sharing of location and microphone and video camera
 
 ## Screenshots
-![Meet Accept / Reject](https://cloud.githubusercontent.com/assets/15970451/15833835/529ddcf6-2bdd-11e6-96c0-383f7f93a0d2.png)
+<p align="center">
+  <img src="https://cloud.githubusercontent.com/assets/15970451/15833835/529ddcf6-2bdd-11e6-96c0-383f7f93a0d2.png">
 
-![Let's Meet Request](https://cloud.githubusercontent.com/assets/15970451/15833836/529e38a4-2bdd-11e6-9268-f2b8b00ed94e.png)
+  <img src="https://cloud.githubusercontent.com/assets/15970451/15833836/529e38a4-2bdd-11e6-9268-f2b8b00ed94e.png">
 
-![Waiting on Confirm](https://cloud.githubusercontent.com/assets/15970451/15833837/529f83e4-2bdd-11e6-917c-e29cba66e2f7.png)
+  <img src="https://cloud.githubusercontent.com/assets/15970451/15833837/529f83e4-2bdd-11e6-917c-e29cba66e2f7.png">
 
-![Confirmed Meet](https://cloud.githubusercontent.com/assets/15970451/15833839/52aae112-2bdd-11e6-82d7-3afbbb161fb2.png)
+  <img src="https://cloud.githubusercontent.com/assets/15970451/15833839/52aae112-2bdd-11e6-82d7-3afbbb161fb2.png">
+</p>
 
 ## Getting Started
 
@@ -104,7 +111,6 @@ EphemeralElixir
 |   |   ├── meeting/
 |   |   |   ├── Accepted.jsx
 |   |   |   ├── CountdownTimer.jsx
-|   |   |   ├── Rejected.jsx
 |   |   |   ├── RequestReceived.jsx
 |   |   |   └── RequestSent.jsx
 |   |   |
@@ -184,6 +190,7 @@ Using React, each component view have their own JSX file. If you would like to a
 - There are almost no HTTP ajax requests used in this application, so don't go lookin' for them.
 - Most of the heavy-duty work is in socket.js
 - The server uses sockets as a medium for clients to send and listen for individual requests. You can get really creative since it is very simple and flexible to use
+- The server also makes use of Node Mailer (a javascript library) to handle sending emails between users
 
 Server-side is heavily dependent on using websockets, since the app requires real-time data communication. We use the lightweight Socket.io JS framework.
 
@@ -252,6 +259,8 @@ mocha specs/socket-server-test.js
 - Mongoose
 - Webpack, Webpack Hotloaders
 - React, React Dom, React Google Maps
+- Pure JS Video Streaming
+- Node Mailer
 - Redux
 - Eslint
 - Babel
