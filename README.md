@@ -261,12 +261,24 @@ mocha specs/socket-server-test.js
 - React, Redux, React Dom, React Google Maps
 - Peer JS Video Streaming
 - Node Mailer
-- Redux
 - Eslint
 - Babel
 - Mocha
 - Chai
 - SocketIO
+
+
+## Mini Tips and Tricks
+
+- If you made a change but you're not seeing it reflect in the app, check the server (terminal) to see if webpack hot module loader compiled your code. Chances are, you have some linting issues that you need to make go away in order for webpack to compile.
+ 
+- Try testing using one of the computers using internet sharing, which will allow other macbooks in the same wifi network to connect directly to the same localhost. IE Sepehr starts up his server in his localhost and turns on internet sharing, Tai is able to go into the app by going to http://macla.local:8000 (assuming his macbook is named macla, etc..). 
+ 
+- To set up unsecured testing so you can bypass the Chrome HTTPS requirement, run this in terminal:
+
+```sh
+/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --user-data-dir=/tmp/foo -unsafely-treat-insecure-origin-as-secure="http://TYPE_THE_URL_HERE"
+```
 
 ## Core Team
 
