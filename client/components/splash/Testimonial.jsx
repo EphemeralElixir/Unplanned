@@ -15,15 +15,13 @@ const Testimonial = function Testimonial() {
         <div className="pure-u-1 pure-u-md-1-2 pure-u-lg-3-5">
           <h2 className="content-head content-head-ribbon">Coffee, food, or beer?</h2>
           <p>
-            "I'm what most people would describe as an introvert, and I often overthink
-            meeting new people. Unplanned has made it really easy for me to get coffee
-            or drinks whenever I feel like it AND have some company along with it!"
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex"
           </p>
-          <em>-Leo A.</em>
+          <em>-John C.</em>
           <p>
-            "I love meeting new people! I met Jessica through unplanned and realized that
-            we had a scary amount of things in common. She's my bestie, and I love hanging
-            out with her.
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex"
           </p>
           <em>-Jennifer M.</em>
         </div>
