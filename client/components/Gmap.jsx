@@ -120,11 +120,8 @@ class Gmap extends Component {
               // use the Marker component to render user as a marker on map
               <Marker
                 key={`marker_${socketId}`}
-                position={
-                  { lat: this.state.fixedPos[index].lat, lng: this.state.fixedPos[index].lng }
-                  // replace the line above, with the one below to use actual user location:
-                  // { lat: marker.lat, lng: marker.lng }
-                }
+                position={{ lat: this.state.fixedPos[index].lat,
+                  lng: this.state.fixedPos[index].lng }}
                 onClick={this.handleMarkerClick.bind(this, marker, socketId)}
               >
                 {/* render InfoWindow only if marker has been clicked */}
